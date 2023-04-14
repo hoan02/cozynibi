@@ -1,7 +1,7 @@
-import "./TourTravel.scss";
+import "./TourTravel.css";
 
 const TourTravel = () => {
-  return <div className="tourTravel">TourTravel</div>;
+  return <div className="tour-travel">TourTravel</div>;
 };
 
 export default TourTravel;

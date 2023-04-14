@@ -1,4 +1,4 @@
-import "./Menu.scss";
+import "./Menu.css";
 
 const Menu = () => {
   return <div className="menu">Menu</div>;

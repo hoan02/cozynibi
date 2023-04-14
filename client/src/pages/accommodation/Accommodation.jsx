@@ -1,7 +1,7 @@
-import "./Accommodation.scss";
+import "./Accommodation.css";
 
 const Accommodation = () => {
-  return <div className="Accommodation">Accommodation</div>;
+  return <div className="accommodation">Accommodation</div>;
 };
 
 export default Accommodation;

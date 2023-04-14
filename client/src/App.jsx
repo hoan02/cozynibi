@@ -1,8 +1,8 @@
 import React from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Route, Routes } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
-import Navbar from "./components/navbar/Navbar";
+import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import Home from "./pages/home/Home";
 import AboutUs from "./pages/aboutUs/AboutUs";
@@ -13,34 +13,85 @@ import Service from "./pages/service/Service";
 import News from "./pages/news/News";
 import Gallery from "./pages/gallery/Gallery";
 import Contact from "./pages/contact/Contact";
-import "./App.scss";
+import "./App.css";
 
-const queryClient = new QueryClient();
+const routes = [
+  {
+    path: "/",
+    element: <Home />,
+    title: "Home",
+  },
+  {
+    path: "/about-us",
+    element: <AboutUs />,
+    title: "About Us",
+  },
+  {
+    path: "/accommodation",
+    element: <Accommodation />,
+    title: "Accommodation",
+  },
+  {
+    path: "/menu",
+    element: <Menu />,
+    title: "Menu",
+  },
+  {
+    path: "/tour-travel",
+    element: <TourTravel />,
+    title: "Tour Travel",
+  },
+  {
+    path: "/service",
+    element: <Service />,
+    title: "Service",
+  },
+  {
+    path: "/news",
+    element: <News />,
+    title: "News",
+  },
+  {
+    path: "/gallery",
+    element: <Gallery />,
+    title: "Gallery",
+  },
+  {
+    path: "/contact",
+    element: <Contact />,
+    title: "Contact",
+  },
+  // {
+  //   path: "*",
+  //   element: <Home />,
+  //   title: "Home",
+  // },
+];
 
 const App = () => {
   return (
     <div className="app">
-      <QueryClientProvider client={queryClient}>
-        <div className="header">
-          <Navbar />
-        </div>
-        <div className="body">
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/about-us" element={<AboutUs />} />
-            <Route exact path="/accommodation" element={<Accommodation />} />
-            <Route exact path="/menu" element={<Menu />} />
-            <Route exact path="/tour-travel" element={<TourTravel />} />
-            <Route exact path="/service" element={<Service />} />
-            <Route exact path="/news" element={<News />} />
-            <Route exact path="/gallery" element={<Gallery />} />
-            <Route exact path="/contact" element={<Contact />} />
-          </Routes>
-        </div>
-        <div className="footer">
-          <Footer />
-        </div>
-      </QueryClientProvider>
+      <Header />
+      <div className="body">
+        <Routes>
+          {routes.map((route) => (
+            <Route
+              key={route.path}
+              exact
+              path={route.path}
+              element={
+                <>
+                  <Helmet>
+                    <title>{route.title}</title>
+                  </Helmet>
+                  {route.element}
+                </>
+              }
+            />
+          ))}
+        </Routes>
+      </div>
+      <Footer />
     </div>
   );
 };
