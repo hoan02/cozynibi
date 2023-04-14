@@ -1,11 +1,12 @@
 # Cozynibi Hotel
 - Đây là trang web ***Cozynibi Hotel*** được tạo bằng **React.js** cho phía client và **Node.js** cho phía server.
 - Project này chính là bài báo cáo cho môn học **"Thực tập chuyên môn-1-2-22(QT02).TT"**
->Họ tên sinh viên: Lê Công Hoan</br>
->Mã sinh viên: 202602932</br>
->Lớp: CNTT-VA2</br>
->Khóa: 61</br>
->Trường đại học Giao thông vận tải</br>
+
+| Họ và tên | Mã sinh viên | Lớp | Khóa |
+| --- | --- | --- | --- |
+| Lê Công Hoan | 202602932 | CNTT-VA2 | 61 |
+| Phạm Thành Thái | 202612956 | CNTT-VA2 | 61 |
+
 
 ## Giới thiệu
 Trang web **Cozynibi Hotel** được thiết kế để cung cấp cho khách hàng của khách sạn thông tin về các phòng, dịch vụ và các hoạt động giải trí tại khách sạn. Bạn có thể đặt phòng và thanh toán trực tuyến thông qua trang web.
@@ -39,8 +40,7 @@ Nếu bạn muốn đóng góp vào trang web **Cozynibi Hotel**, bạn có th�
 5. Push branch của bạn lên Github: `git push origin feature/your-feature-name`
 6. Tạo một pull request trên Github và chờ review từ những người đóng góp khác.
 
-## Tác giả
-- Trang web Cozynibi Hotel được tạo bởi HoanIT 02.
+## Liên hệ:
 - Nếu bạn có bất kỳ câu hỏi hoặc đóng góp nào, vui lòng liên hệ với tôi qua:
 > Email: hoanvipboi1@gmail.com.</br>
 > Facebook: [Lê Công Hoan](https://www.facebook.com/hoan.ann69/)
