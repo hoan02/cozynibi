@@ -3,11 +3,6 @@ const { Schema } = mongoose;
 
 const roomDetailSchema = new Schema(
   {
-    id: {
-      type: String,
-      required: true,
-      unique: true,
-    },
     product: {
       type: Schema.Types.ObjectId,
       ref: "Products",

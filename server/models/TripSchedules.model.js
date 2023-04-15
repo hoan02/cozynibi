@@ -3,11 +3,6 @@ const { Schema } = mongoose;
 
 const tripScheduleSchema = new Schema(
   {
-    id: {
-      type: String,
-      unique: true,
-      required: true,
-    }, 
     time: {
       type: String,
       required: true,

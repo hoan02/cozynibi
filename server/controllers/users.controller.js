@@ -2,18 +2,18 @@ import { cloudinary } from "../index.js"
 import User from "../models/users.model.js";
 import createError from "../utils/createError.js";
 
-export const GetAllUser = async (req, res, next) => {
+export const getAllUser = async (req, res, next) => {
   const user = await User.find({});
   res.status(200).send(user);
 };
 
-export const GetUser = async (req, res, next) => {
+export const getUser = async (req, res, next) => {
   const userId = req.userId;
   const user = await User.findById(userId);
   res.status(200).send(user);
 };
 
-export const EditUser = async (req, res, next) => {
+export const updateUser = async (req, res, next) => {
   const userId = req.userId;
   console.log(req.avatar);
   let newUser = {
@@ -34,7 +34,7 @@ export const EditUser = async (req, res, next) => {
   }
 };
 
-export const DeleteUser = async (req, res, next) => {
+export const deleteUser = async (req, res, next) => {
   const userId = req.userId;
   try {
     await User.findByIdAndDelete(userId);

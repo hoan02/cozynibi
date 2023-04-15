@@ -1,0 +1,14 @@
+.header{
+  padding: 20px 0;
+  background-color: bisque;
+}
+
+.link{
+  margin: 0 30px;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: rgb(18, 187, 40);
+  border: 1px solid gray;
+  border-radius: 20px;
+}

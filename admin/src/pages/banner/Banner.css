@@ -1,0 +1,38 @@
+.banner{
+  text-align: center;
+  margin: 30px;
+}
+
+.container{
+  max-width: 1200px;
+  margin: 0 auto;
+  display: block;
+}
+
+.create-banner{
+  padding: 30px 0;
+}
+
+.render-banner{
+  background-color: #fff;
+}
+
+.item{
+  display: flex;
+  justify-items: center;
+  margin-top: 10px;
+}
+
+.element{
+  min-width: 150px;
+  margin: auto;
+}
+
+.element img{
+  height: 100px;
+  width: 300px;
+  object-fit: contain;
+  border: 1px solid gray;
+}
+
+
