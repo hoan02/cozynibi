@@ -1,35 +1,9 @@
 import React from "react";
-import "./AboutUs.css";
-import ScrollToTopButton from '../../utils/ScrollToTopButton'
+import ScrollToTopButton from '../utils/ScrollToTopButton'
 
 const About = () => {
   return (
     <div>
-      {/* <meta charSet="utf-8" />
-      <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>About</title>
-      Bootstrap
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossOrigin="anonymous"
-      />
-      Fontawesome
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-        crossOrigin="anonymous"
-        referrerPolicy="no-referrer"
-      />
-      <link rel="stylesheet" href="../../Css/common/common.css" />
-      <link rel="stylesheet" href="../../Css/layout/about.css" />
-      Header
-      <header>
-        <div id="header" />
-      </header> */}
       <div className="banner">
         <div className="banner-title">
           <div className="avt">

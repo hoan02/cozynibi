@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-
-import banner from "../../assets/images/banner.jpg";
-import "./Slider.css";
+import banner from '../../assets/images/banner.jpg';
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;

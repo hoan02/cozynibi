@@ -1,5 +1,4 @@
-import SimpleSlider from "../../components/slider/Slider";
-import "./Home.css";
+import SimpleSlider from "../components/_child/Slider";
 
 const Home = () => {
   return (
