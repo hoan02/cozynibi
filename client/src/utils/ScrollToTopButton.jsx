@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {FaArrowCircleUp} from 'react-icons/fa';
-import { Button } from './ScrollToTopStyle';
+// import { Button } from './ScrollToTopStyle';
   
 const ScrollToTopButton = () =>{
   
@@ -20,8 +20,6 @@ const ScrollToTopButton = () =>{
     window.scrollTo({
       top: 0, 
       behavior: 'smooth'
-      /* you can also use 'auto' behaviour
-         in place of 'smooth' */
     });
   };
   
