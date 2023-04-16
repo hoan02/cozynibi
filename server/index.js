@@ -3,10 +3,11 @@ import mongoose from "mongoose";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import * as dotenv from "dotenv";
-import { v2 as cloudinary } from 'cloudinary';
+import { v2 as cloudinary } from "cloudinary";
 
 import authRoute from "./routes/auth.route.js";
 import usersRoute from "./routes/users.route.js";
+import imagesRoute from "./routes/images.route.js";
 import bannersRoute from "./routes/banners.route.js";
 import categoryRoute from "./routes/category.route.js";
 
@@ -16,9 +17,10 @@ dotenv.config();
 cloudinary.config({
   cloud_name: process.env.CLOUND_NAME,
   api_key: process.env.API_KEY,
-  api_secret: process.env.API_SECRET
-})
-export { cloudinary }
+  api_secret: process.env.API_SECRET,
+  secure: true,
+});
+export { cloudinary };
 
 mongoose.set("strictQuery", true);
 
@@ -31,17 +33,21 @@ const connectDB = async () => {
   }
 };
 
-app.use(cors({ 
-  origin: true, 
-  // credentials: false,
-}));
+app.use(
+  cors({
+    origin: true,
+    // credentials: false,
+  })
+);
 app.use(express.json({ limit: "50mb" }));
 app.use(cookieParser());
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
+app.use("/api/image", imagesRoute);
 app.use("/api/banners", bannersRoute);
 app.use("/api/category", categoryRoute);
+
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;

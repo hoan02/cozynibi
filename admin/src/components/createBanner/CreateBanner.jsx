@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import NewRequest from "../../utils/NewRequest";
 import ToastService from "../../utils/ToastService";
@@ -8,9 +6,6 @@ import ToastService from "../../utils/ToastService";
 import "./CreateBanner.css";
 
 const CreateBanner = () => {
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
-
   const slugs = [
     { label: "ABOUT US", value: "about-us" },
     { label: "ACCOMMODATION", value: "accommodation" },
@@ -48,22 +43,20 @@ const CreateBanner = () => {
     };
   };
 
-  // Create a new banner
-  const createBanner = useMutation({
-    mutationFn: () => {
-      return NewRequest.post(`/banners/create`, form);
-    },
-    onSuccess: () => {
-      ToastService.success("Banner created successfully!");
-      queryClient.invalidateQueries(["banners"]);
-      navigate(`/banners`)
-    },
-  });
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    createBanner.mutate();
-  }
+    NewRequest.post(`/banners/create`, form)
+      .then((res) => {
+        if (res) {
+          console.log(res.data);
+          ToastService.success("Banner created successfully!");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        ToastService.error("Banner creation failed!");
+      });
+  };
 
   return (
     <div className="create-banner">

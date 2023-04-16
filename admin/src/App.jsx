@@ -7,8 +7,6 @@ import Home from "./pages/home/Home";
 import Header from "./components/header/Header";
 import Banner from "./pages/banner/Banner";
 import "./App.css";
-import CreateBanner from "./components/createBanner/CreateBanner";
-import UpdateBanner from "./components/updateBanner/UpdateBanner";
 
 const App = () => {
   return (
@@ -18,8 +16,6 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/banners" element={<Banner />} />
-          <Route path="/banners/create" element={<CreateBanner />} />
-          <Route path="/banners/update/:id" element={<UpdateBanner />} />
         </Routes>
       </div>
       <ToastContainer autoClose={2000} draggablePercent={60} />

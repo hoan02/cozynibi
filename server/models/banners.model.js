@@ -5,21 +5,16 @@ const bannerSchema = new Schema(
   {
     title: {
       type: String,
-      required: [true, "Please specify a title"],
+      required: true,
     },
     slug: {
       type: String,
-      required: [true, "Please specify a slug"],
+      required: true,
     },
-    image: { 
-      public_id: {
-        type: String,
-        required: true
-      },
-      url: {
-        type: String,
-        required: true
-      }
+    image: {
+      type: Schema.Types.ObjectId,
+      ref: "Image",
+      required: false,
     },
   },
   {

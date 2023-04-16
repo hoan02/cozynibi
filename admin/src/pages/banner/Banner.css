@@ -5,34 +5,49 @@
 
 .container{
   max-width: 1200px;
+  min-height: 500px;
   margin: 0 auto;
   display: block;
 }
 
-.create-banner{
-  padding: 30px 0;
-}
+
 
 .render-banner{
-  background-color: #fff;
+
+}
+
+.banner-container{
+  display: flex;
+  height: 100px;
+  margin: 10px 0;
+  border: 1px solid gray;
+}
+
+.banner-container .form{
+  display: flex;
 }
 
 .item{
   display: flex;
-  justify-items: center;
-  margin-top: 10px;
+  min-width: 180px;
+  padding: 0 20px;
 }
 
-.element{
-  min-width: 150px;
-  margin: auto;
-}
-
-.element img{
-  height: 100px;
+.item img{
   width: 300px;
-  object-fit: contain;
+}
+
+.form-control{
+  width: 100%;
+  
+}
+
+.update{
+  min-height: 300px;
   border: 1px solid gray;
 }
 
-
+.form-update{
+  text-align: left;
+  display: block;
+}
