@@ -16,21 +16,26 @@ const categorySchema = new Schema(
       type: String,
       required: false,
     },
-    slug: { 
-      type: String, 
+    slug: {
+      type: String,
       required: true,
     },
-    metaTitle: { 
-      type: String, 
-      required: false
+    metaTitle: {
+      type: String,
+      required: false,
     },
-    metaKeyword: { 
-      type: String, 
-      required: false
+    product: {
+      type: Schema.Types.ObjectId,
+      ref: "Product",
+      required: false,
     },
-    metaDescription: { 
-      type: String, 
-      required: false
+    metaKeyword: {
+      type: String,
+      required: false,
+    },
+    metaDescription: {
+      type: String,
+      required: false,
     },
     createdBy: {
       type: Schema.Types.ObjectId,

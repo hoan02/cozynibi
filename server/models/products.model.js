@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const productSchema = new Schema(
   {
-    idCategory:{
+    idCategory: {
       type: String,
       required: true,
     },
@@ -20,21 +20,24 @@ const productSchema = new Schema(
       type: String,
       required: false,
     },
-    image: { 
-      type: String, 
-      required: true,
+    image: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Image",
+        required: false,
+      },
+    ],
+    metaTitle: {
+      type: String,
+      required: false,
     },
-    metaTitle: { 
-      type: String, 
-      required: false
+    metaKeyword: {
+      type: String,
+      required: false,
     },
-    metaKeyword: { 
-      type: String, 
-      required: false
-    },
-    metaDescription: { 
-      type: String, 
-      required: false
+    metaDescription: {
+      type: String,
+      required: false,
     },
     createdBy: {
       type: Schema.Types.ObjectId,

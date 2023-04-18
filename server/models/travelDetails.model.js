@@ -12,10 +12,6 @@ const travelDetailSchema = new Schema(
       type: String, 
       required: false
     },
-    photos:{
-      type: [String], 
-      required: false
-    },
     tripSchedule: {
       type: Schema.Types.ObjectId,
       ref: "TripSchedules",
@@ -31,7 +27,7 @@ const travelDetailSchema = new Schema(
     },
     price: {
       type: [String], 
-      required: true,
+      required: false,
     },
     metaTitle: { 
       type: String, 
