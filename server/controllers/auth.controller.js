@@ -1,19 +1,18 @@
-import User from "../models/users.model.js";
+import Account from "../models/account.model.js";
 import CreateError from "../utils/createError.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-
 export const register = async (req, res, next) => {
   try {
     const hash = bcrypt.hashSync(req.body.password, 5);
-    const newUser = new User({
+    const newAccount = new Account({
       ...req.body,
       password: hash,
     });
 
-    await newUser.save();
-    res.status(201).send("User has been created.");
+    await newAccount.save();
+    res.status(201).send("Tạo tài khoản thành công!");
   } catch (err) {
     next(err);
   }
@@ -21,23 +20,25 @@ export const register = async (req, res, next) => {
 
 export const login = async (req, res, next) => {
   try {
-    const user = await User.findOne({ username: req.body.username });
+    const Account = await Account.findOne({
+      username: req.body.username,
+    });
 
-    if (!user) return next(CreateError(404, "User not found!"));
+    if (!Account) return next(CreateError(404, "Không tìm thấy tài khoản!"));
 
-    const isCorrect = bcrypt.compareSync(req.body.password, user.password);
+    const isCorrect = bcrypt.compareSync(req.body.password, Account.password);
     if (!isCorrect)
-      return next(CreateError(400, "Wrong password or username!"));
+      return next(CreateError(400, "Sai tài khoản hoặc mật khẩu!"));
 
     const token = jwt.sign(
       {
-        id: user._id,
-        isAdmin: user.isAdmin,
+        id: Account._id,
+        isAdmin: Account.isAdmin,
       },
       process.env.JWT_KEY
     );
 
-    const { password, ...info } = user._doc;
+    const { password, ...info } = Account._doc;
     res
       .cookie("accessToken", token, {
         httpOnly: true,
@@ -56,5 +57,5 @@ export const logout = async (req, res) => {
       secure: true,
     })
     .status(200)
-    .send("User has been logged out.");
+    .send("Đăng xuất thành công!");
 };

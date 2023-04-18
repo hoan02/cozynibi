@@ -1,18 +1,19 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-const bannerSchema = new Schema(
+const postSchema = new Schema(
   {
     title: {
       type: String,
-      required: false,
+      required: true,
     },
-    slug: {
+    description: {
       type: String,
       required: true,
     },
-    photoUrl: { 
-      type: [String], 
+    detail: {
+      type: Schema.Types.ObjectId,
+      ref: "PostDetail",
       required: true,
     },
   },
@@ -21,4 +22,4 @@ const bannerSchema = new Schema(
   }
 );
 
-export default mongoose.model("Banner", bannerSchema);
+export default mongoose.model("Post", postSchema);

@@ -21,11 +21,11 @@ const contactSchema = new Schema(
     },
     title: {
       type: String,
-      required: true,
+      required: false,
     },
-    comments: {
+    content: {
       type: String,
-      required: true,
+      required: false,
     },
   },
   {

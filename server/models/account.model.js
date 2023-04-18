@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-const userSchema = new Schema(
+const accountSchema = new Schema(
   {
     username: {
       type: String,
@@ -18,24 +18,17 @@ const userSchema = new Schema(
       required: true,
     },
     avatar: {
-      type: String,
-      required: false,
-    },
-    country: {
-      type: String,
-      required: true,
+      type: Schema.Types.ObjectId,
+      ref: "Image",
+      require: false,
     },
     phone: {
-      type: String,
+      type: Number,
       required: false,
     },
-    desc: {
+    description: {
       type: String,
       required: false,
-    },
-    isAdmin: {
-      type: Boolean,
-      default: false,
     },
   },
   {
@@ -43,4 +36,4 @@ const userSchema = new Schema(
   }
 );
 
-export default mongoose.model("Users", userSchema);
+export default mongoose.model("Account", accountSchema);
