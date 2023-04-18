@@ -1,6 +1,6 @@
 import { cloudinary } from "../index.js";
-import Banner from "../models/banners.model.js";
-import Image from "../models/images.model.js";
+import Banner from "../models/banner.model.js";
+import Image from "../models/image.model.js";
 import createError from "../utils/createError.js";
 
 export const getAllBanner = async (req, res, next) => {
@@ -46,6 +46,7 @@ export const createBanner = async (req, res, next) => {
     res.status(201).json({
       success: true,
       message: "Banner created successfully!",
+      newBanner,
     });
   } catch (err) {
     next(createError(500, "Create banner failed, please try again!"));

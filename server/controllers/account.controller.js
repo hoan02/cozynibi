@@ -1,5 +1,5 @@
 import { cloudinary } from "../index.js";
-import Account from "../models/Accounts.model.js";
+import Account from "../models/account.model.js";
 import createError from "../utils/createError.js";
 
 export const getAccount = async (req, res, next) => {
