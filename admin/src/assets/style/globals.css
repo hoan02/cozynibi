@@ -1,0 +1,17 @@
+/* variables */
+:root{
+    --main-color: #d7b659;
+    --black-color: #000;
+    --white-color: #fff;
+}
+
+*{
+    margin:0;
+    padding:0;
+    text-decoration: none;
+  }
+
+main{
+    width: 100%;
+    padding: 20px;
+  }
