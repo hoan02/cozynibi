@@ -14,6 +14,7 @@ import foodRoute from "./routes/food.route.js";
 import imageRoute from "./routes/image.route.js";
 import postRoute from "./routes/post.route.js";
 import tourRoute from "./routes/tour.route.js";
+import uploadRoute from "./routes/upload.route.js";
 
 const app = express();
 dotenv.config();
@@ -55,6 +56,7 @@ app.use("/api/food", foodRoute);
 app.use("/api/image", imageRoute);
 app.use("/api/post", postRoute);
 app.use("/api/tour", tourRoute);
+app.use("/api/upload", uploadRoute);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;

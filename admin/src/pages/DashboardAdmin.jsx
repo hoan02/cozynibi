@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import CreateBanner from "../components/CreateBanner";
 
 const DashboardAdmin = () => {
   return (
-    <div>DashboardAdmin</div>
-  )
-}
+    <div>
+      <h1>DashboardAdmin</h1>
+      <CreateBanner />
+    </div>
+  );
+};
 
-export default DashboardAdmin
+export default DashboardAdmin;

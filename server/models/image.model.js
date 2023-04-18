@@ -11,7 +11,7 @@ const imageSchema = new Schema(
       type: String,
       required: false,
     },
-    public_id: {
+    publicId: {
       type: String,
       required: false,
     },
