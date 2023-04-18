@@ -1,0 +1,7 @@
+@import '../style/globals.css';
+
+
+/* style layout */
+@import './layout/sidebar.css';
+
+/* style component */

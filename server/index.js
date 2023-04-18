@@ -5,11 +5,15 @@ import cookieParser from "cookie-parser";
 import * as dotenv from "dotenv";
 import { v2 as cloudinary } from "cloudinary";
 
+import accountRoute from "./routes/account.route.js";
 import authRoute from "./routes/auth.route.js";
-import usersRoute from "./routes/users.route.js";
-import imagesRoute from "./routes/images.route.js";
-import bannersRoute from "./routes/banners.route.js";
-import categoryRoute from "./routes/category.route.js";
+import bannerRoute from "./routes/banner.route.js";
+import bookingRoute from "./routes/booking.route.js";
+import contactRoute from "./routes/contact.route.js";
+import foodRoute from "./routes/food.route.js";
+import imageRoute from "./routes/image.route.js";
+import postRoute from "./routes/post.route.js";
+import tourRoute from "./routes/tour.route.js";
 
 const app = express();
 dotenv.config();
@@ -42,12 +46,15 @@ app.use(
 app.use(express.json({ limit: "50mb" }));
 app.use(cookieParser());
 
+app.use("/api/account", accountRoute);
 app.use("/api/auth", authRoute);
-app.use("/api/users", usersRoute);
-app.use("/api/image", imagesRoute);
-app.use("/api/banners", bannersRoute);
-app.use("/api/category", categoryRoute);
-
+app.use("/api/banner", bannerRoute);
+app.use("/api/booking", bookingRoute);
+app.use("/api/contact", contactRoute);
+app.use("/api/food", foodRoute);
+app.use("/api/image", imageRoute);
+app.use("/api/post", postRoute);
+app.use("/api/tour", tourRoute);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;

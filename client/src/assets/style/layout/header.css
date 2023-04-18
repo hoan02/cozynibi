@@ -1,0 +1,35 @@
+.header{
+    display: flex;
+}
+
+/* header logo */
+.header-logo{
+    width: 20%;
+}
+
+
+/* header nav */
+.header-nav{
+    width: 80%;
+}
+
+
+/* nav top */
+.nav-top{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav-top div{
+    margin: 0 20px;
+}
+
+
+/* nav bottom */
+.nav-bottom{
+}
+
+.nav-menu{
+    display: flex;
+    justify-content: space-around;
+}
