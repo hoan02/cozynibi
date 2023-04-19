@@ -2,7 +2,9 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <div>Header</div>
+    <div className='header'>
+      <img src='../../public/logo.png'/>
+    </div>
   )
 }
 

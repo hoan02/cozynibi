@@ -1,6 +1,6 @@
 import { useState } from "react";
-import newRequest from "../utils/newRequest.js";
-import toastService from "../utils/toastService.js";
+import newRequest from "../../utils/newRequest.js";
+import toastService from "../../utils/toastService.js";
 
 const CreateBanner = () => {
   const [imgPreview, setImgPreview] = useState("");
