@@ -1,4 +1,4 @@
-.container {
+.sidebar-container {
   display: flex;
 }
 
@@ -46,4 +46,17 @@
 .icon,
 .link_text {
   font-size: 20px;
+  display: flex;
+}
+
+
+/* submenu */
+.link-submenu{
+  display: flex;
+  flex-direction: column;
+}
+
+.submenu{
+  display: flex;
+  flex-direction: column;
 }
