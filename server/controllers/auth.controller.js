@@ -20,25 +20,25 @@ export const register = async (req, res, next) => {
 
 export const login = async (req, res, next) => {
   try {
-    const Account = await Account.findOne({
+    const account = await Account.findOne({
       username: req.body.username,
     });
 
-    if (!Account) return next(CreateError(404, "Không tìm thấy tài khoản!"));
+    if (!account) return next(CreateError(404, "Không tìm thấy tài khoản!"));
 
-    const isCorrect = bcrypt.compareSync(req.body.password, Account.password);
+    const isCorrect = bcrypt.compareSync(req.body.password, account.password);
     if (!isCorrect)
       return next(CreateError(400, "Sai tài khoản hoặc mật khẩu!"));
 
     const token = jwt.sign(
       {
-        id: Account._id,
-        isAdmin: Account.isAdmin,
+        id: account._id,
+        isAdmin: account.isAdmin,
       },
       process.env.JWT_KEY
     );
 
-    const { password, ...info } = Account._doc;
+    const { password, ...info } = account._doc;
     res
       .cookie("accessToken", token, {
         httpOnly: true,
