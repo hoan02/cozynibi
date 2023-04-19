@@ -102,50 +102,50 @@ import logo from "../assets/images/logo.png";
 import Home from '../pages/Home'
 import AboutUS from '../pages/AboutUs'
 
-// const pages = [
-//   {
-//     path: '/',
-//     name: 'HOME',
+const pages = [
+  {
+    path: '/',
+    name: 'HOME',
     
-//   },
-//   {
-//     path: '/about_us',
-//     name: 'ABOUT US',
-//     content: <AboutUS/>
-//   },
-//   {
-//     path: '/accommodation',
-//     name: 'ACCOMMODATION',
-//   },
-//   {
-//     path: '/menu',
-//     name: 'MENU',
-//   },
-//   {
-//     path: '/tour_travel',
-//     name: 'TOUR TRAVEL',
-//   },
-//   {
-//     path: '/service',
-//     name: 'SERVICE',
-//   },
-//   {
-//     path: '/news',
-//     name: 'NEWS',
-//   },
-//   {
-//     path: '/gallery',
-//     name: 'GALLERY',
-//   },
-//   {
-//     path: '/contact',
-//     name: 'CONTACT',
-//   },
-//   {
-//     path: '/login',
-//     name: 'LOGIN',
-//   },
-// ]
+  },
+  {
+    path: '/about-us',
+    name: 'ABOUT US',
+    content: <AboutUS/>
+  },
+  {
+    path: '/accommodation',
+    name: 'ACCOMMODATION',
+  },
+  {
+    path: '/menu',
+    name: 'MENU',
+  },
+  {
+    path: '/tour-travel',
+    name: 'TOUR TRAVEL',
+  },
+  {
+    path: '/service',
+    name: 'SERVICE',
+  },
+  {
+    path: '/news',
+    name: 'NEWS',
+  },
+  {
+    path: '/gallery',
+    name: 'GALLERY',
+  },
+  {
+    path: '/contact',
+    name: 'CONTACT',
+  },
+  {
+    path: '/',
+    name: 'LOGIN',
+  },
+]
 
 const Header = () => {
   return (
@@ -172,36 +172,13 @@ const Header = () => {
 
         <div className="nav-bottom">
           <ul className="nav-menu">
-            <li>
-              <Link to={"/"}>HOME</Link>
-            </li>
-            <li>
-              <Link to={"/about-us"}>ABOUT US</Link>
-            </li>
-            <li>
-              <Link to={"/accomodation"}>ACCOMMODATION</Link>
-            </li>
-            <li>
-              <Link to={"/menu"}>MENU</Link>
-            </li>
-            <li>
-              <Link to={"#"}>TOUR TRAVEL</Link>
-            </li>
-            <li>
-              <Link to={"#"}>SERVICE</Link>
-            </li>
-            <li>
-              <Link to={"/news"}>NEWS</Link>
-            </li>
-            <li>
-              <Link to={"/gallery"}>GALLERY</Link>
-            </li>
-            <li>
-              <Link to={"/contact"}>CONTACT</Link>
-            </li>
-            <li>
-              <Link to={'../../../admin/src/pages/Login'}>LOG IN</Link>
-            </li>
+            {pages.map((page) => {
+              return (
+                <li key={page.path}>
+                  <Link to={page.path}>{page.name}</Link>
+                </li>
+              )
+            })}
           </ul>
         </div>
 
