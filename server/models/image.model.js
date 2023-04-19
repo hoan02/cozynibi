@@ -5,19 +5,23 @@ const imageSchema = new Schema(
   {
     name: {
       type: String,
-      required: false,
+      required: true,
     },
     description: {
       type: String,
       required: false,
     },
+    folder: {
+      type: String,
+      required: true,
+    },
     publicId: {
       type: String,
-      required: false,
+      required: true,
     },
     url: {
       type: String,
-      required: false,
+      required: true,
     },
   },
   {
