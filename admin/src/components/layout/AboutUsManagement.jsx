@@ -1,8 +1,11 @@
 import React from 'react'
+import CreateBanner from '../_child/CreateBanner'
 
 const AboutUsManagement = () => {
   return (
-    <div>AboutUsManagement</div>
+    <div>
+      <CreateBanner/>
+    </div>
   )
 }
 
