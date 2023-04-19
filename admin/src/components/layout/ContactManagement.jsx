@@ -1,8 +1,12 @@
 import React from 'react'
+import CreateBanner from '../_child/CreateBanner'
+
 
 const ContactManagement = () => {
   return (
-    <div>ContactManagement</div>
+    <div>
+      <CreateBanner/>
+    </div>
   )
 }
 

@@ -23,3 +23,9 @@ main{
   a{
     text-decoration: none;
   }
+
+
+  .ant-menu-item-selected{
+    background-color: var(--main-color) !important;
+    color: var(--white-color) !important;
+  }
