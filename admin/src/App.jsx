@@ -86,7 +86,7 @@ function SideMenu() {
             {label: 'Contact', key: '/contact_management', icon: <AiOutlineContacts/>},
           ]},
           { label: "Account", key: "", icon: <MdAccountCircle/> },
-          { label: "Logout", danger: true, icon: <CgDanger/>},
+          { label: "Logout", key: 'logout', danger: true, icon: <CgDanger/>},
         ]}
       ></Menu>
     </div>
