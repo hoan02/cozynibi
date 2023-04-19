@@ -2,6 +2,8 @@
 
 
 /* style layout */
+@import './layout/header.css';
+@import './layout/footer.css';
 @import './layout/sidebar.css';
 
 /* style component */
