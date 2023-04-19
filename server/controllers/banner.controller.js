@@ -23,26 +23,22 @@ export const getBanner = async (req, res, next) => {
 };
 
 export const createBanner = async (req, res, next) => {
-  const { title, slug, image, nameImage } = req.body;
+  const { title, image } = req.body;
+  let newBanner;
   try {
-    const result = await cloudinary.uploader.upload(image, {
-      folder: "banners",
-      // width: 300,
-      // height: 300,
-      // crop: "scale"
-    });
-    const newImg = await Image.create({
-      name: nameImage,
-      public_id: result.public_id,
-      url: result.secure_url,
-    });
-
-    const newBanner = await Banner.create({
-      title,
-      slug,
-      image: newImg._id,
-    });
-
+    const banner = await Banner.findOne({ title });
+    if (banner) {
+      newBanner = await banner.updateOne({
+        $push: {
+          image,
+        },
+      });
+    } else {
+      newBanner = Banner.create({
+        title,
+        image,
+      });
+    }
     res.status(201).json({
       success: true,
       message: "Banner created successfully!",
