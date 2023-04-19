@@ -1,21 +1,53 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { Helmet } from "react-helmet";
+
+import "react-toastify/dist/ReactToastify.css";
+
 import DashboardAdmin from "./pages/DashboardAdmin";
 import BannerAdmin from "./pages/BannerAdmin";
 import Sidebar from "./components/Sidebar";
-import './App.css';
+import "./App.css";
 
-function App() {
+const routes = [
+  {
+    path: "/",
+    element: <DashboardAdmin />,
+    title: "Home",
+  },
+  {
+    path: "/banner-admin",
+    element: <BannerAdmin />,
+    title: "Banner Admin",
+  },
+];
+
+const App = () => {
   return (
-    <BrowserRouter>
+    <div className="app">
       <Sidebar>
         <Routes>
-          <Route path="/" element={<DashboardAdmin />} />
-          <Route path="/banner_admin" element={<BannerAdmin />} />
+          {routes.map((route) => (
+            <Route
+              key={route.path}
+              exact
+              path={route.path}
+              element={
+                <>
+                  <Helmet>
+                    <title>{route.title}</title>
+                  </Helmet>
+                  {route.element}
+                </>
+              }
+            />
+          ))}
         </Routes>
       </Sidebar>
-    </BrowserRouter>
+      <ToastContainer autoClose={2000} draggablePercent={60} />
+    </div>
   );
-}
+};
 
 export default App;

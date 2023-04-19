@@ -3,6 +3,11 @@ const { Schema } = mongoose;
 
 const bookingSchema = new Schema(
   {
+    room: {
+      type: Schema.Types.ObjectId,
+      ref: "Room",
+      required: true,
+    },
     checkIn: {
       type: String,
       required: true,
@@ -21,10 +26,22 @@ const bookingSchema = new Schema(
       required: true,
       default: 0,
     },
-    idRoom: {
+    numberRoom: {
+      type: Number,
+      required: true,
+    },
+    fullName: {
       type: String,
       required: true,
-    }
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

@@ -1,25 +1,25 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-const tripScheduleSchema = new Schema(
+const tourSchema = new Schema(
   {
-    id: {
-      type: String,
-      unique: true,
-      required: true,
-    }, 
-    time: {
+    name: {
       type: String,
       required: true,
     },
-    description: {
+    note: {
       type: String,
       required: true,
-    }
+    },
+    detail: {
+      type: Schema.Types.ObjectId,
+      ref: "TourDetail",
+      required: true,
+    },
   },
   {
     timestamps: true,
   }
 );
 
-export default mongoose.model("TripSchedules", tripScheduleSchema);
+export default mongoose.model("Tour", tourSchema);

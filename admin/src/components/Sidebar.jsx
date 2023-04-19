@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaTh } from "react-icons/fa";
 import { GiKnightBanner } from "react-icons/gi";
 import { MdOutlineDashboard } from "react-icons/md";
 import { AiOutlineDown } from "react-icons/ai";
@@ -54,6 +54,12 @@ const Sidebar = ({ children }) => {
         },
       ],
     },
+    {
+      path: "/banner-admin",
+      name: "BannerAdmin",
+      icon: <FaTh />,
+      submenu: [],
+    },
   ];
   return (
     <div className="sidebar-container">
@@ -72,7 +78,7 @@ const Sidebar = ({ children }) => {
               to={item.path}
               key={index}
               className="link"
-              activeclassName="active"
+              activeClassName="active"
             >
               <div className="icon">{item.icon}</div>
               <div
@@ -87,7 +93,7 @@ const Sidebar = ({ children }) => {
               to={item.path}
               key={index}
               className="link link-submenu"
-              activeclassName="active"
+              activeClassName="active"
             >
               <div className="icon">{item.icon}</div>
               <div
@@ -97,9 +103,9 @@ const Sidebar = ({ children }) => {
                 {item.name} <AiOutlineDown/>
               </div>
               <ul className="submenu">
-                {item.submenu.map((submenuItem) => {
+                {item.submenu.map((submenuItem, subIndex) => {
                     return (
-                        <li className="submenu-item" key={submenuItem.index}>
+                        <li className="submenu-item" key={subIndex}>
                             <NavLink to={submenuItem.path}>{submenuItem.name}</NavLink>
                         </li>
                     )
