@@ -15,3 +15,17 @@ main{
     width: 100%;
     padding: 20px;
   }
+
+  ul{
+    list-style: none;
+  }
+
+  a{
+    text-decoration: none;
+  }
+
+
+  .ant-menu-item-selected{
+    background-color: var(--main-color) !important;
+    color: var(--white-color) !important;
+  }

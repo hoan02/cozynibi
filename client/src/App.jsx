@@ -4,17 +4,17 @@ import { Helmet } from "react-helmet";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
-import Header from "./components/header/Header";
-import Footer from "./components/footer/Footer";
-import Home from "./pages/home/Home";
-import AboutUs from "./pages/aboutUs/AboutUs";
-import Accommodation from "./pages/accommodation/Accommodation";
-import Menu from "./pages/menu/Menu";
-import TourTravel from "./pages/tourTravel/TourTravel";
-import Service from "./pages/service/Service";
-import News from "./pages/news/News";
-import Gallery from "./pages/gallery/Gallery";
-import Contact from "./pages/contact/Contact";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import AboutUs from "./pages/AboutUs";
+import Accommodation from "./pages/Accommodation";
+import Menu from "./pages/Menu";
+import TourTravel from "./pages/TourTravel";
+import Service from "./pages/Service";
+import News from "./pages/News";
+import Gallery from "./pages/Gallery";
+import Contact from "./pages/Contact";
 import "./App.css";
 
 const routes = [
@@ -63,11 +63,6 @@ const routes = [
     element: <Contact />,
     title: "Contact",
   },
-  // {
-  //   path: "*",
-  //   element: <Home />,
-  //   title: "Home",
-  // },
 ];
 
 const App = () => {
