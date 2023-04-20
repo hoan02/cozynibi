@@ -5,9 +5,14 @@ import "./App.css";
 // import icon
 import { AiOutlineHome, AiOutlineContacts } from 'react-icons/ai'
 import { TbNews } from 'react-icons/tb'
-import { FcAbout } from 'react-icons/fc'
+import { FcAbout, FcGallery } from 'react-icons/fc'
 import { MdAccountCircle } from 'react-icons/md'
 import { CgDanger } from 'react-icons/cg'
+import { FaHotel } from 'react-icons/fa'
+import { GrGallery } from 'react-icons/gr'
+import { BsMenuUp, BsNewspaper } from 'react-icons/bs'
+import { RiServiceFill } from 'react-icons/ri'
+import { MdTour } from 'react-icons/md'
 
 
 import { Route, Routes, useNavigate } from "react-router-dom";
@@ -20,8 +25,17 @@ import newRequest from "./utils/newRequest";
 // import components
 import Login from "./pages/Login";
 import DashboardAdmin from "./pages/DashboardAdmin";
+import AccountManagement from './pages/AccountManagement'
+
+// import layout
 import AboutUsManagement from "./components/layout/AboutUsManagement";
+import AccommodationManagement from "./components/layout/AccommodationManagement";
 import ContactManagement from "./components/layout/ContactManagement";
+import GalleryManagement from "./components/layout/GalleryManagement";
+import MenuManagement from "./components/layout/MenuManagement";
+import NewsManagement from "./components/layout/NewsManagement";
+import ServiceManagement from "./components/layout/ServiceManagement";
+import TourTravelManagement from "./components/layout/TourTravelManagement";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
@@ -81,12 +95,18 @@ function SideMenu() {
         defaultSelectedKeys={[window.location.pathname]}
         items={[
           { label: "Home", key: "/", icon: <AiOutlineHome/> },
-          { label: "Pages", key: "/pages_management", icon: <TbNews/>,  children: [
-            {label: 'About us', key: '/about_us_management', icon: <FcAbout/>},
-            {label: 'Contact', key: '/contact_management', icon: <AiOutlineContacts/>},
+          { label: "Pages", key: "/pages-management", icon: <TbNews/>,  children: [
+            {label: 'About us', key: '/pages/about-us-management', icon: <FcAbout/>},
+            {label: 'Accommodation', key: '/pages/accommodation-management', icon: <FaHotel/>},
+            {label: 'Contact', key: '/pages/contact-management', icon: <AiOutlineContacts/>},
+            {label: 'Gallery', key: '/pages/gallery-management', icon: <GrGallery/>},
+            {label: 'Menu', key: '/pages/menu-management', icon: <BsMenuUp/>},
+            {label: 'News', key: '/pages/news-management', icon: <BsNewspaper/>},
+            {label: 'Service', key: '/pages/service-management', icon: <RiServiceFill/>},
+            {label: 'Tour Travel', key: '/pages/tour-travel-management', icon: <MdTour/>},
           ]},
-          { label: "Account", key: "", icon: <MdAccountCircle/> },
-          { label: "Logout", danger: true, icon: <CgDanger/>},
+          { label: "Account", key: "/account-management", icon: <MdAccountCircle/> },
+          { label: "Logout", key: 'logout', danger: true, icon: <CgDanger/>},
         ]}
       ></Menu>
     </div>
@@ -98,8 +118,15 @@ function Content() {
     <div>
       <Routes>
         <Route path="/" element={<DashboardAdmin />} />
-        <Route path="/about_us_management" element={<AboutUsManagement />} />
-        <Route path="/contact_management" element={<ContactManagement />} />
+        <Route path="/pages/about-us-management" element={<AboutUsManagement />} />
+        <Route path="/pages/accommodation-management" element={<AccommodationManagement />} />
+        <Route path="/pages/contact-management" element={<ContactManagement />} />
+        <Route path="/pages/gallery-management" element={<GalleryManagement />} />
+        <Route path="/pages/menu-management" element={<MenuManagement />} />
+        <Route path="/pages/news-management" element={<NewsManagement />} />
+        <Route path="/pages/service-management" element={<ServiceManagement />} />
+        <Route path="/pages/tour-travel-management" element={<TourTravelManagement />} />
+        <Route path="/account-management" element={<AccountManagement />} />
       </Routes>
     </div>
   );
