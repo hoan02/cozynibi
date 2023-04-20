@@ -109,6 +109,7 @@ const CreateBanner = () => {
           )}
         </div>
       </div>
+      
       <div className="form">
         <form>
           <h2>Form</h2>

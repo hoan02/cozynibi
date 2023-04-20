@@ -1,3 +1,10 @@
+/* variables */
+:root{
+    --main-color: #d7b659;
+    --black-color: #000;
+    --white-color: #fff;
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -6,6 +13,8 @@
 
 a{
     text-decoration: none;
+    color: var(--black-color);
+    
 }
 
 a:hover{
