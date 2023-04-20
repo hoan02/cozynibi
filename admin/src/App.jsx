@@ -3,17 +3,16 @@ import { Menu } from "antd";
 import "./App.css";
 
 // import icon
-import { AiOutlineHome, AiOutlineContacts } from 'react-icons/ai'
-import { TbNews } from 'react-icons/tb'
-import { FcAbout, FcGallery } from 'react-icons/fc'
-import { MdAccountCircle } from 'react-icons/md'
-import { CgDanger } from 'react-icons/cg'
-import { FaHotel } from 'react-icons/fa'
-import { GrGallery } from 'react-icons/gr'
-import { BsMenuUp, BsNewspaper } from 'react-icons/bs'
-import { RiServiceFill } from 'react-icons/ri'
-import { MdTour } from 'react-icons/md'
-
+import { AiOutlineHome, AiOutlineContacts } from "react-icons/ai";
+import { TbNews } from "react-icons/tb";
+import { FcAbout, FcGallery } from "react-icons/fc";
+import { MdAccountCircle } from "react-icons/md";
+import { CgDanger } from "react-icons/cg";
+import { FaHotel } from "react-icons/fa";
+import { GrGallery } from "react-icons/gr";
+import { BsMenuUp, BsNewspaper } from "react-icons/bs";
+import { RiServiceFill } from "react-icons/ri";
+import { MdTour } from "react-icons/md";
 
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -25,7 +24,7 @@ import newRequest from "./utils/newRequest";
 // import components
 import Login from "./pages/Login";
 import DashboardAdmin from "./pages/DashboardAdmin";
-import AccountManagement from './pages/AccountManagement'
+import AccountManagement from "./pages/AccountManagement";
 
 // import layout
 import AboutUsManagement from "./components/layout/AboutUsManagement";
@@ -41,7 +40,6 @@ import Footer from "./components/Footer";
 
 const App = () => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  console.log(currentUser);
 
   return (
     <div
@@ -85,28 +83,70 @@ function SideMenu() {
     <div>
       <Menu
         onClick={({ key }) => {
-          if (key === "logout") {
+          if (key === "/logout") {
+            console.log("ok");
             handleLogout();
             navigate("/");
           } else {
             navigate(key);
           }
         }}
-        defaultSelectedKeys={[window.location.pathname]}
+        defaultselectedpaths={[window.location.pathname]}
         items={[
-          { label: "Home", key: "/", icon: <AiOutlineHome/> },
-          { label: "Pages", key: "/pages-management", icon: <TbNews/>,  children: [
-            {label: 'About us', key: '/pages/about-us-management', icon: <FcAbout/>},
-            {label: 'Accommodation', key: '/pages/accommodation-management', icon: <FaHotel/>},
-            {label: 'Contact', key: '/pages/contact-management', icon: <AiOutlineContacts/>},
-            {label: 'Gallery', key: '/pages/gallery-management', icon: <GrGallery/>},
-            {label: 'Menu', key: '/pages/menu-management', icon: <BsMenuUp/>},
-            {label: 'News', key: '/pages/news-management', icon: <BsNewspaper/>},
-            {label: 'Service', key: '/pages/service-management', icon: <RiServiceFill/>},
-            {label: 'Tour Travel', key: '/pages/tour-travel-management', icon: <MdTour/>},
-          ]},
-          { label: "Account", key: "/account-management", icon: <MdAccountCircle/> },
-          { label: "Logout", key: 'logout', danger: true, icon: <CgDanger/>},
+          { label: "Home", key: "/", icon: <AiOutlineHome /> },
+          {
+            label: "Pages",
+            key: "/pages-management",
+            icon: <TbNews />,
+            children: [
+              {
+                label: "About us",
+                key: "/pages/about-us-management",
+                icon: <FcAbout />,
+              },
+              {
+                label: "Accommodation",
+                key: "/pages/accommodation-management",
+                icon: <FaHotel />,
+              },
+              {
+                label: "Contact",
+                key: "/pages/contact-management",
+                icon: <AiOutlineContacts />,
+              },
+              {
+                label: "Gallery",
+                key: "/pages/gallery-management",
+                icon: <GrGallery />,
+              },
+              {
+                label: "Menu",
+                key: "/pages/menu-management",
+                icon: <BsMenuUp />,
+              },
+              {
+                label: "News",
+                key: "/pages/news-management",
+                icon: <BsNewspaper />,
+              },
+              {
+                label: "Service",
+                key: "/pages/service-management",
+                icon: <RiServiceFill />,
+              },
+              {
+                label: "Tour Travel",
+                key: "/pages/tour-travel-management",
+                icon: <MdTour />,
+              },
+            ],
+          },
+          {
+            label: "Account",
+            key: "/account-management",
+            icon: <MdAccountCircle />,
+          },
+          { label: "Logout", key: "logout", danger: true, icon: <CgDanger /> },
         ]}
       ></Menu>
     </div>
@@ -118,14 +158,34 @@ function Content() {
     <div>
       <Routes>
         <Route path="/" element={<DashboardAdmin />} />
-        <Route path="/pages/about-us-management" element={<AboutUsManagement />} />
-        <Route path="/pages/accommodation-management" element={<AccommodationManagement />} />
-        <Route path="/pages/contact-management" element={<ContactManagement />} />
-        <Route path="/pages/gallery-management" element={<GalleryManagement />} />
+        <Route path="/page/about-us" element={<AboutUsManagement />} />
+        <Route path="/page/contact" element={<ContactManagement />} />
+        <Route
+          path="/pages/about-us-management"
+          element={<AboutUsManagement />}
+        />
+        <Route
+          path="/pages/accommodation-management"
+          element={<AccommodationManagement />}
+        />
+        <Route
+          path="/pages/contact-management"
+          element={<ContactManagement />}
+        />
+        <Route
+          path="/pages/gallery-management"
+          element={<GalleryManagement />}
+        />
         <Route path="/pages/menu-management" element={<MenuManagement />} />
         <Route path="/pages/news-management" element={<NewsManagement />} />
-        <Route path="/pages/service-management" element={<ServiceManagement />} />
-        <Route path="/pages/tour-travel-management" element={<TourTravelManagement />} />
+        <Route
+          path="/pages/service-management"
+          element={<ServiceManagement />}
+        />
+        <Route
+          path="/pages/tour-travel-management"
+          element={<TourTravelManagement />}
+        />
         <Route path="/account-management" element={<AccountManagement />} />
       </Routes>
     </div>

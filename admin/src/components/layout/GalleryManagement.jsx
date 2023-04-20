@@ -1,10 +1,16 @@
 import React from 'react'
-import CreateBanner from '../_child/CreateBanner'
+import Banner from '../_child/Banner';
 
 const GalleryManagement = () => {
+  const config = {
+    title: "Gallery",
+    slug: "gallery",
+  };
+
   return (
     <div>
-      <CreateBanner/>
+      <h1>Gallery Management</h1>
+      <Banner {...config} />
     </div>
   )
 }
