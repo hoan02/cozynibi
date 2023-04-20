@@ -1,26 +1,19 @@
 import React from "react";
-import ScrollToTopButton from '../utils/ScrollToTopButton'
+import Banner from "../components/_child/Banner";
+import banner from "../assets/images/banner-about-us.jpg";
 
-const About = () => {
+// import images
+import bgAbout from '../assets/images/bg-abu.png'
+import about1 from '../assets/images/abu-1.jpg'
+import about2 from '../assets/images/abu-2.jpg'
+import about3 from '../assets/images/abu-3.jpg'
+
+
+const AboutUs = () => {
   return (
-    <div>
-      <div className="banner">
-        <div className="banner-title">
-          <div className="avt">
-            {/* <img src={require("../../assets/images/banner-about-us.jpg")} alt="" /> */}
-            <img src={require("../../assets/images/banner-about-us.jpg")} alt="" />
-          </div>
-          <div className="desc">
-            <h1>
-              <span>About Us</span>
-            </h1>
-            <img src={require("../../assets/images/bg-tit.png")} alt="" />
-          </div>
-        </div>
-        <div className="top-connect">
-          <img src={require("../../assets/images/bg-abu.png")} alt="" />
-        </div>
-      </div>
+    <div className="about">
+      <Banner img={banner} text="about us" />
+
       <div className="about-intro bg-sena">
         <div className="container position-abs">
           <h2>
@@ -45,11 +38,11 @@ const About = () => {
       <div className="list-about-us">
         <div className="item-abu">
           <div className="top-connect">
-            <img src={require("../../assets/images/bg-abu.png")} alt="" />
+            <img src={bgAbout} alt="" />
           </div>
           <div className="abu-content">
             <div className="avt">
-              <img src={require("../../assets/images/abu-1.jpg")} alt="" />
+              <img src={about1} alt="" />
             </div>
             <div className="desc">
               <h3>comfortable rooms</h3>
@@ -68,16 +61,16 @@ const About = () => {
             </div>
           </div>
           <div className="bottom-connect">
-            <img src={require("../../assets/images/bg-abu.png")} alt="" />
+            <img src={bgAbout} alt="" />
           </div>
         </div>
         <div className="item-abu">
           <div className="top-connect">
-            <img src={require("../../assets/images/bg-abu.png")} alt="" />
+            <img src={bgAbout} alt="" />
           </div>
           <div className="abu-content">
             <div className="avt">
-              <img src={require("../../assets/images/abu-2.jpg")} alt="" />
+              <img src={about2} alt="" />
             </div>
             <div className="desc special">
               <h3>extensive menu</h3>
@@ -96,50 +89,40 @@ const About = () => {
               </div>
             </div>
           </div>
-          <div className="bottom-connect">
-            <img src={require("../../assets/images/bg-abu.png")} alt="" />
-          </div>
         </div>
         <div className="item-abu">
-          <div className="top-connect">
-            <img src={require("../../assets/images/bg-abu.png")} alt="" />
-          </div>
-          <div className="abu-content">
-            <div className="avt">
-              <img src={require("../../assets/images/abu-3.jpg")} alt="" />
+      <div className="top-connect">
+        <img src={bgAbout} alt="" />
+      </div>
+      <div className="abu-content">
+        <div className="avt">
+          <img src={about3} alt="" />
+        </div>
+        <div className="desc">
+          <h3>extensive menu</h3>
+          <div className="content-wrapp">
+            <div className="detail">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+                vel molestie nisl. Duis ac mi leo. Mauris at convallis erat.
+                Aliquam interdum semper luctus. Aenean ex tellus, gravida ut
+                rutrum dignissim, malesuada vitae nulla. Sed viverra, nisl
+                dapibus lobortis porttitor, risus risus dictum risus, sed
+                rhoncus orci urna dignissim leo. Cras id nunc nulla. Aliquam a
+                tortor fermentum, finibus elit ac, dictum purus.
+              </p>
             </div>
-            <div className="desc">
-              <h3>extensive menu</h3>
-              <div className="content-wrapp">
-                <div className="detail">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Integer vel molestie nisl. Duis ac mi leo. Mauris at
-                    convallis erat. Aliquam interdum semper luctus. Aenean ex
-                    tellus, gravida ut rutrum dignissim, malesuada vitae nulla.
-                    Sed viverra, nisl dapibus lobortis porttitor, risus risus
-                    dictum risus, sed rhoncus orci urna dignissim leo. Cras id
-                    nunc nulla. Aliquam a tortor fermentum, finibus elit ac,
-                    dictum purus.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="bottom-connect mb-20px">
-            <img src={require("../../assets/images/bg-abu.png")} alt="" />
           </div>
         </div>
       </div>
-      {/* Hotline */}
-      <div className="fix-hotline">
-        <a href="#">
-          <img src={require("../../Assets/icon/hotline-fix.png")} alt="" />
-        </a>
+      <div className="bottom-connect mb-20px">
+        <img src={bgAbout} alt="" />
       </div>
-      <ScrollToTopButton />
+    </div>
+      </div>
+      
     </div>
   );
 };
 
-export default About;
+export default AboutUs;
