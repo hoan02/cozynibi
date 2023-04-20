@@ -16,6 +16,7 @@ const toastService = {
   info: (message, id) => {
     toast.info(message, { toastId: id, theme: "colored" });
   },
-};
+}; 
+     
 
 export default toastService;

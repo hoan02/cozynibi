@@ -19,6 +19,11 @@ const imageSchema = new Schema(
       type: String,
       required: true,
     },
+    isShow: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
     url: {
       type: String,
       required: true,

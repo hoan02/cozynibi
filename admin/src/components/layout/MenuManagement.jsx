@@ -1,19 +1,18 @@
 import React from 'react'
 import Banner from '../_child/Banner';
 
-
-const ContactManagement = () => {
+const MenuManagement = () => {
   const config = {
-    title: "Contact",
-    slug: "contact",
+    title: "Menu",
+    slug: "menu",
   };
 
   return (
     <div>
-      <h1>Contact Management</h1>
+      <h1>Menu Management</h1>
       <Banner {...config} />
     </div>
   )
 }
 
-export default ContactManagement
+export default MenuManagement
