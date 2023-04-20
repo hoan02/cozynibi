@@ -3,12 +3,11 @@ import { Menu } from "antd";
 import "./App.css";
 
 // import icon
-import { AiOutlineHome, AiOutlineContacts } from 'react-icons/ai'
-import { TbNews } from 'react-icons/tb'
-import { FcAbout } from 'react-icons/fc'
-import { MdAccountCircle } from 'react-icons/md'
-import { CgDanger } from 'react-icons/cg'
-
+import { AiOutlineHome, AiOutlineContacts } from "react-icons/ai";
+import { TbNews } from "react-icons/tb";
+import { FcAbout } from "react-icons/fc";
+import { MdAccountCircle } from "react-icons/md";
+import { CgDanger } from "react-icons/cg";
 
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -71,22 +70,45 @@ function SideMenu() {
     <div>
       <Menu
         onClick={({ key }) => {
-          if (key === "logout") {
+          if (key === "/logout") {
+            console.log("ok");
             handleLogout();
             navigate("/");
           } else {
             navigate(key);
           }
         }}
-        defaultSelectedKeys={[window.location.pathname]}
+        defaultSelectedpaths={[window.location.pathname]}
         items={[
-          { label: "Home", key: "/", icon: <AiOutlineHome/> },
-          { label: "Pages", key: "/pages_management", icon: <TbNews/>,  children: [
-            {label: 'About us', key: '/about_us_management', icon: <FcAbout/>},
-            {label: 'Contact', key: '/contact_management', icon: <AiOutlineContacts/>},
-          ]},
-          { label: "Account", key: "", icon: <MdAccountCircle/> },
-          { label: "Logout", danger: true, icon: <CgDanger/>},
+          { label: "Home", key: "/", icon: <AiOutlineHome /> },
+          {
+            label: "Pages",
+            key: "/page",
+            icon: <TbNews />,
+            children: [
+              {
+                label: "About us",
+                key: "/page/about-us",
+                icon: <FcAbout />,
+              },
+              {
+                label: "Contact",
+                key: "/page/contact",
+                icon: <AiOutlineContacts />,
+              },
+            ],
+          },
+          {
+            label: "Account",
+            key: "/my-account",
+            icon: <MdAccountCircle />,
+          },
+          {
+            label: "Logout",
+            key: "/logout",
+            danger: true,
+            icon: <CgDanger />,
+          },
         ]}
       ></Menu>
     </div>
@@ -98,8 +120,8 @@ function Content() {
     <div>
       <Routes>
         <Route path="/" element={<DashboardAdmin />} />
-        <Route path="/about_us_management" element={<AboutUsManagement />} />
-        <Route path="/contact_management" element={<ContactManagement />} />
+        <Route path="/page/about-us" element={<AboutUsManagement />} />
+        <Route path="/page/contact" element={<ContactManagement />} />
       </Routes>
     </div>
   );
