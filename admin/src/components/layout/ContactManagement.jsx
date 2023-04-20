@@ -1,11 +1,17 @@
 import React from 'react'
-import CreateBanner from '../_child/CreateBanner'
+import Banner from '../_child/Banner';
 
 
 const ContactManagement = () => {
+  const config = {
+    title: "Contact",
+    slug: "contact",
+  };
+
   return (
     <div>
-      <CreateBanner/>
+      <h1>Contact Management</h1>
+      <Banner {...config} />
     </div>
   )
 }

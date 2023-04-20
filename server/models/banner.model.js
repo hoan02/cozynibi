@@ -7,15 +7,15 @@ const bannerSchema = new Schema(
       type: String,
       required: true,
     },
+    slug: {
+      type: String,
+      required: true,
+    },
     image: [
       {
         type: Schema.Types.ObjectId,
         ref: "Image",
-        isActive: {
-          type: Boolean,
-          default: true,
-        },
-        required: false,
+        required: true,
       },
     ],
   },

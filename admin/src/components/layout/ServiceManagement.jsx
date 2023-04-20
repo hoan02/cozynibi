@@ -1,10 +1,16 @@
 import React from 'react'
-import CreateBanner from '../_child/CreateBanner'
+import Banner from '../_child/Banner';
 
 const ServiceManagement = () => {
+  const config = {
+    title: "Service",
+    slug: "service",
+  };
+
   return (
     <div>
-      <CreateBanner/>
+      <h1>Service Management</h1>
+      <Banner {...config} />
     </div>
   )
 }
