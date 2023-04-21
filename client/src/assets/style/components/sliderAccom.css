@@ -1,0 +1,23 @@
+.slick-prev{
+    left: 50px !important;
+    z-index: 100;
+    color: #CBAB54;
+}
+
+.slick-next{
+    right: 50px !important;
+    z-index: 100;
+    rotate: 360deg !important;
+    color: #CBAB54;
+}
+
+.slick-next::before, .slick-prev::before{
+    font-size: 50px !important;
+    background-color: #CBAB54;
+    border-radius: 50%;
+}
+
+.slider-container{
+    width: 90%;
+    margin: 0 auto;
+}
