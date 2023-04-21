@@ -27,14 +27,14 @@ import DashboardAdmin from "./pages/DashboardAdmin";
 import AccountManagement from "./pages/AccountManagement";
 
 // import layout
-import AboutUsManagement from "./components/layout/AboutUsManagement";
-import AccommodationManagement from "./components/layout/AccommodationManagement";
-import ContactManagement from "./components/layout/ContactManagement";
-import GalleryManagement from "./components/layout/GalleryManagement";
-import MenuManagement from "./components/layout/MenuManagement";
-import NewsManagement from "./components/layout/NewsManagement";
-import ServiceManagement from "./components/layout/ServiceManagement";
-import TourTravelManagement from "./components/layout/TourTravelManagement";
+import AboutUsManagement from "./components/layouts/AboutUsManagement";
+import AccommodationManagement from "./components/layouts/AccommodationManagement";
+import ContactManagement from "./components/layouts/ContactManagement";
+import GalleryManagement from "./components/layouts/GalleryManagement";
+import MenuManagement from "./components/layouts/MenuManagement";
+import NewsManagement from "./components/layouts/NewsManagement";
+import ServiceManagement from "./components/layouts/ServiceManagement";
+import TourTravelManagement from "./components/layouts/TourTravelManagement";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
@@ -83,8 +83,7 @@ function SideMenu() {
     <div>
       <Menu
         onClick={({ key }) => {
-          if (key === "/logout") {
-            console.log("ok");
+          if (key === "logout") {
             handleLogout();
             navigate("/");
           } else {
