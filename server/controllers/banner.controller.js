@@ -34,12 +34,12 @@ export const createBanner = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      message: "Banner created successfully!",
+      message: "Tạo banner thành công!",
       newBanner,
     });
     console.log(newBanner);
   } catch (err) {
-    next(createError(500, "Create banner failed, please try again!"));
+    next(createError(500, "Tạo banner thất bại!"));
   }
 };
 
@@ -79,25 +79,30 @@ export const updateBanner = async (req, res, next) => {
     });
     res.status(200).json({
       success: true,
-      message: "Banner updated successfully!",
+      message: "Cập nhật banner thành công!",
       bannerUpdate,
     });
   } catch (err) {
-    next(createError(500, "Update banner failed, please try again!"));
+    next(createError(500, "Cập nhật banner thất bại!"));
   }
 };
 
 export const deleteBanner = async (req, res, next) => {
   const bannerId = req.params.id;
+  const imageId = req.query.imageId;
   try {
     const banner = await Banner.findById(bannerId);
-    await Image.findByIdAndUpdate(banner.image, {
-      name: "",
-      public_id: "",
-      url: "",
+    if (!banner) {
+      return res.status(404).send("Không tìm thấy banner!");
+    }
+    banner.image.pull(imageId);
+    await banner.save();
+    await Image.findByIdAndDelete(imageId);
+    res.status(200).json({
+      success: true,
+      message: "Xóa banner thành công!",
     });
-    res.status(200).send("Deleted banner and its image successfully!");
   } catch (err) {
-    next(createError(500, "Delete banner failed, please try again!"));
+    next(createError(500, "Xóa banner thất bại!"));
   }
 };

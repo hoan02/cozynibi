@@ -16,7 +16,7 @@ const Login = () => {
     try {
       const res = await newRequest.post(`auth/login`, values);
       localStorage.setItem("currentUser", JSON.stringify(res.data));
-      window.location.reload();
+      location.reload();
       navigate("/");
     } catch (error) {
       toastService.error(error.response.data.message);
