@@ -1,10 +1,12 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Banner from "../components/_child/Banner";
 
 // import images
-import newItem from '../assets/images/news-item.jpg'
-import banner from '../assets/images/banner-gallery.jpg'
+import newItem from "../assets/images/news-item.jpg";
+import banner from "../assets/images/banner-gallery.jpg";
+
+import newRequest from "../utils/NewRequest";
 
 const itemContentContainerLink = {
   margin: "0 0 15px",
@@ -26,9 +28,15 @@ const readMoreLink = {
 };
 
 const News = () => {
+  const folder = "banner/news";
+  const [imgBanner, setImgBanner] = useState("");
+  newRequest.get(`image/?folder=${folder}`).then((res) => {
+    setImgBanner(res.data.url);
+  });
+
   return (
     <div>
-      <Banner img={banner} text='news'/>
+      {imgBanner && <Banner img={imgBanner} text="news" />}
       <div className="page-news">
         <div className="container">
           <div className="news-box">

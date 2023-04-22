@@ -1,10 +1,14 @@
 import { useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { Button } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
 
 import newRequest from "../../utils/newRequest";
 import toastService from "../../utils/toastService";
 import bannerDefault from "../../assets/images/banner-default.jpg";
 import "../../assets/styles/_child/banner.css";
+import BannerBoard from "./BannerBoard";
 
 const Banner = (props) => {
   const queryClient = useQueryClient();
@@ -71,15 +75,20 @@ const Banner = (props) => {
 
   // PUT: Update banner
   const updateBanner = useMutation({
-    mutationFn: (image) => {
-      return newRequest.put(`/banner/update/${id}`, image);
+    mutationFn: ({ imageOldId, imageNewId }) => {
+      return newRequest.put(`/banner/update`, {
+        imageOldId,
+        imageNewId,
+      });
     },
     onSuccess: (res) => {
       toastService.success(res.data.message);
       queryClient.invalidateQueries(["banners"]);
     },
   });
-  const handleUpdate = () => {};
+  const handleUpdate = (imageOldId, imageNewId) => {
+    updateBanner.mutate({ imageOldId, imageNewId });
+  };
 
   // DELETE: Delete banner
   const deleteBanner = useMutation({
@@ -104,12 +113,23 @@ const Banner = (props) => {
         <div className="create-banner-content">
           <img src={imgPreview || bannerDefault} alt="Image Preview" />
           <div className="form">
-            <input
-              className="input"
-              type="file"
-              ref={fileInputRef}
-              onChange={handleImageChange}
-            />
+            <div className="upload">
+              Chọn ảnh:
+              <IconButton
+                color="primary"
+                aria-label="upload picture"
+                component="label"
+              >
+                <input
+                  hidden
+                  accept="image/*"
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleImageChange}
+                />
+                <PhotoCamera />
+              </IconButton>
+            </div>
             <div>Name file: {resImg && resImg.name}</div>
             <div>Folder: {resImg && resImg.folder}</div>
             <div>Public id: {resImg && resImg.publicId}</div>
@@ -120,37 +140,33 @@ const Banner = (props) => {
               </a>
             </div>
             {resImg ? (
-              <button onClick={handleCreate}>Create</button>
-            ) : (
-              <button style={{ cursor: "wait", opacity: 0.5 }} disabled>
+              <Button
+                variant="contained"
+                color="success"
+                onClick={handleCreate}
+              >
                 Create
-              </button>
+              </Button>
+            ) : (
+              <Button className="btn-create" variant="contained" disabled>
+                Create
+              </Button>
             )}
           </div>
         </div>
       </div>
 
       <div className="render-banner">
-        <h3>Render banner</h3>
         {isLoading ? (
           <div>Loading</div>
         ) : error ? (
           <div>Error</div>
         ) : (
-          allImages.map((img) => {
-            return (
-              <div className="item" key={img._id}>
-                <img src={img.url} alt={img.name} />
-                <span>{img.name}</span>
-                <span>{img.publicId}</span>
-                <a href={img.url} target="_blank">
-                  {img.url.slice(0, 40)}...
-                </a>
-                {/* <button onClick={handleUpdate}>Update</button> */}
-                <button onClick={() => handleDelete(img._id)}>Delete</button>
-              </div>
-            );
-          })
+          <BannerBoard
+            data={allImages}
+            handleUpdate={handleUpdate}
+            handleDelete={handleDelete}
+          />
         )}
       </div>
     </div>

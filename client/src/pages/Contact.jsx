@@ -1,18 +1,26 @@
-import React from "react";
+import { useState } from "react";
 import Banner from "../components/_child/Banner";
 
 // import images
-import imgLocation from '../assets/images/ct-loc.png'
-import imgPhone from '../assets/images/ct-phone.png'
-import imgFax from '../assets/images/ct-fax.png'
-import imgMail from '../assets/images/ct-mail.png'
-import imgWeb from '../assets/images/ct-web.png'
-import banner from '../assets/images/banner-contact.jpg'
+import imgLocation from "../assets/images/ct-loc.png";
+import imgPhone from "../assets/images/ct-phone.png";
+import imgFax from "../assets/images/ct-fax.png";
+import imgMail from "../assets/images/ct-mail.png";
+import imgWeb from "../assets/images/ct-web.png";
+import banner from "../assets/images/banner-contact.jpg";
+
+import newRequest from "../utils/NewRequest";
 
 const Contact = () => {
+  const folder = "banner/contact";
+  const [imgBanner, setImgBanner] = useState("");
+  newRequest.get(`image/?folder=${folder}`).then((res) => {
+    setImgBanner(res.data.url);
+  });
+
   return (
     <div>
-      <Banner img={banner} text='contact'/>
+      {imgBanner && <Banner img={imgBanner} text="contact" />}
       <section>
         <div className="contact bg-sena">
           <div className="container">
@@ -23,10 +31,7 @@ const Contact = () => {
                   <div className="contact-list">
                     <div className="contact-item">
                       <div className="contact-icon">
-                        <img
-                          src={imgLocation}
-                          alt=""
-                        />
+                        <img src={imgLocation} alt="" />
                       </div>
                       <div className="contact-text">
                         <p>
@@ -37,10 +42,7 @@ const Contact = () => {
                     </div>
                     <div className="contact-item">
                       <div className="contact-icon">
-                        <img
-                          src={imgPhone}
-                          alt=""
-                        />
+                        <img src={imgPhone} alt="" />
                       </div>
                       <div className="contact-text">
                         <p>
@@ -51,10 +53,7 @@ const Contact = () => {
                     </div>
                     <div className="contact-item">
                       <div className="contact-icon">
-                        <img
-                          src={imgFax}
-                          alt=""
-                        />
+                        <img src={imgFax} alt="" />
                       </div>
                       <div className="contact-text">
                         <p>(024) 3,783,5641</p>
@@ -62,10 +61,7 @@ const Contact = () => {
                     </div>
                     <div className="contact-item">
                       <div className="contact-icon">
-                        <img
-                          src={imgMail}
-                          alt=""
-                        />
+                        <img src={imgMail} alt="" />
                       </div>
                       <div className="contact-text">
                         <p>info@adcvietnam.net</p>
@@ -73,10 +69,7 @@ const Contact = () => {
                     </div>
                     <div className="contact-item">
                       <div className="contact-icon">
-                        <img
-                          src={imgWeb}
-                          alt=""
-                        />
+                        <img src={imgWeb} alt="" />
                       </div>
                       <div className="contact-text">
                         <p>
