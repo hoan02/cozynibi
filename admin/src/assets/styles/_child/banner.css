@@ -1,8 +1,8 @@
-.create-banner{
-  
+.create-banner {
+  border: 1px solid #dbdbdb;
 }
 
-.create-banner p{
+.create-banner p {
   font-size: 20px;
 }
 
@@ -19,50 +19,13 @@
 }
 
 .create-banner img {
-  border: 1px solid ;
+  border: 1px solid gray;
   height: 300px;
   width: 700px;
   object-fit: cover;
   border: 1px solid #a3a3a3;
 }
 
-.create-banner button {
-  font-size: 1rem;
-  max-width: 100px;
-  background-color: #0fad29;
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  padding: 5px 0;
-  cursor: pointer;
-}
-
-.create-banner button:hover{
-  opacity: 0.9;
-}
-
-.render-banner{
-
-}
-
-.render-banner .item{
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.item{
-  display: flex;
-  gap: 20px;
-}
-
-.item img {
-  width: 400px;
-  height: 150px;
-  object-fit: cover;
-  border: 1px solid #a3a3a3;
-}
-
-.item .url{
- 
+.render-banner {
+  width: 100%;
 }

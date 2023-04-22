@@ -2,6 +2,21 @@ import { cloudinary } from "../index.js";
 import Image from "../models/image.model.js";
 import createError from "../utils/createError.js";
 
+export const getImage = async (req, res, next) => {
+  const folder = req.query.folder || "";
+  try {
+    let image;
+    if (folder) {
+      image = await Image.findOne({ folder: folder, isShow: true });
+    } else {
+      image = await Image.find({ isShow: true });
+    }
+    res.status(200).send(image);
+  } catch (err) {
+    next(createError(500, "Lấy ảnh thất bại!"));
+  }
+};
+
 export const createImage = async (req, res, next) => {
   const { file, name, folder } = req.body;
   try {

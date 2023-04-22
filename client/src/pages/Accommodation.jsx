@@ -1,13 +1,15 @@
-import React from "react";
+import { useState } from "react";
 import SliderAccom from "../components/_child/SliderAccom";
 import { Link } from "react-router-dom";
 import Banner from "../components/_child/Banner";
 
-import bannerAboutUs from '../assets/images/banner-about-us.jpg'
-import bgTitle from '../assets/images/bg-tit.png'
-import bgFrame from '../assets/images/bg-frs.png'
-import accomSlide1 from '../assets/images/accom-slide-1.jpg'
-import bgReadmore from '../assets/images/bg-read-m.png'
+import bannerAboutUs from "../assets/images/banner-about-us.jpg";
+import bgTitle from "../assets/images/bg-tit.png";
+import bgFrame from "../assets/images/bg-frs.png";
+import accomSlide1 from "../assets/images/accom-slide-1.jpg";
+import bgReadmore from "../assets/images/bg-read-m.png";
+
+import newRequest from "../utils/NewRequest";
 
 const bigItemTextContent = {
   textTransform: "uppercase",
@@ -37,19 +39,21 @@ const readMore = {
   textDecoration: "none",
 };
 
-const Accomodation = () => {
+const Accommodation = () => {
+  const folder = "banner/accommodation";
+  const [imgBanner, setImgBanner] = useState("");
+  newRequest.get(`image/?folder=${folder}`).then((res) => {
+    setImgBanner(res.data.url);
+  });
   return (
     <div>
-      <Banner img={bannerAboutUs} text='accommodation'/>
+      {imgBanner && <Banner img={imgBanner} text="accommodation" />}
       <div className="container">
         <div className="slider-box">
           <div className="big-item">
             <div className="big-item-content">
               <div className="big-item-img">
-                <img
-                  src={accomSlide1}
-                  alt=""
-                />
+                <img src={accomSlide1} alt="" />
               </div>
               <div className="big-item-text">
                 <div className="big-item-text-content">
@@ -80,4 +84,4 @@ const Accomodation = () => {
   );
 };
 
-export default Accomodation;
+export default Accommodation;
