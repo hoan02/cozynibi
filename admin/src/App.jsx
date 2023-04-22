@@ -80,7 +80,7 @@ function SideMenu() {
   };
 
   return (
-    <div>
+    <div className="sidebar-menu">
       <Menu
         onClick={({ key }) => {
           if (key === "/logout") {
@@ -155,7 +155,7 @@ function SideMenu() {
 
 function Content() {
   return (
-    <div>
+    <div className="sidebar-content">
       <Routes>
         <Route path="/" element={<DashboardAdmin />} />
         <Route path="/page/about-us" element={<AboutUsManagement />} />
