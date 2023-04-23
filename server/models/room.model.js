@@ -3,31 +3,48 @@ const { Schema } = mongoose;
 
 const roomSchema = new Schema(
   {
-    title: {
+    name: {
       type: String,
       required: true,
     },
-    description: {
+    notes: {
       type: String,
       required: true,
     },
-    featuredImage: {
-      type: Schema.Types.ObjectId,
-      ref: "Image",
-      require: true,
+    descriptions: {
+      type: String,
+      required: false,
     },
-    detail: {
-      type: Schema.Types.ObjectId,
-      ref: "RoomDetail",
+    images: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Image",
+        required: false,
+      },
+    ],
+    area: {
+      type: Number,
+      required: true,
+    },
+    high: {
+      type: Number,
+      required: true,
+    },
+    bedSize: {
+      type: Number,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    equipment: {
+      type: [String],
       required: true,
     },
     booking: {
       type: Schema.Types.ObjectId,
       ref: "Booking",
-      required: false,
-    },
-    note: {
-      type: String,
       required: false,
     },
     metaTitle: {
