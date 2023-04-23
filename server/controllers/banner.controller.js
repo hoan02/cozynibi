@@ -13,16 +13,6 @@ export const getAllBanner = async (req, res, next) => {
   }
 };
 
-export const getBanner = async (req, res, next) => {
-  const bannerId = req.params.id;
-  try {
-    const banner = await Banner.findById(bannerId).populate("image");
-    res.status(200).send(banner);
-  } catch (err) {
-    next(createError(500, "Tìm kiếm banner không thành công!"));
-  }
-};
-
 export const createBanner = async (req, res, next) => {
   const bannerId = req.params.id;
   const image = req.body;
@@ -44,43 +34,19 @@ export const createBanner = async (req, res, next) => {
 };
 
 export const updateBanner = async (req, res, next) => {
-  const { title, slug, image } = req.body;
-  const bannerId = req.params._id;
-
+  const { imageOldId, imageNewId } = req.body;
   try {
-    const currentBanner = await Banner.findById(bannerId);
-
-    const data = {
-      title,
-      slug,
-    };
-
-    if (image !== "") {
-      const imgId = currentBanner.image.public_id;
-      if (imgId) {
-        await cloudinary.uploader.destroy(imgId);
-      }
-
-      const newImg = await cloudinary.uploader.upload(image, {
-        folder: "banners",
-        // width: 300,
-        // height: 300,
-        // crop: "scale"
-      });
-
-      data.image = {
-        public_id: newImg.public_id,
-        url: newImg.secure_url,
-      };
-    }
-
-    const bannerUpdate = await Banner.findByIdAndUpdate(bannerId, data, {
-      new: true,
+    const updateOldImg = await Image.findByIdAndUpdate(imageOldId, {
+      isShow: false,
     });
+
+    const updateNewImg = await Image.findByIdAndUpdate(imageNewId, {
+      isShow: true,
+    });
+
     res.status(200).json({
       success: true,
       message: "Cập nhật banner thành công!",
-      bannerUpdate,
     });
   } catch (err) {
     next(createError(500, "Cập nhật banner thất bại!"));
