@@ -40,7 +40,7 @@ const connectDB = async () => {
 app.use(
   cors({
     origin: true,
-    credentials: false,
+    credentials: true,
   })
 );
 app.use(express.json({ limit: "50mb" }));

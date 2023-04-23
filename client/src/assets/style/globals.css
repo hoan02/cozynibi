@@ -1,26 +1,25 @@
 /* variables */
-:root{
-    --main-color: #d7b659;
-    --black-color: #000;
-    --white-color: #fff;
+:root {
+  --main-color: #d7b659;
+  --black-color: #000;
+  --white-color: #fff;
 }
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-a{
-    text-decoration: none;
-    color: var(--black-color);
-    
+a {
+  text-decoration: none;
+  color: var(--black-color);
 }
 
-a:hover{
-    text-decoration: none;
+a:hover {
+  text-decoration: none;
 }
 
-ul{
-    list-style: none;
+ul {
+  list-style: none;
 }
