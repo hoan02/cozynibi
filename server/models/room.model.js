@@ -31,7 +31,7 @@ const roomSchema = new Schema(
       required: true,
     },
     bedSize: {
-      type: Number,
+      type: String,
       required: true,
     },
     price: {
@@ -40,7 +40,7 @@ const roomSchema = new Schema(
     },
     equipment: {
       type: [String],
-      required: true,
+      required: false,
     },
     booking: {
       type: Schema.Types.ObjectId,

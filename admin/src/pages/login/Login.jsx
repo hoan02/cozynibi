@@ -17,7 +17,6 @@ const Login = () => {
 
   const onSubmit = async (values) => {
     setError("");
-    console.log(values);
     try {
       const response = await newRequest.post(`auth/login`, values);
       signIn({

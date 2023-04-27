@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SliderAccom from "../components/_child/SliderAccom";
 import { Link } from "react-router-dom";
 import Banner from "../components/_child/Banner";
@@ -42,9 +42,13 @@ const readMore = {
 const Accommodation = () => {
   const folder = "banner/accommodation";
   const [imgBanner, setImgBanner] = useState("");
-  newRequest.get(`image/?folder=${folder}`).then((res) => {
-    setImgBanner(res.data.url);
-  });
+
+  useEffect(() => {
+    newRequest.get(`image/?folder=${folder}`).then((res) => {
+      setImgBanner(res.data.url);
+    });
+  }, []);
+
   return (
     <div>
       {imgBanner && <Banner img={imgBanner} text="accommodation" />}

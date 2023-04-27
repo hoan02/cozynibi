@@ -16,7 +16,6 @@ export const getAllBanner = async (req, res, next) => {
 export const createBanner = async (req, res, next) => {
   const bannerId = req.params.id;
   const image = req.body;
-  console.log(image);
   try {
     const newBanner = await Banner.findByIdAndUpdate(bannerId, {
       $addToSet: { image: [image] },

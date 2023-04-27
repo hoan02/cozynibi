@@ -7,10 +7,11 @@ import News from "../pages/news/News";
 import Gallery from "../pages/gallery/Gallery";
 import Contact from "../pages/contact/Contact";
 
+
 export const listPage = [
   {
     name: "About Us",
-    slug: "about-us", 
+    slug: "about-us",
     component: <AboutUs />,
   },
   {
