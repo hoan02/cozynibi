@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import {
@@ -6,7 +8,6 @@ import {
   FormControl,
   FormLabel,
   FormControlLabel,
-  FormGroup,
   InputLabel,
   TextField,
   Select,
@@ -16,16 +17,8 @@ import {
 } from "@mui/material";
 
 import noImg from "../../assets/images/no-img.jpg";
-
-const initialValues = {
-  name: "",
-  notes: "",
-  descriptions: "",
-  area: "",
-  high: "",
-  bedSize: "",
-  price: "",
-};
+import newRequest from "../../utils/newRequest";
+import toastService from "../../utils/toastService";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Please enter room name!"),
@@ -38,7 +31,9 @@ const validationSchema = Yup.object().shape({
     .required("Please enter room height!")
     .positive("Room height must be a positive number!"),
   bedSize: Yup.string().required("Please choose bed size!"),
-  price: Yup.number().required("Please enter price!").positive(),
+  price: Yup.number()
+    .required("Please enter price!")
+    .positive("Price must be a positive number!"),
 });
 
 const listEquipment = [
@@ -58,49 +53,101 @@ const listEquipment = [
   "Free wifi - internet access",
 ];
 
-const Room = () => {
-  const [formData, setFormData] = useState({});
-  const [imgPreview, setImgPreview] = useState([]);
-  const [selectedEquipment, setSelectedEquipment] = useState([]);
+const CreateRoom = () => {
+  const queryClient = useQueryClient();
 
-  const handleChangeEquipment = (event) => {
-    const value = event.target.value;
-    if (selectedEquipment.includes(value)) {
-      setSelectedEquipment(
-        selectedEquipment.filter((equipment) => equipment !== value)
-      );
-    } else {
-      setSelectedEquipment([...selectedEquipment, value]);
-    }
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: "",
+    notes: "",
+    descriptions: "",
+    area: "",
+    high: "",
+    bedSize: "",
+    price: "",
+    equipment: [],
+    images: [],
+  });
+
+  // const [imgPreview, setImgPreview] = useState([]);
+
+  const handleChangeEquipment = (e) => {
+    const isChecked = e.target.checked;
+    const equipmentValue = e.target.value;
+
+    setFormData((prevFormData) => {
+      if (isChecked) {
+        return {
+          ...prevFormData,
+          equipment: [...prevFormData.equipment, equipmentValue],
+        };
+      } else {
+        return {
+          ...prevFormData,
+          equipment: prevFormData.equipment.filter(
+            (eq) => eq !== equipmentValue
+          ),
+        };
+      }
+    });
   };
 
-  console.log(selectedEquipment);
-
-  const handleImageChange = (event, index) => {
-    const selectedImage = event.target.files[0];
+  const handleImageChange = (e, index) => {
+    e.preventDefault();
+    const file = e.target.files[0];
 
     const reader = new FileReader();
-    reader.readAsDataURL(selectedImage);
-    reader.onloadend = () => {
-      setImgPreview((prevUrls) => {
-        const updatedUrls = [...prevUrls];
-        updatedUrls[index] = reader.result;
-        return updatedUrls;
-      });
+    reader.readAsDataURL(file);
+    reader.onloadend = async () => {
+      // setImgPreview((prevUrls) => {
+      //   const updatedUrls = [...prevUrls];
+      //   updatedUrls[index] = reader.result;
+      //   return updatedUrls;
+      // });
+      try {
+        const res = await newRequest.post(`image/create`, {
+          file: reader.result,
+          name: file.name,
+          folder: `accommodation`,
+        });
+        toastService.success("Upload ảnh thành công!");
+        setFormData((prevFormData) => {
+          const updatedImage = [...prevFormData.images];
+          updatedImage[index] = res.data.image;
+          return {
+            ...prevFormData,
+            images: updatedImage,
+          };
+        });
+      } catch (err) {
+        console.log(err);
+      }
     };
   };
 
+  // POST: Create new room
+  const createRoom = useMutation({
+    mutationFn: (formData) => {
+      return newRequest.post(`room/create`, formData);
+    },
+    onSuccess: (res) => {
+      toastService.success(res.data.message);
+      queryClient.invalidateQueries(["rooms"]);
+    },
+  });
+
   const handleSubmit = (values) => {
-    // submit form
     setFormData({ ...formData, ...values });
-    console.log(formData);
+    createRoom.mutate(formData);
   };
 
   return (
     <div>
-      <Box sx={{ maxWidth: "800px", margin: "auto" }}>
+      <h1 style={{ textAlign: "center", margin: 20 }}>Create new room</h1>
+
+      <Box sx={{ maxWidth: "800px", margin: "50px auto" }}>
         <Formik
-          initialValues={initialValues}
+          initialValues={formData}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
@@ -199,7 +246,14 @@ const Room = () => {
                 style={{ marginBottom: "16px" }}
               />
 
-              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <FormLabel component="legend">Images: </FormLabel>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  marginTop: "10px",
+                }}
+              >
                 {[0, 1, 2].map((index) => (
                   <Box key={index} fullWidth>
                     <Box
@@ -215,7 +269,11 @@ const Room = () => {
                       }}
                     >
                       <img
-                        src={imgPreview[index] || noImg}
+                        src={
+                          formData.images[index]
+                            ? formData.images[index].url
+                            : noImg
+                        }
                         alt={`preview-${index}`}
                         style={{
                           width: "250px",
@@ -224,6 +282,13 @@ const Room = () => {
                         }}
                       />
                     </Box>
+                    {
+                      <div style={{ color: "green", margin: "8px" }}>
+                        {formData.images[index]
+                          ? `Id: ${formData.images[index]._id}`
+                          : `Id: null`}
+                      </div>
+                    }
                     <Button
                       variant="contained"
                       component="label"
@@ -238,11 +303,6 @@ const Room = () => {
                         onChange={(event) => handleImageChange(event, index)}
                       />
                     </Button>
-                    {errors.images && touched.images && (
-                      <div style={{ color: "red", marginTop: "8px" }}>
-                        {errors.images}
-                      </div>
-                    )}
                   </Box>
                 ))}
               </Box>
@@ -254,13 +314,19 @@ const Room = () => {
                   gridTemplateColumns: "repeat(2, 1fr)",
                 }}
               >
-                <FormLabel component="legend">Equipment</FormLabel>
-                {listEquipment.map((equipment) => (
+                <FormLabel component="legend">Equipment:</FormLabel>
+                {listEquipment.map((equipment, index) => (
                   <FormControlLabel
-                    key={equipment}
-                    control={<Checkbox onChange={handleChangeEquipment} />}
-                    label={equipment}
+                    key={index}
                     value={equipment}
+                    label={equipment}
+                    name="equipment"
+                    control={
+                      <Checkbox
+                        checked={formData.equipment.includes(equipment)}
+                        onChange={handleChangeEquipment}
+                      />
+                    }
                   />
                 ))}
               </FormControl>
@@ -268,16 +334,26 @@ const Room = () => {
               <Button
                 type="submit"
                 variant="contained"
+                color="success"
                 sx={{ marginTop: "16px" }}
               >
-                Create New Room
+                Create new room
               </Button>
             </Form>
           )}
         </Formik>
+        <Button
+          type="submit"
+          variant="contained"
+          color="error"
+          sx={{ marginTop: "16px" }}
+          onClick={() => navigate(`/pages/accommodation`)}
+        >
+          Back
+        </Button>
       </Box>
     </div>
   );
 };
 
-export default Room;
+export default CreateRoom;

@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Banner from "../components/_child/Banner";
-import banner from "../assets/images/banner-about-us.jpg";
 
 // import images
 import bgAbout from "../assets/images/bg-abu.png";
@@ -12,10 +11,13 @@ import newRequest from "../utils/NewRequest";
 const AboutUs = () => {
   const folder = "banner/about-us";
   const [imgBanner, setImgBanner] = useState("");
-  newRequest.get(`image/?folder=${folder}`).then((res) => {
-    setImgBanner(res.data.url);
-  });
-  
+
+  useEffect(() => {
+    newRequest.get(`image/?folder=${folder}`).then((res) => {
+      setImgBanner(res.data.url);
+    });
+  }, []);
+
   return (
     <div className="about">
       {imgBanner && <Banner img={imgBanner} text="about us" />}

@@ -11,11 +11,49 @@ const tourSchema = new Schema(
       type: String,
       required: true,
     },
-    detail: {
-      type: Schema.Types.ObjectId,
-      ref: "TourDetail",
+    tourCode: {
+      type: Number,
       required: true,
     },
+    images: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Image",
+        required: false,
+      },
+    ],
+    tripSchedule: [
+      {
+        time: {
+          type: String,
+          required: true,
+        },
+        content: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+    inclusions: {
+      type: [String],
+      required: true,
+    },
+    exclusions: {
+      type: [String],
+      required: true,
+    },
+    price: [
+      {
+        person: {
+          type: Number,
+          required: true,
+        },
+        pricePerPerson: {
+          type: Number,
+          required: true,
+        },
+      },
+    ],
   },
   {
     timestamps: true,
