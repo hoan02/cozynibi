@@ -1,7 +1,16 @@
-import { cloudinary } from "../index.js";
 import Banner from "../models/banner.model.js";
 import Image from "../models/image.model.js";
 import createError from "../utils/createError.js";
+
+export const getBanner = async (req, res, next) => {
+  const bannerId = req.params.id;
+  try {
+    const banner = await Banner.findById(bannerId).populate("image");
+    res.status(200).send(banner);
+  } catch (err) {
+    next(createError(500, "Tìm kiếm banner không thành công!"));
+  }
+};
 
 export const getAllBanner = async (req, res, next) => {
   const slug = req.query.slug;
@@ -26,7 +35,6 @@ export const createBanner = async (req, res, next) => {
       message: "Tạo banner thành công!",
       newBanner,
     });
-    console.log(newBanner);
   } catch (err) {
     next(createError(500, "Tạo banner thất bại!"));
   }

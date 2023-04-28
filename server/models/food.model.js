@@ -7,7 +7,7 @@ const foodSchema = new Schema(
       type: String,
       required: true,
     },
-    description: {
+    descriptions: {
       type: String,
       required: false,
     },

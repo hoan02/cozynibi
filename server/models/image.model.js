@@ -7,7 +7,7 @@ const imageSchema = new Schema(
       type: String,
       required: true,
     },
-    description: {
+    descriptions: {
       type: String,
       required: false,
     },
@@ -18,6 +18,7 @@ const imageSchema = new Schema(
     publicId: {
       type: String,
       required: true,
+      unique: true,
     },
     isShow: {
       type: Boolean,
@@ -27,6 +28,7 @@ const imageSchema = new Schema(
     url: {
       type: String,
       required: true,
+      unique: true,
     },
   },
   {

@@ -4,7 +4,7 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 
 import ImageControl from "../../components/imageControl/ImagesControl";
-import { listPage } from "../../contexts/listPage";
+import { listParentPage } from "../../contexts/listPage";
 
 const Banners = () => {
   const [value, setValue] = useState("about-us");
@@ -32,7 +32,7 @@ const Banners = () => {
             zIndex: 1,
           }}
         >
-          {listPage.map((page, index) => {
+          {listParentPage.map((page, index) => {
             return <Tab label={page.name} key={index} value={page.slug} />;
           })}
         </Tabs>

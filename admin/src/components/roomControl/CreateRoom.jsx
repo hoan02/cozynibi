@@ -133,12 +133,22 @@ const CreateRoom = () => {
     onSuccess: (res) => {
       toastService.success(res.data.message);
       queryClient.invalidateQueries(["rooms"]);
+      navigate(`/pages/accommodation`);
     },
   });
 
   const handleSubmit = (values) => {
-    setFormData({ ...formData, ...values });
-    createRoom.mutate(formData);
+    const newData = {
+      ...formData,
+      name: values.name,
+      notes: values.notes,
+      descriptions: values.descriptions,
+      area: values.area,
+      high: values.high,
+      bedSize: values.bedSize,
+      price: values.price,
+    };
+    createRoom.mutate(newData);
   };
 
   return (

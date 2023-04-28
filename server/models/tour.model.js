@@ -7,12 +7,8 @@ const tourSchema = new Schema(
       type: String,
       required: true,
     },
-    note: {
-      type: String,
-      required: true,
-    },
     tourCode: {
-      type: Number,
+      type: String,
       required: true,
     },
     images: [
@@ -22,7 +18,7 @@ const tourSchema = new Schema(
         required: false,
       },
     ],
-    tripSchedule: [
+    tripSchedules: [
       {
         time: {
           type: String,
@@ -42,9 +38,9 @@ const tourSchema = new Schema(
       type: [String],
       required: true,
     },
-    price: [
+    tourPrice: [
       {
-        person: {
+        numberPerson: {
           type: Number,
           required: true,
         },

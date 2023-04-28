@@ -2,7 +2,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useSignOut } from "react-auth-kit";
 
-import { listPage } from "../../contexts/listPage";
+import { listParentPage } from "../../contexts/listPage";
 import toastService from "../../utils/toastService";
 import "./Sidebar.scss";
 
@@ -44,7 +44,7 @@ const Sidebar = () => {
         </div>
         {openPages && (
           <div className="pages-list">
-            {listPage.map((page, index) => {
+            {listParentPage.map((page, index) => {
               return (
                 <NavLink
                   key={index}
