@@ -42,11 +42,6 @@ const roomSchema = new Schema(
       type: [String],
       required: false,
     },
-    booking: {
-      type: Schema.Types.ObjectId,
-      ref: "Booking",
-      required: false,
-    },
     metaTitle: {
       type: String,
       required: false,

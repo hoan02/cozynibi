@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import {
   Box,
@@ -73,13 +73,18 @@ const UpdateRoom = () => {
   // const [imgPreview, setImgPreview] = useState([]);
 
   // GET: get room update
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await newRequest.get(`room/${id}`);
-      setFormData(res.data);
-    };
-    fetchData();
-  }, []);
+  const {
+    isLoading,
+    error,
+    data: allRoom,
+  } = useQuery({
+    queryKey: ["rooms"],
+    queryFn: () =>
+      newRequest.get(`room/${id}`).then((res) => {
+        setFormData(res.data);
+        return res.data;
+      }),
+  });
 
   const handleChangeEquipment = (e) => {
     const isChecked = e.target.checked;
@@ -143,6 +148,7 @@ const UpdateRoom = () => {
     onSuccess: (res) => {
       toastService.success(res.data.message);
       queryClient.invalidateQueries(["rooms"]);
+      navigate(`/pages/accommodation`);
     },
   });
 
@@ -163,7 +169,11 @@ const UpdateRoom = () => {
   return (
     <div>
       <h1 style={{ textAlign: "center", margin: 20 }}>Update room</h1>
-      {formData._id && (
+      {isLoading ? (
+        <>Loading</>
+      ) : error ? (
+        <>Error</>
+      ) : (
         <Box sx={{ maxWidth: "800px", margin: "50px auto" }}>
           <InputLabel id="" style={{ marginBottom: "16px" }}>
             Object id: {formData._id}
@@ -175,61 +185,61 @@ const UpdateRoom = () => {
           >
             {({ values, errors, touched, handleChange, handleBlur }) => (
               <Form>
-                <Field
-                  as={TextField}
+                <TextField
                   name="name"
-                  label="Name Room"
+                  label="Name room"
                   fullWidth
+                  value={values.name}
                   error={touched.name && Boolean(errors.name)}
                   helperText={touched.name && errors.name}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   style={{ marginBottom: "16px" }}
                 />
-                <Field
-                  as={TextField}
+                <TextField
                   name="notes"
                   label="Notes"
                   fullWidth
                   multiline
+                  value={values.notes}
                   error={touched.notes && Boolean(errors.notes)}
                   helperText={touched.notes && errors.notes}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   style={{ marginBottom: "16px" }}
                 />
-                <Field
-                  as={TextField}
+                <TextField
                   name="descriptions"
                   label="Descriptions"
                   fullWidth
                   multiline
                   minRows={3}
+                  value={values.descriptions}
                   error={touched.descriptions && Boolean(errors.descriptions)}
                   helperText={touched.descriptions && errors.descriptions}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   style={{ marginBottom: "16px" }}
                 />
-                <Field
-                  as={TextField}
+                <TextField
                   name="area"
                   label="Area (m2)"
                   fullWidth
                   type="number"
+                  value={values.area}
                   error={touched.area && Boolean(errors.area)}
                   helperText={touched.area && errors.area}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   style={{ marginBottom: "16px" }}
                 />
-                <Field
-                  as={TextField}
+                <TextField
                   name="high"
                   label="High (m)"
                   fullWidth
                   type="number"
                   step={0.1}
+                  value={values.high}
                   error={touched.high && Boolean(errors.high)}
                   helperText={touched.high && errors.high}
                   onChange={handleChange}
@@ -238,11 +248,11 @@ const UpdateRoom = () => {
                 />
                 <FormControl fullWidth>
                   <InputLabel id="">BedSize (w*h)</InputLabel>
-                  <Field
-                    as={Select}
+                  <Select
                     name="bedSize"
                     label="BedSize (w*h)"
                     fullWidth
+                    value={values.bedSize}
                     error={touched.bedSize && Boolean(errors.bedSize)}
                     helperText={touched.bedSize && errors.bedSize}
                     onChange={handleChange}
@@ -252,15 +262,15 @@ const UpdateRoom = () => {
                     <MenuItem value="1.8*2.0">1.8*2.0</MenuItem>
                     <MenuItem value="2.0*2.2">2.0*2.2</MenuItem>
                     <MenuItem value="2.0*3.0">2.0*3.0</MenuItem>
-                  </Field>
+                  </Select>
                 </FormControl>
 
-                <Field
-                  as={TextField}
+                <TextField
                   name="price"
                   label="Price (vnd)"
                   fullWidth
                   type="number"
+                  value={values.price}
                   error={touched.price && Boolean(errors.price)}
                   helperText={touched.price && errors.price}
                   onChange={handleChange}

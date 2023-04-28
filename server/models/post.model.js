@@ -7,13 +7,8 @@ const postSchema = new Schema(
       type: String,
       required: true,
     },
-    description: {
+    content: {
       type: String,
-      required: true,
-    },
-    detail: {
-      type: Schema.Types.ObjectId,
-      ref: "PostDetail",
       required: true,
     },
   },

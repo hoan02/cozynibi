@@ -7,8 +7,12 @@ import News from "../pages/news/News";
 import Gallery from "../pages/gallery/Gallery";
 import Contact from "../pages/contact/Contact";
 
+import CreateRoom from "../components/roomControl/CreateRoom";
+import UpdateRoom from "../components/roomControl/UpdateRoom";
+import CreateTour from "../components/tourControl/CreateTour";
+import UpdateTour from "../components/tourControl/UpdateTour";
 
-export const listPage = [
+export const listParentPage = [
   {
     name: "About Us",
     slug: "about-us",
@@ -48,5 +52,28 @@ export const listPage = [
     name: "Contact",
     slug: "contact",
     component: <Contact />,
+  },
+];
+
+export const listChildPage = [
+  {
+    name: "Create new room",
+    slug: "accommodation/create",
+    component: <CreateRoom />,
+  },
+  {
+    name: "Update room",
+    slug: "accommodation/update/:id",
+    component: <UpdateRoom />,
+  },
+  {
+    name: "Create new tour",
+    slug: "tour-travel/create",
+    component: <CreateTour />,
+  },
+  {
+    name: "Update tour",
+    slug: "tour-travel/update/:id",
+    component: <UpdateTour />,
   },
 ];
