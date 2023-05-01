@@ -4,11 +4,12 @@ import {
   createImage,
   updateImage,
 } from "../controllers/image.controller.js";
+import { verifyToken } from "../middlewares/jwt.js";
 
 const router = express.Router();
 
 router.get("/", getImage);
-router.post("/create", createImage);
-router.put("/update/:id", updateImage);
+router.post("/create", verifyToken, createImage);
+router.put("/update/:id", verifyToken, updateImage);
 
 export default router;

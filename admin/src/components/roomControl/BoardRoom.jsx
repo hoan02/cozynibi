@@ -8,18 +8,17 @@ import TextareaAutosize from "@mui/base/TextareaAutosize";
 import newRequest from "../../utils/newRequest";
 import toastService from "../../utils/toastService";
 
-// const RoomTable = ({ data, handleUpdate, handleDelete }) => {
-const RoomTable = () => {
-  const queryClient = useQueryClient();
+const BoardRoom = () => {
   const navigate = useNavigate();
-  const [roomData, setRoomData] = useState([]);
+  const queryClient = useQueryClient();
+  const [dataRoomGrid, setDataRoomGrid] = useState([]);
 
   // GET: Get all rooms
-  const { isLoading, error, data } = useQuery({
+  const { isLoading, error } = useQuery({
     queryKey: ["rooms"],
     queryFn: () =>
       newRequest.get(`room`).then((res) => {
-        setRoomData(
+        setDataRoomGrid(
           res.data.map((item, index) => ({
             stt: index + 1,
             image: item.images[0].url,
@@ -141,7 +140,7 @@ const RoomTable = () => {
         <DataGrid
           density="comfortable"
           getRowId={(row) => row.stt}
-          rows={roomData}
+          rows={dataRoomGrid}
           columns={columns}
           rowHeight={100}
           components={{ Toolbar: GridToolbar }}
@@ -151,4 +150,4 @@ const RoomTable = () => {
   );
 };
 
-export default RoomTable;
+export default BoardRoom;

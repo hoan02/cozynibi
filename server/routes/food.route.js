@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.get("/:id", getFood);
 router.get("/", getAllFood);
-router.post("/create", createFood);
-router.delete("/delete/:id", deleteFood);
+router.post("/create", verifyToken, createFood);
+router.delete("/delete/:id", verifyToken, deleteFood);
 
 export default router;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import {
   Box,
@@ -163,8 +163,7 @@ const CreateRoom = () => {
         >
           {({ values, errors, touched, handleChange, handleBlur }) => (
             <Form>
-              <Field
-                as={TextField}
+              <TextField
                 name="name"
                 label="Name Room"
                 fullWidth
@@ -174,8 +173,7 @@ const CreateRoom = () => {
                 onBlur={handleBlur}
                 style={{ marginBottom: "16px" }}
               />
-              <Field
-                as={TextField}
+              <TextField
                 name="notes"
                 label="Notes"
                 fullWidth
@@ -186,8 +184,7 @@ const CreateRoom = () => {
                 onBlur={handleBlur}
                 style={{ marginBottom: "16px" }}
               />
-              <Field
-                as={TextField}
+              <TextField
                 name="descriptions"
                 label="Descriptions"
                 fullWidth
@@ -199,8 +196,7 @@ const CreateRoom = () => {
                 onBlur={handleBlur}
                 style={{ marginBottom: "16px" }}
               />
-              <Field
-                as={TextField}
+              <TextField
                 name="area"
                 label="Area (m2)"
                 fullWidth
@@ -211,8 +207,7 @@ const CreateRoom = () => {
                 onBlur={handleBlur}
                 style={{ marginBottom: "16px" }}
               />
-              <Field
-                as={TextField}
+              <TextField
                 name="high"
                 label="High (m)"
                 fullWidth
@@ -226,7 +221,7 @@ const CreateRoom = () => {
               />
               <FormControl fullWidth>
                 <InputLabel id="">BedSize (w*h)</InputLabel>
-                <Field
+                <TextField
                   as={Select}
                   name="bedSize"
                   label="BedSize (w*h)"
@@ -240,11 +235,10 @@ const CreateRoom = () => {
                   <MenuItem value="1.8*2.0">1.8*2.0</MenuItem>
                   <MenuItem value="2.0*2.2">2.0*2.2</MenuItem>
                   <MenuItem value="2.0*3.0">2.0*3.0</MenuItem>
-                </Field>
+                </TextField>
               </FormControl>
 
-              <Field
-                as={TextField}
+              <TextField
                 name="price"
                 label="Price (vnd)"
                 fullWidth
@@ -318,7 +312,7 @@ const CreateRoom = () => {
               </Box>
 
               <FormControl
-                component="fieldset"
+                component="TextFieldset"
                 sx={{
                   display: "grid",
                   gridTemplateColumns: "repeat(2, 1fr)",

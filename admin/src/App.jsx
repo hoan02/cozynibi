@@ -4,11 +4,11 @@ import { RequireAuth } from "react-auth-kit";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
-import Login from "./pages/login/Login.jsx";
+import Login from "./pages/Login.jsx";
 import Sidebar from "./components/sidebar/Sidebar.jsx";
-import Home from "./pages/home/Home.jsx";
-import Banners from "./pages/banners/Banners";
-import MyAccount from "./pages/myAccount/MyAccount";
+import Home from "./pages/Home.jsx";
+import Banners from "./pages/Banners";
+import MyAccount from "./pages/MyAccount.jsx";
 import { listParentPage, listChildPage } from "./contexts/listPage.jsx";
 import "./App.scss";
 

@@ -3,22 +3,12 @@ import Image from "../models/image.model.js";
 import createError from "../utils/createError.js";
 
 export const getBanner = async (req, res, next) => {
-  const bannerId = req.params.id;
-  try {
-    const banner = await Banner.findById(bannerId).populate("image");
-    res.status(200).send(banner);
-  } catch (err) {
-    next(createError(500, "Tìm kiếm banner không thành công!"));
-  }
-};
-
-export const getAllBanner = async (req, res, next) => {
   const slug = req.query.slug;
   try {
     const allBanner = await Banner.findOne({ slug: slug }).populate("image");
     res.status(200).send(allBanner);
   } catch (err) {
-    next(createError(500, "Tìm kiếm tất cả banner không thành công!"));
+    next(createError(500, "Tìm kiếm banner không thành công!"));
   }
 };
 

@@ -1,21 +1,19 @@
 import { useRef, useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Button, IconButton, TextField } from "@mui/material";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Button, IconButton } from "@mui/material";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 
 import newRequest from "../../utils/newRequest";
 import toastService from "../../utils/toastService";
-import FoodDefault from "../../assets/images/food-default.jpg";
-import "./FoodControl.scss";
-import FoodTable from "./FoodTable";
+import bannerDefault from "../../assets/images/banner-default.jpg";
+import BoardBanner from "./BoardBanner";
+import "./CreateBanner.scss";
 
-const FoodControl = () => {
+const CreateBanner = ({ slug }) => {
   const queryClient = useQueryClient();
   const fileInputRef = useRef(null);
   const [imgPreview, setImgPreview] = useState("");
   const [resImg, setResImg] = useState(null);
-  const [allFood, setAllFood] = useState([]);
-  const [nameFood, setNameFood] = useState("");
 
   // Choose photo
   const handleImageChange = async (e) => {
@@ -29,7 +27,7 @@ const FoodControl = () => {
         const res = await newRequest.post(`image/create`, {
           file: reader.result,
           name: file.name,
-          folder: `foods`,
+          folder: `banner/${slug}`,
         });
         setResImg(res.data.image);
       } catch (err) {
@@ -38,24 +36,14 @@ const FoodControl = () => {
     };
   };
 
-  // GET: Get all foods
-  const { isLoading, error } = useQuery({
-    queryKey: ["foods"],
-    queryFn: () =>
-      newRequest.get(`/food`).then((res) => {
-        setAllFood(res.data.reverse());
-        return res.data;
-      }),
-  });
-
-  // POST: Create new food
-  const createFood = useMutation({
-    mutationFn: (data) => {
-      return newRequest.post(`/food/create`, data);
+  // POST: Create new image banner
+  const createBanner = useMutation({
+    mutationFn: (image) => {
+      return newRequest.post(`/banner/create/all?slug=${slug}`, image);
     },
     onSuccess: (res) => {
       toastService.success(res.data.message);
-      queryClient.invalidateQueries(["foods"]);
+      queryClient.invalidateQueries(["banners"]);
       setImgPreview("");
       setResImg(null);
       fileInputRef.current.value = "";
@@ -63,41 +51,17 @@ const FoodControl = () => {
   });
 
   const handleCreate = () => {
-    const data = {
-      name: nameFood,
-      image: resImg._id,
-    };
-    createFood.mutate(data);
-  };
-
-  // DELETE: Delete Food
-  const deleteFood = useMutation({
-    mutationFn: (foodId) => {
-      return newRequest.delete(`/food/delete/${foodId}`);
-    },
-    onSuccess: (res) => {
-      toastService.success(res.data.message);
-      queryClient.invalidateQueries(["foods"]);
-    },
-  });
-
-  const handleDelete = (foodId) => {
-    deleteFood.mutate(foodId);
+    createBanner.mutate(resImg);
   };
 
   return (
     <div className="container">
-      <div className="create-food">
+      <div className="create-banner">
         <div className="content">
           <div className="img">
-            <img src={imgPreview || FoodDefault} alt="Image Preview" />
+            <img src={imgPreview || bannerDefault} alt="Image Preview" />
           </div>
           <div className="form">
-            <TextField
-              label="Name food"
-              variant="outlined"
-              onChange={(e) => setNameFood(e.target.value)}
-            />
             <div className="upload">
               Chọn ảnh:
               <IconButton
@@ -142,17 +106,8 @@ const FoodControl = () => {
         </div>
       </div>
 
-      <div className="render-food">
-        {isLoading ? (
-          <div>Loading</div>
-        ) : error ? (
-          <div>Error</div>
-        ) : (
-          <FoodTable data={allFood} handleDelete={handleDelete} />
-        )}
-      </div>
     </div>
   );
 };
 
-export default FoodControl;
+export default CreateBanner;
