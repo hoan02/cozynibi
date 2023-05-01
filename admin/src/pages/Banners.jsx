@@ -3,15 +3,15 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 
-import BannerControl from "../../components/bannerControl/BannerControl";
-import { listParentPage } from "../../contexts/listPage";
+import BoardBanner from "../components/bannerControl/BoardBanner";
+import { listParentPage } from "../contexts/listPage";
 
 const Banners = () => {
   const [value, setValue] = useState("about-us");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    history.push(`/banners/${newValue}`);
+    // history.push(`/banners/${newValue}`);
   };
 
   return (
@@ -45,7 +45,7 @@ const Banners = () => {
           }}
         >
           <div className="content">
-            <BannerControl slug={value} />
+            <BoardBanner slug={value} />
           </div>
         </Box>
       </Box>

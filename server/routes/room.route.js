@@ -12,8 +12,8 @@ const router = express.Router();
 
 router.get("/:id", getRoom);
 router.get("/", getAllRoom);
-router.post("/create", createRoom);
-router.put("/update/:id", updateRoom);
-router.delete("/delete/:id", deleteRoom);
+router.post("/create", verifyToken, createRoom);
+router.put("/update/:id", verifyToken, updateRoom);
+router.delete("/delete/:id", verifyToken, deleteRoom);
 
 export default router;

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Box, Button } from "@mui/material";
-import RoomTable from "../components/roomControl/RoomTable";
+import BoardRoom from "../components/roomControl/BoardRoom";
 
 const Accommodation = () => {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const Accommodation = () => {
         Create new room
       </Button>
 
-      <RoomTable />
+      <BoardRoom />
     </Box>
   );
 };
