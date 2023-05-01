@@ -1,18 +1,38 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Button, Radio } from "@mui/material";
+import { Button, Box } from "@mui/material";
 import TextareaAutosize from "@mui/base/TextareaAutosize";
 
 import newRequest from "../../utils/newRequest";
 import toastService from "../../utils/toastService";
 
 // const RoomTable = ({ data, handleUpdate, handleDelete }) => {
-const RoomTable = ({ data }) => {
+const RoomTable = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const [roomData, setRoomData] = useState([]);
 
-  // DELETE: delete room
+  // GET: Get all rooms
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["rooms"],
+    queryFn: () =>
+      newRequest.get(`room`).then((res) => {
+        setRoomData(
+          res.data.map((item, index) => ({
+            stt: index + 1,
+            image: item.images[0].url,
+            name: item.name,
+            notes: item.notes,
+            idObject: item._id,
+          }))
+        );
+        return res.data;
+      }),
+  });
+
+  // DELETE: Delete room
   const deleteBanner = useMutation({
     mutationFn: (roomId) => {
       return newRequest.delete(`/room/delete/${roomId}`);
@@ -111,25 +131,23 @@ const RoomTable = ({ data }) => {
     },
   ];
 
-  const roomData = data.map((item, index) => ({
-    stt: index + 1,
-    image: item.images[0].url,
-    name: item.name,
-    notes: item.notes,
-    idObject: item._id,
-  }));
-
   return (
-    <div style={{ height: "100%", width: "100%" }}>
-      <DataGrid
-        density="comfortable"
-        getRowId={(row) => row.stt}
-        rows={roomData}
-        columns={columns}
-        rowHeight={100}
-        components={{ Toolbar: GridToolbar }}
-      />
-    </div>
+    <Box style={{ height: "100%", width: "100%" }}>
+      {isLoading ? (
+        <>Loading</>
+      ) : error ? (
+        <>Error</>
+      ) : (
+        <DataGrid
+          density="comfortable"
+          getRowId={(row) => row.stt}
+          rows={roomData}
+          columns={columns}
+          rowHeight={100}
+          components={{ Toolbar: GridToolbar }}
+        />
+      )}
+    </Box>
   );
 };
 

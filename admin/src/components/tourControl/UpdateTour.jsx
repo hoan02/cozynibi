@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Formik, Form } from "formik";
@@ -8,8 +8,8 @@ import { Box, FormLabel, InputLabel, TextField, Button } from "@mui/material";
 import noImg from "../../assets/images/no-img.jpg";
 import newRequest from "../../utils/newRequest";
 import toastService from "../../utils/toastService";
-import DoubleTodoList from "../../hooks/DoubleTodoList";
-import MonoTodoList from "../../hooks/MonoTodoList";
+import DoubleTodoList from "../../layouts/DoubleTodoList";
+import MonoTodoList from "../../layouts/MonoTodoList";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Please enter room name!"),
@@ -34,19 +34,17 @@ const UpdateTour = () => {
   const [exclusions, setExclusions] = useState([]);
 
   // GET: get tour update
-  const { isLoading, error, data } = useQuery({
-    queryKey: ["tours"],
-    queryFn: () =>
-      newRequest.get(`tour/${id}`).then((res) => {
-        setFormData(res.data);
-        setSchedules(res.data.tripSchedules);
-        setTourPrice(res.data.tourPrice);
-        setExclusions(res.data.exclusions);
-        return res.data;
-      }),
+  const { isLoading, error } = useQuery({
+    queryKey: ["tour", id],
+    queryFn: () => newRequest.get(`tour/${id}`),
+    onSuccess: async (res) => {
+      setFormData(res.data);
+      setSchedules(res.data.tripSchedules);
+      setTourPrice(res.data.tourPrice);
+      setInclusions(res.data.inclusions);
+      setExclusions(res.data.exclusions);
+    },
   });
-
-  console.log(formData);
 
   const handleImageChange = (e, index) => {
     e.preventDefault();
@@ -84,7 +82,7 @@ const UpdateTour = () => {
     onSuccess: (res) => {
       toastService.success(res.data.message);
       queryClient.invalidateQueries(["tours"]);
-      navigate(`/pages/accommodation`);
+      navigate(`/pages/tour-travel`);
     },
   });
 
@@ -104,7 +102,6 @@ const UpdateTour = () => {
   return (
     <div>
       <h1 style={{ textAlign: "center", margin: 20 }}>Update tour</h1>
-
       {isLoading ? (
         <>Loading</>
       ) : error ? (
@@ -115,6 +112,7 @@ const UpdateTour = () => {
             Object id: {formData._id}
           </InputLabel>
           <Formik
+            enableReinitialize
             initialValues={formData}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
@@ -247,7 +245,7 @@ const UpdateTour = () => {
             variant="contained"
             color="error"
             sx={{ marginTop: "16px" }}
-            onClick={() => navigate(`/pages/accommodation`)}
+            onClick={() => navigate(`/pages/tour-travel`)}
           >
             Back
           </Button>

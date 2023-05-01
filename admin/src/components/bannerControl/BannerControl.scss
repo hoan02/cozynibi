@@ -22,6 +22,7 @@
 
       .form {
         display: flex;
+        flex-direction: column;
         flex: 1;
         gap: 10px;
 
@@ -32,17 +33,8 @@
       }
     }
   }
-}
 
-.create-banner .form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.create-banner img {
-}
-
-.render-banner {
-  width: 100%;
+  .render-banner {
+    width: 100%;
+  }
 }

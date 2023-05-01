@@ -179,6 +179,7 @@ const UpdateRoom = () => {
             Object id: {formData._id}
           </InputLabel>
           <Formik
+            enableReinitialize
             initialValues={formData}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
