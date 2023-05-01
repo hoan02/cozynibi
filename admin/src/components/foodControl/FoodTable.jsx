@@ -1,17 +1,7 @@
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { Button, Radio } from "@mui/material";
 
-const ImageTable = ({ data, handleUpdate, handleDelete }) => {
-  const handleChange = (imgNewId) => {
-    const imageToShow = data.find((item) => item.isShow);
-    if (imageToShow) {
-      const imgOldId = imageToShow._id;
-      handleUpdate(imgOldId, imgNewId);
-    } else {
-      console.log("err");
-    }
-  };
-
+const FoodTable = ({ data, handleDelete }) => {
   const columns = [
     {
       field: "stt",
@@ -21,15 +11,15 @@ const ImageTable = ({ data, handleUpdate, handleDelete }) => {
     {
       field: "image",
       headerName: "Image",
-      width: 300,
+      width: 150,
       renderCell: (params) => (
         <a href={params.value} target="_blank" rel="noopener noreferrer">
           <img
             src={params.value}
             alt=""
             style={{
-              width: "280px",
-              height: "100%",
+              width: "120px",
+              height: "120px",
               objectFit: "cover",
             }}
           />
@@ -37,35 +27,24 @@ const ImageTable = ({ data, handleUpdate, handleDelete }) => {
       ),
     },
     {
-      field: "name",
-      headerName: "Name",
+      field: "nameFood",
+      headerName: "Name food",
+      width: 260,
+    },
+    {
+      field: "nameFile",
+      headerName: "Name file",
       width: 180,
     },
     {
       field: "publicId",
       headerName: "Public Id",
-      width: 300,
+      width: 250,
     },
     {
       field: "idObject",
       headerName: "Id Object",
       width: 240,
-    },
-    {
-      field: "isShow",
-      headerName: "Is Show",
-      width: 100,
-      sortable: false,
-      filterable: false,
-      disableColumnMenu: true,
-      renderCell: (params) => (
-        <Radio
-          checked={params.row.isShow}
-          onChange={() => {
-            handleChange(params.row.idObject);
-          }}
-        />
-      ),
     },
     {
       field: "Delete",
@@ -79,7 +58,6 @@ const ImageTable = ({ data, handleUpdate, handleDelete }) => {
           variant="contained"
           color="error"
           onClick={() => handleDelete(params.row.idObject)}
-          disabled={params.row.isShow ? true : false}
         >
           Delete
         </Button>
@@ -87,13 +65,13 @@ const ImageTable = ({ data, handleUpdate, handleDelete }) => {
     },
   ];
 
-  const bannerData = data.map((item, index) => ({
+  const foodData = data.map((item, index) => ({
     stt: index + 1,
-    image: item.url,
-    name: item.name,
-    isShow: item.isShow,
-    publicId: item.publicId,
+    nameFood: item.name,
     idObject: item._id,
+    image: item.image.url,
+    nameFile: item.image.name,
+    publicId: item.image.publicId,
   }));
 
   return (
@@ -101,7 +79,7 @@ const ImageTable = ({ data, handleUpdate, handleDelete }) => {
       <DataGrid
         density="comfortable"
         getRowId={(row) => row.stt}
-        rows={bannerData}
+        rows={foodData}
         columns={columns}
         rowHeight={100}
         components={{ Toolbar: GridToolbar }}
@@ -110,4 +88,4 @@ const ImageTable = ({ data, handleUpdate, handleDelete }) => {
   );
 };
 
-export default ImageTable;
+export default FoodTable;

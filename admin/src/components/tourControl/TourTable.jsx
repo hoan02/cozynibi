@@ -1,8 +1,8 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Button, Radio } from "@mui/material";
-import TextareaAutosize from "@mui/base/TextareaAutosize";
+import { Button, Box } from "@mui/material";
 
 import newRequest from "../../utils/newRequest";
 import toastService from "../../utils/toastService";
@@ -11,8 +11,31 @@ import toastService from "../../utils/toastService";
 const tourTable = ({ data }) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const [tourData, setTourData] = useState([]);
 
-  // DELETE: delete tour
+  // GET: Get all tour
+  const {
+    isLoading,
+    error,
+    data: allTour,
+  } = useQuery({
+    queryKey: ["tours"],
+    queryFn: () =>
+      newRequest.get(`tour`).then((res) => {
+        setTourData(
+          res.data.map((item, index) => ({
+            stt: index + 1,
+            image: item.images[0].url,
+            name: item.name,
+            tourCode: item.tourCode,
+            idObject: item._id,
+          }))
+        );
+        return res.data;
+      }),
+  });
+
+  // DELETE: Delete tour
   const deleteBanner = useMutation({
     mutationFn: (tourId) => {
       return newRequest.delete(`/tour/delete/${tourId}`);
@@ -61,7 +84,7 @@ const tourTable = ({ data }) => {
       headerName: "Tour Code",
       width: 150,
     },
-    
+
     {
       field: "idObject",
       headerName: "Id Object",
@@ -104,25 +127,23 @@ const tourTable = ({ data }) => {
     },
   ];
 
-  const tourData = data.map((item, index) => ({
-    stt: index + 1,
-    image: item.images[0].url,
-    name: item.name,
-    tourCode: item.tourCode,
-    idObject: item._id,
-  }));
-
   return (
-    <div style={{ height: "100%", width: "100%" }}>
-      <DataGrid
-        density="comfortable"
-        getRowId={(row) => row.stt}
-        rows={tourData}
-        columns={columns}
-        rowHeight={100}
-        components={{ Toolbar: GridToolbar }}
-      />
-    </div>
+    <Box style={{ height: "100%", width: "100%" }}>
+      {isLoading ? (
+        <>Loading</>
+      ) : error ? (
+        <>Error</>
+      ) : (
+        <DataGrid
+          density="comfortable"
+          getRowId={(row) => row.stt}
+          rows={tourData}
+          columns={columns}
+          rowHeight={100}
+          components={{ Toolbar: GridToolbar }}
+        />
+      )}
+    </Box>
   );
 };
 

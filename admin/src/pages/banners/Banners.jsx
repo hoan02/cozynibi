@@ -3,7 +3,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 
-import ImageControl from "../../components/imageControl/ImagesControl";
+import BannerControl from "../../components/bannerControl/BannerControl";
 import { listParentPage } from "../../contexts/listPage";
 
 const Banners = () => {
@@ -45,7 +45,7 @@ const Banners = () => {
           }}
         >
           <div className="content">
-            <ImageControl slug={value} />
+            <BannerControl slug={value} />
           </div>
         </Box>
       </Box>
