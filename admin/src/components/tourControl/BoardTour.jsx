@@ -2,13 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Button, Box } from "@mui/material";
+import { Button, Box, LinearProgress } from "@mui/material";
 
 import newRequest from "../../utils/newRequest";
 import toastService from "../../utils/toastService";
 
-// const tourTable = ({ data, handleUpdate, handleDelete }) => {
-const tourTable = ({ data }) => {
+const BoardTour = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [tourData, setTourData] = useState([]);
@@ -17,7 +16,7 @@ const tourTable = ({ data }) => {
   const {
     isLoading,
     error,
-    data: allTour,
+    // data: allTour,
   } = useQuery({
     queryKey: ["tours"],
     queryFn: () =>
@@ -130,7 +129,7 @@ const tourTable = ({ data }) => {
   return (
     <Box style={{ height: "100%", width: "100%" }}>
       {isLoading ? (
-        <>Loading</>
+        <LinearProgress />
       ) : error ? (
         <>Error</>
       ) : (
@@ -147,4 +146,4 @@ const tourTable = ({ data }) => {
   );
 };
 
-export default tourTable;
+export default BoardTour;

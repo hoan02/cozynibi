@@ -1,7 +1,7 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { Button, Radio } from "@mui/material";
+import { Box, Button, Radio, LinearProgress } from "@mui/material";
 
 import newRequest from "../../utils/newRequest";
 import toastService from "../../utils/toastService";
@@ -52,7 +52,7 @@ const BoardBanner = (props) => {
   // DELETE: Delete banner
   const deleteBanner = useMutation({
     mutationFn: (imgId) => {
-      return newRequest.delete(`/banner/delete/${bannerId}?imageId=${imgId}`);
+      return newRequest.delete(`/banner/delete?slug=${slug}&imageId=${imgId}`);
     },
     onSuccess: (res) => {
       toastService.success(res.data.message);
@@ -150,9 +150,9 @@ const BoardBanner = (props) => {
   ];
 
   return (
-    <div style={{ height: "100%", width: "100%" }}>
+    <Box>
       {isLoading ? (
-        <div>Loading</div>
+        <LinearProgress />
       ) : error ? (
         <div>Error</div>
       ) : (
@@ -165,7 +165,7 @@ const BoardBanner = (props) => {
           components={{ Toolbar: GridToolbar }}
         />
       )}
-    </div>
+    </Box>
   );
 };
 

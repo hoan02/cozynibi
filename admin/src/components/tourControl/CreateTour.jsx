@@ -9,8 +9,8 @@ import { Box, FormLabel, TextField, IconButton, Button } from "@mui/material";
 import noImg from "../../assets/images/no-img.jpg";
 import newRequest from "../../utils/newRequest";
 import toastService from "../../utils/toastService";
-import DoubleTodoList from "../../layouts/DoubleTodoList";
-import MonoTodoList from "../../layouts/MonoTodoList";
+import DoubleTodoList from "../DoubleTodoList";
+import MonoTodoList from "../MonoTodoList";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Please enter room name!"),

@@ -3,13 +3,20 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { Box, FormLabel, InputLabel, TextField, Button } from "@mui/material";
+import {
+  Box,
+  FormLabel,
+  InputLabel,
+  TextField,
+  Button,
+  LinearProgress,
+} from "@mui/material";
 
 import noImg from "../../assets/images/no-img.jpg";
 import newRequest from "../../utils/newRequest";
 import toastService from "../../utils/toastService";
-import DoubleTodoList from "../../layouts/DoubleTodoList";
-import MonoTodoList from "../../layouts/MonoTodoList";
+import DoubleTodoList from "../DoubleTodoList";
+import MonoTodoList from "../MonoTodoList";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Please enter room name!"),
@@ -103,7 +110,7 @@ const UpdateTour = () => {
     <div>
       <h1 style={{ textAlign: "center", margin: 20 }}>Update tour</h1>
       {isLoading ? (
-        <>Loading</>
+        <LinearProgress />
       ) : error ? (
         <>Error</>
       ) : (

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, TextField, IconButton } from "@mui/material";
+import { Box, TextField, IconButton, Fab } from "@mui/material";
 import { Add, Delete } from "@mui/icons-material";
 
 const MonoTodoList = ({ label, tasks, setTasks }) => {
@@ -26,7 +26,7 @@ const MonoTodoList = ({ label, tasks, setTasks }) => {
           label={`New ${label}`}
           variant="outlined"
           size="small"
-          sx={{ width: 500, marginBottom: "16px" }}
+          sx={{ minWidth: "500px", margin: "0 16px 10px 0" }}
         />
         <IconButton onClick={handleAddTask}>
           <Add />

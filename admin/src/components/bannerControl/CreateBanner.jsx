@@ -1,16 +1,17 @@
 import { useRef, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Button, IconButton } from "@mui/material";
+import { Box, Button, IconButton } from "@mui/material";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 
 import newRequest from "../../utils/newRequest";
 import toastService from "../../utils/toastService";
 import bannerDefault from "../../assets/images/banner-default.jpg";
-import BoardBanner from "./BoardBanner";
-import "./CreateBanner.scss";
 
-const CreateBanner = ({ slug }) => {
+const CreateBanner = () => {
+  const { slug } = useParams();
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const fileInputRef = useRef(null);
   const [imgPreview, setImgPreview] = useState("");
   const [resImg, setResImg] = useState(null);
@@ -39,7 +40,7 @@ const CreateBanner = ({ slug }) => {
   // POST: Create new image banner
   const createBanner = useMutation({
     mutationFn: (image) => {
-      return newRequest.post(`/banner/create/all?slug=${slug}`, image);
+      return newRequest.post(`/banner/create?slug=${slug}`, image);
     },
     onSuccess: (res) => {
       toastService.success(res.data.message);
@@ -47,6 +48,7 @@ const CreateBanner = ({ slug }) => {
       setImgPreview("");
       setResImg(null);
       fileInputRef.current.value = "";
+      navigate(`banners`);
     },
   });
 
@@ -55,58 +57,57 @@ const CreateBanner = ({ slug }) => {
   };
 
   return (
-    <div className="container">
-      <div className="create-banner">
-        <div className="content">
-          <div className="img">
-            <img src={imgPreview || bannerDefault} alt="Image Preview" />
-          </div>
-          <div className="form">
-            <div className="upload">
-              Chọn ảnh:
-              <IconButton
-                color="primary"
-                aria-label="upload picture"
-                component="label"
-              >
-                <input
-                  hidden
-                  accept="image/*"
-                  type="file"
-                  ref={fileInputRef}
-                  onChange={handleImageChange}
-                />
-                <PhotoCamera />
-              </IconButton>
-            </div>
-            <div>Name file: {resImg && resImg.name}</div>
-            <div>Folder: {resImg && resImg.folder}</div>
-            <div>Public id: {resImg && resImg.publicId}</div>
-            <div>
-              Url:
-              <a href={resImg && resImg.url} target="_blank">
-                {resImg && resImg.url}{" "}
-              </a>
-            </div>
-            {resImg ? (
-              <Button
-                className="btn-create"
-                variant="contained"
-                color="success"
-                onClick={handleCreate}
-              >
-                Create
-              </Button>
-            ) : (
-              <Button className="btn-create" variant="contained" disabled>
-                Create
-              </Button>
-            )}
-          </div>
-        </div>
-      </div>
-
-    </div>
+    <Box sx={{ maxWidth: "1000px", margin: "auto" }}>
+      <Box sx={{ margin: "20px 0" }}>
+        <img
+          style={{ width: "100%", height: "auto", objectFit: "cover" }}
+          src={imgPreview || bannerDefault}
+          alt="Image Preview"
+        />
+      </Box>
+      <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+        <Box>
+          Chọn ảnh:
+          <IconButton
+            color="primary"
+            aria-label="upload picture"
+            component="label"
+          >
+            <input
+              hidden
+              accept="image/*"
+              type="file"
+              ref={fileInputRef}
+              onChange={handleImageChange}
+            />
+            <PhotoCamera />
+          </IconButton>
+        </Box>
+        <Box>Name file: {resImg && resImg.name}</Box>
+        <Box>Folder: {resImg && resImg.folder}</Box>
+        <Box>Public id: {resImg && resImg.publicId}</Box>
+        <Box>
+          Url:
+          <a href={resImg && resImg.url} target="_blank">
+            {resImg && resImg.url}{" "}
+          </a>
+        </Box>
+        {resImg ? (
+          <Button
+            variant="contained"
+            color="success"
+            sx={{ maxWidth: "200px" }}
+            onClick={handleCreate}
+          >
+            Create
+          </Button>
+        ) : (
+          <Button variant="contained" disabled sx={{ maxWidth: "200px" }}>
+            Create
+          </Button>
+        )}
+      </Box>
+    </Box>
   );
 };
 

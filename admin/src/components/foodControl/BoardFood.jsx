@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { Button } from "@mui/material";
+import { Button, LinearProgress } from "@mui/material";
 
 import newRequest from "../../utils/newRequest";
 import toastService from "../../utils/toastService";
@@ -109,7 +109,7 @@ const BoardFood = () => {
   return (
     <div style={{ height: "100%", width: "100%" }}>
       {isLoading ? (
-        <div>Loading</div>
+        <LinearProgress />
       ) : error ? (
         <div>Error</div>
       ) : (
