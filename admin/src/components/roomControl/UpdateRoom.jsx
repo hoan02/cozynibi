@@ -14,6 +14,7 @@ import {
   MenuItem,
   Button,
   Checkbox,
+  CircularProgress,
 } from "@mui/material";
 
 import noImg from "../../assets/images/no-img.jpg";
@@ -170,7 +171,7 @@ const UpdateRoom = () => {
     <div>
       <h1 style={{ textAlign: "center", margin: 20 }}>Update room</h1>
       {isLoading ? (
-        <>Loading</>
+        <CircularProgress />
       ) : error ? (
         <>Error</>
       ) : (

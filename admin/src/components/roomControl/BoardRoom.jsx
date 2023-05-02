@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Button, Box } from "@mui/material";
+import { Button, Box, LinearProgress } from "@mui/material";
 import TextareaAutosize from "@mui/base/TextareaAutosize";
 
 import newRequest from "../../utils/newRequest";
@@ -133,7 +133,7 @@ const BoardRoom = () => {
   return (
     <Box style={{ height: "100%", width: "100%" }}>
       {isLoading ? (
-        <>Loading</>
+        <LinearProgress />
       ) : error ? (
         <>Error</>
       ) : (

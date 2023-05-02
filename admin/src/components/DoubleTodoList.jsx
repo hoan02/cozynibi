@@ -5,7 +5,8 @@ import {
   ListItem,
   ListItemText,
   ListItemSecondaryAction,
-  IconButton,
+  Box,
+  Fab,
 } from "@mui/material";
 import { Add, Delete, Edit, Save, Cancel } from "@mui/icons-material";
 
@@ -64,15 +65,15 @@ const DoubleTodoList = ({ nameKey, nameValue, tasks, setTasks }) => {
         sx={{ width: 500, mr: 1 }}
       />
 
-      <IconButton onClick={handleAddTask}>
+      <Fab color="primary" size="small" onClick={handleAddTask}>
         <Add />
-      </IconButton>
+      </Fab>
 
       <List>
         {tasks.map((task, index) => (
-          <ListItem key={index}>
+          <ListItem key={index} sx={{ maxWidth: "730px" }}>
             {editIndex === index ? (
-              <div>
+              <Box>
                 <TextField
                   value={editTask[nameKey]}
                   onChange={(e) =>
@@ -94,7 +95,7 @@ const DoubleTodoList = ({ nameKey, nameValue, tasks, setTasks }) => {
                   size="small"
                   sx={{ width: 400, mr: 1 }}
                 />
-              </div>
+              </Box>
             ) : (
               <ListItemText
                 primary={task[nameKey]}
@@ -103,24 +104,38 @@ const DoubleTodoList = ({ nameKey, nameValue, tasks, setTasks }) => {
               />
             )}
 
-            <ListItemSecondaryAction sx={{ display: "flex" }}>
+            <ListItemSecondaryAction sx={{ display: "flex", gap: "10px" }}>
               {editIndex === index ? (
-                <div>
-                  <IconButton onClick={handleSaveTask}>
+                <>
+                  <Fab color="success" size="small" onClick={handleSaveTask}>
                     <Save />
-                  </IconButton>
-                  <IconButton onClick={handleCancelEdit}>
+                  </Fab>
+                  <Fab
+                    color="secondary"
+                    size="small"
+                    onClick={handleCancelEdit}
+                  >
                     <Cancel />
-                  </IconButton>
-                </div>
+                  </Fab>
+                </>
               ) : (
                 <>
-                  <IconButton onClick={() => handleEditTask(index)}>
+                  <Fab
+                    color="primary"
+                    size="small"
+                    onClick={() => handleEditTask(index)}
+                  >
                     <Edit />
-                  </IconButton>
-                  <IconButton onClick={() => handleDeleteTask(index)}>
-                    <Delete />
-                  </IconButton>
+                  </Fab>
+                  <Fab
+                    color="primary"
+                    size="small"
+                    onClick={() => handleDeleteTask(index)}
+                  >
+                    <Fab color="error" size="small">
+                      <Delete />
+                    </Fab>
+                  </Fab>
                 </>
               )}
             </ListItemSecondaryAction>

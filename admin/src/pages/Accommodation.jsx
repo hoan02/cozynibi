@@ -9,7 +9,6 @@ const Accommodation = () => {
     <Box sx={{ padding: "20px" }}>
       <h1 style={{ textAlign: "center", color: "green" }}>ACCOMMODATION</h1>
       <Button
-        className="btn-create"
         variant="contained"
         color="success"
         onClick={() => navigate(`create`)}

@@ -13,12 +13,17 @@ export const getBanner = async (req, res, next) => {
 };
 
 export const createBanner = async (req, res, next) => {
-  const bannerId = req.params.id;
+  const slug = req.query.slug;
   const image = req.body;
   try {
-    const newBanner = await Banner.findByIdAndUpdate(bannerId, {
-      $addToSet: { image: [image] },
-    });
+    const newBanner = await Banner.findOneAndUpdate(
+      {
+        slug: slug,
+      },
+      {
+        $addToSet: { image: [image] },
+      }
+    );
 
     res.status(201).json({
       success: true,
@@ -51,10 +56,10 @@ export const updateBanner = async (req, res, next) => {
 };
 
 export const deleteBanner = async (req, res, next) => {
-  const bannerId = req.params.id;
+  const slug = req.query.slug;
   const imageId = req.query.imageId;
   try {
-    const banner = await Banner.findById(bannerId);
+    const banner = await Banner.findOne({ slug: slug });
     if (!banner) {
       return res.status(404).send("Không tìm thấy banner!");
     }

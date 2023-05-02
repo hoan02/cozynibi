@@ -1,12 +1,12 @@
 import { useState } from "react";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Box from "@mui/material/Box";
+import { useNavigate } from "react-router-dom";
+import { Tab, Tabs, Box, Button } from "@mui/material";
 
 import BoardBanner from "../components/bannerControl/BoardBanner";
 import { listParentPage } from "../contexts/listPage";
 
 const Banners = () => {
+  const navigate = useNavigate();
   const [value, setValue] = useState("about-us");
 
   const handleChange = (event, newValue) => {
@@ -45,6 +45,14 @@ const Banners = () => {
           }}
         >
           <div className="content">
+            <Button
+              variant="contained"
+              color="success"
+              onClick={() => navigate(`create/${value}`)}
+              sx={{ margin: "20px" }}
+            >
+              Create new banner
+            </Button>
             <BoardBanner slug={value} />
           </div>
         </Box>

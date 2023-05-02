@@ -10,8 +10,8 @@ import { verifyToken } from "../middlewares/jwt.js";
 const router = express.Router();
 
 router.get("/get", getBanner);
-router.post("/create/:id", verifyToken, createBanner);
+router.post("/create", verifyToken, createBanner);
 router.put("/update", verifyToken, updateBanner);
-router.delete("/delete/:id", verifyToken, deleteBanner);
+router.delete("/delete", verifyToken, deleteBanner);
 
 export default router;

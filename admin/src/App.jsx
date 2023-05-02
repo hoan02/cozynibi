@@ -8,6 +8,7 @@ import Login from "./pages/Login.jsx";
 import Sidebar from "./components/sidebar/Sidebar.jsx";
 import Home from "./pages/Home.jsx";
 import Banners from "./pages/Banners";
+import CreateBanner from "./components/bannerControl/CreateBanner.jsx";
 import MyAccount from "./pages/MyAccount.jsx";
 import { listParentPage, listChildPage } from "./contexts/listPage.jsx";
 import "./App.scss";
@@ -27,6 +28,12 @@ const App = () => {
             path="/banners"
             element={
               <RequireAuth loginPath="/login">{<Banners />}</RequireAuth>
+            }
+          />
+          <Route
+            path="banners/create/:slug"
+            element={
+              <RequireAuth loginPath="/login">{<CreateBanner />}</RequireAuth>
             }
           />
           <Route
