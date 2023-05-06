@@ -14,7 +14,7 @@ import {
   MenuItem,
   Button,
   Checkbox,
-  CircularProgress,
+  LinearProgress,
 } from "@mui/material";
 
 import noImg from "../../assets/images/no-img.jpg";
@@ -73,18 +73,13 @@ const UpdateRoom = () => {
 
   // const [imgPreview, setImgPreview] = useState([]);
 
-  // GET: get room update
-  const {
-    isLoading,
-    error,
-    data: allRoom,
-  } = useQuery({
+  // GET: Get room update
+  const { isLoading, error } = useQuery({
     queryKey: ["rooms"],
-    queryFn: () =>
-      newRequest.get(`room/${id}`).then((res) => {
-        setFormData(res.data);
-        return res.data;
-      }),
+    queryFn: () => newRequest.get(`room/${id}`),
+    onSuccess: (res) => {
+      setFormData(res.data);
+    },
   });
 
   const handleChangeEquipment = (e) => {
@@ -171,7 +166,7 @@ const UpdateRoom = () => {
     <div>
       <h1 style={{ textAlign: "center", margin: 20 }}>Update room</h1>
       {isLoading ? (
-        <CircularProgress />
+        <LinearProgress />
       ) : error ? (
         <>Error</>
       ) : (

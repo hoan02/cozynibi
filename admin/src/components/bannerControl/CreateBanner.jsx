@@ -52,7 +52,7 @@ const CreateBanner = () => {
     },
   });
 
-  const handleCreate = () => {
+  const clickCreate = () => {
     createBanner.mutate(resImg);
   };
 
@@ -97,7 +97,7 @@ const CreateBanner = () => {
             variant="contained"
             color="success"
             sx={{ maxWidth: "200px" }}
-            onClick={handleCreate}
+            onClick={clickCreate}
           >
             Create
           </Button>

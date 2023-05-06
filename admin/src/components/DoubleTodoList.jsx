@@ -15,17 +15,17 @@ const DoubleTodoList = ({ nameKey, nameValue, tasks, setTasks }) => {
   const [editIndex, setEditIndex] = useState(-1);
   const [editTask, setEditTask] = useState({ [nameKey]: "", [nameValue]: "" });
 
-  const handleAddTask = () => {
+  const clickAddTask = () => {
     setTasks([...tasks, newTask]);
     setNewTask({ [nameKey]: "", [nameValue]: "" });
   };
 
-  const handleEditTask = (index) => {
+  const clickEditTask = (index) => {
     setEditIndex(index);
     setEditTask(tasks[index]);
   };
 
-  const handleSaveTask = () => {
+  const clickSaveTask = () => {
     if (editIndex >= 0) {
       const newTasks = [...tasks];
       newTasks[editIndex] = editTask;
@@ -35,12 +35,12 @@ const DoubleTodoList = ({ nameKey, nameValue, tasks, setTasks }) => {
     }
   };
 
-  const handleCancelEdit = () => {
+  const clickCancelEdit = () => {
     setEditIndex(-1);
     setEditTask({ [nameKey]: "", [nameValue]: "" });
   };
 
-  const handleDeleteTask = (index) => {
+  const clickDeleteTask = (index) => {
     setTasks([...tasks.slice(0, index), ...tasks.slice(index + 1)]);
   };
 
@@ -65,7 +65,7 @@ const DoubleTodoList = ({ nameKey, nameValue, tasks, setTasks }) => {
         sx={{ width: 500, mr: 1 }}
       />
 
-      <Fab color="primary" size="small" onClick={handleAddTask}>
+      <Fab color="primary" size="small" onClick={clickAddTask}>
         <Add />
       </Fab>
 
@@ -107,13 +107,13 @@ const DoubleTodoList = ({ nameKey, nameValue, tasks, setTasks }) => {
             <ListItemSecondaryAction sx={{ display: "flex", gap: "10px" }}>
               {editIndex === index ? (
                 <>
-                  <Fab color="success" size="small" onClick={handleSaveTask}>
+                  <Fab color="success" size="small" onClick={clickSaveTask}>
                     <Save />
                   </Fab>
                   <Fab
                     color="secondary"
                     size="small"
-                    onClick={handleCancelEdit}
+                    onClick={clickCancelEdit}
                   >
                     <Cancel />
                   </Fab>
@@ -123,14 +123,14 @@ const DoubleTodoList = ({ nameKey, nameValue, tasks, setTasks }) => {
                   <Fab
                     color="primary"
                     size="small"
-                    onClick={() => handleEditTask(index)}
+                    onClick={() => clickEditTask(index)}
                   >
                     <Edit />
                   </Fab>
                   <Fab
                     color="primary"
                     size="small"
-                    onClick={() => handleDeleteTask(index)}
+                    onClick={() => clickDeleteTask(index)}
                   >
                     <Fab color="error" size="small">
                       <Delete />

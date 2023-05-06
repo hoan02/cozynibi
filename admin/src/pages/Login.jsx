@@ -28,15 +28,16 @@ const Login = () => {
   const handleSubmit = async (values) => {
     setError("");
     try {
-      const res = await newRequest.post(`auth/login`, values);
-      signIn({
-        token: res.data.token,
-        expiresIn: 3600,
-        tokenType: "Bearer",
-        authState: { username: values.username },
+      await newRequest.post(`auth/login`, values).then((res) => {
+        signIn({
+          token: res.data.token,
+          expiresIn: 3600,
+          tokenType: "Bearer",
+          authState: { username: values.username },
+        });
+        toastService.success("Đăng nhập thành công!");
+        navigate("/");
       });
-      toastService.success("Đăng nhập thành công!");
-      navigate("/");
     } catch (err) {
       setError("Username or password wrong!");
     }

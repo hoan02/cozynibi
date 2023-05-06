@@ -11,6 +11,17 @@ const postSchema = new Schema(
       type: String,
       required: true,
     },
+    text: {
+      type: String,
+      required: true,
+    },
+    images: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Image",
+        required: false,
+      },
+    ],
   },
   {
     timestamps: true,

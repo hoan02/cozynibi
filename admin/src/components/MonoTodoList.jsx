@@ -5,14 +5,14 @@ import { Add, Delete } from "@mui/icons-material";
 const MonoTodoList = ({ label, tasks, setTasks }) => {
   const [newTasks, setNewTasks] = useState("");
 
-  const handleAddTask = () => {
+  const clickAddTask = () => {
     if (newTasks.trim()) {
       setTasks([...tasks, newTasks]);
       setNewTasks("");
     }
   };
 
-  const handleDeleteTask = (index) => {
+  const clickDeleteTask = (index) => {
     const newTasks = tasks.filter((_, i) => i !== index);
     setTasks(newTasks);
   };
@@ -28,14 +28,14 @@ const MonoTodoList = ({ label, tasks, setTasks }) => {
           size="small"
           sx={{ minWidth: "500px", margin: "0 16px 10px 0" }}
         />
-        <IconButton onClick={handleAddTask}>
+        <IconButton onClick={clickAddTask}>
           <Add />
         </IconButton>
         <ul>
           {tasks.map((task, index) => (
             <li key={index}>
               {task}
-              <IconButton onClick={() => handleDeleteTask(index)}>
+              <IconButton onClick={() => clickDeleteTask(index)}>
                 <Delete />
               </IconButton>
             </li>
