@@ -44,7 +44,7 @@ const UpdateTour = () => {
   const { isLoading, error } = useQuery({
     queryKey: ["tour", id],
     queryFn: () => newRequest.get(`tour/${id}`),
-    onSuccess: async (res) => {
+    onSuccess: (res) => {
       setFormData(res.data);
       setSchedules(res.data.tripSchedules);
       setTourPrice(res.data.tourPrice);

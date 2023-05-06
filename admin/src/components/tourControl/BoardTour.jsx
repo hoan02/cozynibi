@@ -19,19 +19,18 @@ const BoardTour = () => {
     // data: allTour,
   } = useQuery({
     queryKey: ["tours"],
-    queryFn: () =>
-      newRequest.get(`tour`).then((res) => {
-        setTourData(
-          res.data.map((item, index) => ({
-            stt: index + 1,
-            image: item.images[0].url,
-            name: item.name,
-            tourCode: item.tourCode,
-            idObject: item._id,
-          }))
-        );
-        return res.data;
-      }),
+    queryFn: () => newRequest.get(`tour`),
+    onSuccess: (res) => {
+      setTourData(
+        res.data.map((item, index) => ({
+          stt: index + 1,
+          image: item.images[0].url,
+          name: item.name,
+          tourCode: item.tourCode,
+          idObject: item._id,
+        }))
+      );
+    },
   });
 
   // DELETE: Delete tour

@@ -16,19 +16,18 @@ const BoardRoom = () => {
   // GET: Get all rooms
   const { isLoading, error } = useQuery({
     queryKey: ["rooms"],
-    queryFn: () =>
-      newRequest.get(`room`).then((res) => {
-        setDataRoomGrid(
-          res.data.map((item, index) => ({
-            stt: index + 1,
-            image: item.images[0].url,
-            name: item.name,
-            notes: item.notes,
-            idObject: item._id,
-          }))
-        );
-        return res.data;
-      }),
+    queryFn: () => newRequest.get(`room`),
+    onSuccess: (res) => {
+      setDataRoomGrid(
+        res.data.map((item, index) => ({
+          stt: index + 1,
+          image: item.images[0].url,
+          name: item.name,
+          notes: item.notes,
+          idObject: item._id,
+        }))
+      );
+    },
   });
 
   // DELETE: Delete room

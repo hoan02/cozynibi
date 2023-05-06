@@ -8,24 +8,23 @@ import toastService from "../../utils/toastService";
 
 const BoardFood = () => {
   const queryClient = useQueryClient();
-  const [dataFoodGrid, setDataFoodGrid] = useState();
+  const [dataFoodGrid, setDataFoodGrid] = useState([]);
   // GET: Get all foods
   const { isLoading, error } = useQuery({
     queryKey: ["foods"],
-    queryFn: () =>
-      newRequest.get(`/food`).then((res) => {
-        setDataFoodGrid(
-          res.data.reverse().map((item, index) => ({
-            stt: index + 1,
-            nameFood: item.name,
-            idObject: item._id,
-            image: item.image.url,
-            nameFile: item.image.name,
-            publicId: item.image.publicId,
-          }))
-        );
-        return res.data;
-      }),
+    queryFn: async () => {
+      const res = await newRequest.get(`/food`);
+      const data = res.data.reverse().map((item, index) => ({
+        stt: index + 1,
+        nameFood: item.name,
+        idObject: item._id,
+        image: item.image.url,
+        nameFile: item.image.name,
+        publicId: item.image.publicId,
+      }));
+      setDataFoodGrid(data);
+      return res.data;
+    },
   });
 
   // DELETE: Delete Food
@@ -39,7 +38,7 @@ const BoardFood = () => {
     },
   });
 
-  const handleDelete = (foodId) => {
+  const clickDelete = (foodId) => {
     deleteFood.mutate(foodId);
   };
 
@@ -98,7 +97,7 @@ const BoardFood = () => {
         <Button
           variant="contained"
           color="error"
-          onClick={() => handleDelete(params.row.idObject)}
+          onClick={() => clickDelete(params.row.idObject)}
         >
           Delete
         </Button>

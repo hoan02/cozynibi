@@ -11,6 +11,8 @@ import CreateRoom from "../components/roomControl/CreateRoom";
 import UpdateRoom from "../components/roomControl/UpdateRoom";
 import CreateTour from "../components/tourControl/CreateTour";
 import UpdateTour from "../components/tourControl/UpdateTour";
+import CreatePost from "../components/postControl/CreatePost";
+import UpdatePost from "../components/postControl/UpdatePost";
 
 export const listParentPage = [
   {
@@ -75,5 +77,15 @@ export const listChildPage = [
     name: "Update tour",
     slug: "tour-travel/update/:id",
     component: <UpdateTour />,
+  },
+  {
+    name: "Create new post",
+    slug: "news/create",
+    component: <CreatePost />,
+  },
+  {
+    name: "Update tour",
+    slug: "news/update/:id",
+    component: <UpdatePost />,
   },
 ];

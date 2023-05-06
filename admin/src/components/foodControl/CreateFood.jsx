@@ -1,8 +1,7 @@
 import { useRef, useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Button, IconButton, TextField } from "@mui/material";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Box, Button, IconButton, TextField } from "@mui/material";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
-import Box from "@mui/material/Box";
 
 import newRequest from "../../utils/newRequest";
 import toastService from "../../utils/toastService";
@@ -50,7 +49,7 @@ const CreateFood = () => {
     },
   });
 
-  const handleCreate = () => {
+  const clickCreate = () => {
     const data = {
       name: nameFood,
       image: resImg._id,
@@ -125,7 +124,7 @@ const CreateFood = () => {
                 className="btn-create"
                 variant="contained"
                 color="success"
-                onClick={handleCreate}
+                onClick={clickCreate}
               >
                 Create
               </Button>

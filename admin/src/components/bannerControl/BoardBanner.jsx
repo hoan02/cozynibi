@@ -60,7 +60,7 @@ const BoardBanner = (props) => {
     },
   });
 
-  const handleDelete = (imgId) => {
+  const clickDelete = (imgId) => {
     deleteBanner.mutate(imgId);
   };
 
@@ -140,7 +140,7 @@ const BoardBanner = (props) => {
         <Button
           variant="contained"
           color="error"
-          onClick={() => handleDelete(params.row.idObject)}
+          onClick={() => clickDelete(params.row.idObject)}
           disabled={params.row.isShow ? true : false}
         >
           Delete

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useMemo, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import ReactQuill, { Quill } from "react-quill";
 import ImageUploader from "quill-image-uploader";
@@ -12,6 +12,7 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
+  LinearProgress,
 } from "@mui/material";
 
 import { Preview, Send } from "@mui/icons-material";
@@ -22,12 +23,14 @@ Quill.register("modules/imageUploader", ImageUploader);
 import newRequest from "../../utils/newRequest";
 import toastService from "../../utils/toastService";
 
-const CreatePost = () => {
+const UpdatePost = () => {
   const queryClient = useQueryClient();
+  const { id } = useParams();
   const navigate = useNavigate();
   const reactQuillRef = useRef();
   const [data, setData] = useState({
     title: "",
+    content: "",
     text: "",
     images: [],
   });
@@ -36,10 +39,23 @@ const CreatePost = () => {
   const [content, setContent] = useState("");
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
-  // POST: Create a new Post
-  const createPost = useMutation({
+  // GET: Get post update
+  const { isLoading, error } = useQuery({
+    queryKey: ["posts", id],
+    queryFn: () => newRequest.get(`post/${id}`),
+    onSuccess: (res) => {
+      setTitle(res.data.title);
+      setContent(res.data.content);
+      setData({
+        images: res.data.images,
+      });
+    },
+  });
+
+  // PUT: Update a new Post
+  const updatePost = useMutation({
     mutationFn: (formData) => {
-      return newRequest.post(`post/create`, formData);
+      return newRequest.put(`post/update/${id}`, formData);
     },
     onSuccess: (res) => {
       toastService.success(res.data.message);
@@ -50,7 +66,7 @@ const CreatePost = () => {
 
   const clickSend = () => {
     // console.log(data);
-    createPost.mutate(data);
+    updatePost.mutate(data);
   };
 
   const clickPreview = () => {
@@ -63,7 +79,6 @@ const CreatePost = () => {
       ...data,
       title,
       content,
-      text,
     });
   }, [title, content]);
 
@@ -136,64 +151,69 @@ const CreatePost = () => {
   );
 
   return (
-    <Box sx={{ padding: "50px" }}>
-      <h1 style={{ textAlign: "center", marginBottom: "20px" }}>
-        Create new post
-      </h1>
-      <Box>
-        <Dialog
-          open={isPreviewOpen}
-          onClose={() => setIsPreviewOpen(false)}
-          PaperProps={{
-            sx: {
-              width: "100%",
-              maxWidth: "1080px!important",
-            },
-          }}
-        >
-          <DialogTitle>Preview</DialogTitle>
-          <DialogContent>
-            <ReactQuill value={text} readOnly={true} theme="bubble" />
-          </DialogContent>
-        </Dialog>
-        <TextField
-          label="Title"
-          fullWidth
-          onChange={(e) => setTitle(e.target.value)}
-          style={{ marginBottom: "16px" }}
-        />
-
-        <ReactQuill
-          theme="snow"
-          placeholder="Write something ..."
-          value={content}
-          formats={formats}
-          onChange={(html) => setContent(html)}
-          modules={modules}
-          ref={reactQuillRef}
-        />
-
-        <Box>
-          <SpeedDial
-            ariaLabel="SpeedDial basic example"
-            sx={{ position: "fixed", bottom: 50, right: 30 }}
-            icon={<SpeedDialIcon />}
+    <>
+      <h1 style={{ textAlign: "center", marginBottom: "20px" }}>Update Post</h1>
+      {isLoading ? (
+        <LinearProgress />
+      ) : error ? (
+        <></>
+      ) : (
+        <Box sx={{ padding: "50px" }}>
+          <Dialog
+            open={isPreviewOpen}
+            onClose={() => setIsPreviewOpen(false)}
+            PaperProps={{
+              sx: {
+                width: "100%",
+                maxWidth: "1080px!important",
+              },
+            }}
           >
-            <SpeedDialAction
-              icon={<Preview />}
-              tooltipTitle="Preview"
-              onClick={clickPreview}
-            />
-            <SpeedDialAction
-              icon={<Send />}
-              tooltipTitle="Send"
-              onClick={clickSend}
-            />
-          </SpeedDial>
+            <DialogTitle>Preview</DialogTitle>
+            <DialogContent>
+              <ReactQuill value={text} readOnly={true} theme="bubble" />
+            </DialogContent>
+          </Dialog>
+          <TextField
+            label="Title"
+            fullWidth
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            style={{ marginBottom: "16px" }}
+          />
+
+          <ReactQuill
+            theme="snow"
+            placeholder="Write something ..."
+            value={content}
+            formats={formats}
+            onChange={(html) => setContent(html)}
+            modules={modules}
+            ref={reactQuillRef}
+          />
+
+          <Box>
+            <SpeedDial
+              ariaLabel="SpeedDial basic example"
+              sx={{ position: "fixed", bottom: 50, right: 30 }}
+              icon={<SpeedDialIcon />}
+            >
+              <SpeedDialAction
+                icon={<Preview />}
+                tooltipTitle="Preview"
+                onClick={clickPreview}
+              />
+              <SpeedDialAction
+                icon={<Send />}
+                tooltipTitle="Send"
+                onClick={clickSend}
+              />
+            </SpeedDial>
+          </Box>
         </Box>
-      </Box>
-    </Box>
+      )}
+    </>
   );
 };
 
-export default CreatePost;
+export default UpdatePost;
