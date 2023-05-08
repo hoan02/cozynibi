@@ -5,14 +5,14 @@ import PhotoCamera from "@mui/icons-material/PhotoCamera";
 
 import newRequest from "../../utils/newRequest";
 import toastService from "../../utils/toastService";
-import FoodDefault from "../../assets/images/food-default.jpg";
+import noImg from "../../assets/images/no-img.jpg";
 
-const CreateFood = () => {
+const CreateShowcase = () => {
   const queryClient = useQueryClient();
   const fileInputRef = useRef(null);
   const [imgPreview, setImgPreview] = useState("");
   const [resImg, setResImg] = useState(null);
-  const [nameFood, setNameFood] = useState("");
+  const [nameShowcase, setNameShowcase] = useState("");
 
   // Choose photo
   const handleImageChange = async (e) => {
@@ -26,7 +26,7 @@ const CreateFood = () => {
         const res = await newRequest.post(`image/create`, {
           file: reader.result,
           name: file.name,
-          folder: `foods`,
+          folder: `showcase`,
         });
         setResImg(res.data.image);
       } catch (err) {
@@ -35,14 +35,14 @@ const CreateFood = () => {
     };
   };
 
-  // POST: Create new food
-  const createFood = useMutation({
+  // POST: Create new Showcase
+  const createShowcase = useMutation({
     mutationFn: (data) => {
-      return newRequest.post(`/food/create`, data);
+      return newRequest.post(`/showcase/create`, data);
     },
     onSuccess: (res) => {
       toastService.success(res.data.message);
-      queryClient.invalidateQueries(["foods"]);
+      queryClient.invalidateQueries(["showcases"]);
       setImgPreview("");
       setResImg(null);
       fileInputRef.current.value = "";
@@ -51,11 +51,11 @@ const CreateFood = () => {
 
   const clickCreate = () => {
     const data = {
-      name: nameFood,
+      name: nameShowcase,
       image: resImg._id,
     };
-    setNameFood("");
-    createFood.mutate(data);
+    setNameShowcase("");
+    createShowcase.mutate(data);
   };
 
   return (
@@ -70,7 +70,7 @@ const CreateFood = () => {
             }}
           >
             <img
-              src={imgPreview || FoodDefault}
+              src={imgPreview || noImg}
               alt="Image Preview"
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />
@@ -84,10 +84,10 @@ const CreateFood = () => {
             }}
           >
             <TextField
-              label="Name food"
+              label="Name Showcase"
               variant="outlined"
-              value={nameFood}
-              onChange={(e) => setNameFood(e.target.value)}
+              value={nameShowcase}
+              onChange={(e) => setNameShowcase(e.target.value)}
             />
             <Box
               sx={{
@@ -142,4 +142,4 @@ const CreateFood = () => {
   );
 };
 
-export default CreateFood;
+export default CreateShowcase;

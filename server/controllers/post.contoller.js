@@ -30,7 +30,6 @@ export const createPost = async (req, res, next) => {
       message: "Tạo bài viết thành công!",
       newPost,
     });
-    console.log(newPost);
   } catch (err) {
     next(createError(500, "Tạo bài viết thất bại!"));
   }

@@ -47,6 +47,7 @@ const UpdatePost = () => {
       setTitle(res.data.title);
       setContent(res.data.content);
       setData({
+        text: res.data.text,
         images: res.data.images,
       });
     },
