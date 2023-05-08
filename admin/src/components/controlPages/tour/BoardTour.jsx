@@ -4,8 +4,8 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button, Box, LinearProgress } from "@mui/material";
 
-import newRequest from "../../utils/newRequest";
-import toastService from "../../utils/toastService";
+import newRequest from "../../../utils/newRequest";
+import toastService from "../../../utils/toastService";
 
 const BoardTour = () => {
   const queryClient = useQueryClient();

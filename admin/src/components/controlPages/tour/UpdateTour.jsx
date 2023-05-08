@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Formik, Form } from "formik";
@@ -12,11 +12,11 @@ import {
   LinearProgress,
 } from "@mui/material";
 
-import noImg from "../../assets/images/no-img.jpg";
-import newRequest from "../../utils/newRequest";
-import toastService from "../../utils/toastService";
-import DoubleTodoList from "../DoubleTodoList";
-import MonoTodoList from "../MonoTodoList";
+import noImg from "../../../assets/images/no-img.jpg";
+import newRequest from "../../../utils/newRequest";
+import toastService from "../../../utils/toastService";
+import DoubleTodoList from "../../DoubleTodoList";
+import MonoTodoList from "../../MonoTodoList";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Please enter room name!"),

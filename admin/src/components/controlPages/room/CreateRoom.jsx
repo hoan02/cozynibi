@@ -16,9 +16,9 @@ import {
   Checkbox,
 } from "@mui/material";
 
-import noImg from "../../assets/images/no-img.jpg";
-import newRequest from "../../utils/newRequest";
-import toastService from "../../utils/toastService";
+import noImg from "../../../assets/images/no-img.jpg";
+import newRequest from "../../../utils/newRequest";
+import toastService from "../../../utils/toastService";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Please enter room name!"),

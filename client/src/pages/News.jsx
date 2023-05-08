@@ -6,7 +6,7 @@ import Banner from "../components/_child/Banner";
 import newItem from "../assets/images/news-item.jpg";
 import banner from "../assets/images/banner-gallery.jpg";
 
-import newRequest from "../utils/NewRequest";
+import newRequest from "../utils/newRequest";
 
 const itemContentContainerLink = {
   margin: "0 0 15px",

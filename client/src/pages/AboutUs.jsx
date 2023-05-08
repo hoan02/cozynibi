@@ -6,7 +6,7 @@ import bgAbout from "../assets/images/bg-abu.png";
 import about1 from "../assets/images/abu-1.jpg";
 import about2 from "../assets/images/abu-2.jpg";
 import about3 from "../assets/images/abu-3.jpg";
-import newRequest from "../utils/NewRequest";
+import newRequest from "../utils/newRequest";
 
 const AboutUs = () => {
   const folder = "banner/about-us";

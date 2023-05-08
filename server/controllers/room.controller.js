@@ -1,6 +1,4 @@
-import { cloudinary } from "../index.js";
 import Room from "../models/room.model.js";
-import Image from "../models/image.model.js";
 import createError from "../utils/createError.js";
 
 export const getRoom = async (req, res, next) => {

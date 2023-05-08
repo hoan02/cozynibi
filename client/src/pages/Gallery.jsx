@@ -5,7 +5,7 @@ import Banner from "../components/_child/Banner";
 import galleryItem from "../assets/images/gallery-item.jpg";
 import banner from "../assets/images/banner-gallery.jpg";
 
-import newRequest from "../utils/NewRequest";
+import newRequest from "../utils/newRequest";
 
 const Gallery = () => {
   const folder = "banner/gallery";

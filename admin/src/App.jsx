@@ -8,7 +8,7 @@ import Login from "./pages/Login.jsx";
 import Sidebar from "./components/sidebar/Sidebar.jsx";
 import Home from "./pages/Home.jsx";
 import Banners from "./pages/Banners";
-import CreateBanner from "./components/bannerControl/CreateBanner.jsx";
+import CreateBanner from "./components/banner/CreateBanner.jsx";
 import MyAccount from "./pages/MyAccount.jsx";
 import { listParentPage, listChildPage } from "./contexts/listPage.jsx";
 import "./App.scss";

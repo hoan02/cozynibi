@@ -3,8 +3,8 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { Button, LinearProgress } from "@mui/material";
 
-import newRequest from "../../utils/newRequest";
-import toastService from "../../utils/toastService";
+import newRequest from "../../../utils/newRequest";
+import toastService from "../../../utils/toastService";
 
 const BoardShowcase = () => {
   const queryClient = useQueryClient();

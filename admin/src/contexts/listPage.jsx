@@ -7,12 +7,12 @@ import News from "../pages/News";
 import Gallery from "../pages/Gallery";
 import Contact from "../pages/Contact";
 
-import CreateRoom from "../components/roomControl/CreateRoom";
-import UpdateRoom from "../components/roomControl/UpdateRoom";
-import CreateTour from "../components/tourControl/CreateTour";
-import UpdateTour from "../components/tourControl/UpdateTour";
-import CreatePost from "../components/postControl/CreatePost";
-import UpdatePost from "../components/postControl/UpdatePost";
+import CreateRoom from "../components/controlPages/room/CreateRoom";
+import UpdateRoom from "../components/controlPages/room/UpdateRoom";
+import CreateTour from "../components/controlPages/tour/CreateTour";
+import UpdateTour from "../components/controlPages/tour/UpdateTour";
+import CreatePost from "../components/controlPages/post/CreatePost";
+import UpdatePost from "../components/controlPages/post/UpdatePost";
 
 export const listParentPage = [
   {

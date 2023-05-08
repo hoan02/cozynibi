@@ -1,5 +1,4 @@
 import Tour from "../models/tour.model.js";
-import Image from "../models/image.model.js";
 import createError from "../utils/createError.js";
 
 export const getTour = async (req, res, next) => {

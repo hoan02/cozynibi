@@ -1,8 +1,7 @@
 import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-import CreatePost from "../components/postControl/CreatePost";
-import BoardPost from "../components/postControl/BoardPost";
+import BoardPost from "../components/controlPages/post/BoardPost";
 
 const News = () => {
   const navigate = useNavigate();

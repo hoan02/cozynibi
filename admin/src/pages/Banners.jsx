@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Tab, Tabs, Box, Button } from "@mui/material";
 
-import BoardBanner from "../components/bannerControl/BoardBanner";
+import BoardBanner from "../components/banner/BoardBanner";
 import { listParentPage } from "../contexts/listPage";
 
 const Banners = () => {

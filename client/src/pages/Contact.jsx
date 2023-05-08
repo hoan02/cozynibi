@@ -9,7 +9,7 @@ import imgMail from "../assets/images/ct-mail.png";
 import imgWeb from "../assets/images/ct-web.png";
 import banner from "../assets/images/banner-contact.jpg";
 
-import newRequest from "../utils/NewRequest";
+import newRequest from "../utils/newRequest";
 
 const Contact = () => {
   const folder = "banner/contact";

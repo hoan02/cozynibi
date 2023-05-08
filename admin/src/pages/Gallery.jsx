@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
-import CreateShowcase from "../components/showcaseControl/CreateShowcase";
-import BoardShowcase from "../components/showcaseControl/BoardShowcase";
+import CreateShowcase from "../components/controlPages/showcase/CreateShowcase";
+import BoardShowcase from "../components/controlPages/showcase/BoardShowcase";
 
 const Gallery = () => {
   return (

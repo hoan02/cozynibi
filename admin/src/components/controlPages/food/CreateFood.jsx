@@ -3,9 +3,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Box, Button, IconButton, TextField } from "@mui/material";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 
-import newRequest from "../../utils/newRequest";
-import toastService from "../../utils/toastService";
-import FoodDefault from "../../assets/images/food-default.jpg";
+import newRequest from "../../../utils/newRequest";
+import toastService from "../../../utils/toastService";
+import FoodDefault from "../../../assets/images/food-default.jpg";
 
 const CreateFood = () => {
   const queryClient = useQueryClient();
