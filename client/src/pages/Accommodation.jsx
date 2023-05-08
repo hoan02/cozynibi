@@ -58,9 +58,7 @@ const Accommodation = () => {
               <div className="big-item-text">
                 <div className="big-item-text-content">
                   <h3>
-                    <Link to={"#"} style={bigItemTextContent}>
                       double room
-                    </Link>
                   </h3>
                   <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -69,7 +67,7 @@ const Accommodation = () => {
                     Et ex vel aut dicta? Corporis, nam quo?
                   </p>
                   <div className="read-more">
-                    <Link to={"#"} style={readMore}>
+                    <Link to={"../pages"} style={readMore}>
                       read more
                     </Link>
                   </div>
@@ -77,6 +75,7 @@ const Accommodation = () => {
               </div>
             </div>
           </div>
+          
           <SliderAccom />
         </div>
       </div>
