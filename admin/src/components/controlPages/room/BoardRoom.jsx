@@ -5,43 +5,44 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button, Box, LinearProgress } from "@mui/material";
 import TextareaAutosize from "@mui/base/TextareaAutosize";
 
-import newRequest from "../../utils/newRequest";
-import toastService from "../../utils/toastService";
+import newRequest from "../../../utils/newRequest";
+import toastService from "../../../utils/toastService";
 
-const BoardPost = () => {
+const BoardRoom = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const [dataPostGrid, setDataPostGrid] = useState([]);
+  const [dataRoomGrid, setDataRoomGrid] = useState([]);
 
-  // GET: Get all Posts
+  // GET: Get all rooms
   const { isLoading, error } = useQuery({
-    queryKey: ["posts"],
-    queryFn: () => newRequest.get(`post`),
+    queryKey: ["rooms"],
+    queryFn: () => newRequest.get(`room`),
     onSuccess: (res) => {
-      setDataPostGrid(
+      setDataRoomGrid(
         res.data.map((item, index) => ({
           stt: index + 1,
-          title: item.title,
           image: item.images[0].url,
+          name: item.name,
+          notes: item.notes,
           idObject: item._id,
         }))
       );
     },
   });
 
-  // DELETE: Delete Post
+  // DELETE: Delete room
   const deleteBanner = useMutation({
-    mutationFn: (postId) => {
-      return newRequest.delete(`/post/delete/${postId}`);
+    mutationFn: (roomId) => {
+      return newRequest.delete(`/room/delete/${roomId}`);
     },
     onSuccess: (res) => {
       toastService.success(res.data.message);
-      queryClient.invalidateQueries(["posts"]);
+      queryClient.invalidateQueries(["rooms"]);
     },
   });
 
-  const handleDelete = (postId) => {
-    deleteBanner.mutate(postId);
+  const handleDelete = (roomId) => {
+    deleteBanner.mutate(roomId);
   };
 
   const columns = [
@@ -69,9 +70,22 @@ const BoardPost = () => {
       ),
     },
     {
-      field: "title",
-      headerName: "Title",
-      width: 500,
+      field: "name",
+      headerName: "Name",
+      width: 150,
+    },
+    {
+      field: "notes",
+      headerName: "Notes",
+      width: 300,
+      renderCell: (params) => (
+        <TextareaAutosize
+          readOnly
+          defaultValue={params.value}
+          maxRows={4}
+          style={{ padding: 5, width: 280, height: 100 }}
+        />
+      ),
     },
     {
       field: "idObject",
@@ -125,7 +139,7 @@ const BoardPost = () => {
         <DataGrid
           density="comfortable"
           getRowId={(row) => row.stt}
-          rows={dataPostGrid}
+          rows={dataRoomGrid}
           columns={columns}
           rowHeight={100}
           components={{ Toolbar: GridToolbar }}
@@ -135,4 +149,4 @@ const BoardPost = () => {
   );
 };
 
-export default BoardPost;
+export default BoardRoom;

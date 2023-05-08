@@ -5,7 +5,7 @@ import Banner from "../components/_child/Banner";
 import menuItem from "../assets/images/menu-item.jpg";
 import bannerGalley from "../assets/images/banner-gallery.jpg";
 
-import newRequest from "../utils/NewRequest";
+import newRequest from "../utils/newRequest";
 
 const Menu = () => {
   const folder = "banner/menu";

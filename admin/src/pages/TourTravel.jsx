@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 import { Box, Button } from "@mui/material";
-import TourTable from "../components/tourControl/BoardTour";
+import TourTable from "../components/controlPages/tour/BoardTour";
 
 const TourTravel = () => {
   const navigate = useNavigate();

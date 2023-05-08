@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import Banner from "../components/_child/Banner";
-import newRequest from "../utils/NewRequest";
+import newRequest from "../utils/newRequest";
 
 const TourTravel = () => {
   const folder = "banner/tour-travel";

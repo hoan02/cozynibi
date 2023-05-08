@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
-import BoardFood from "../components/foodControl/BoardFood";
-import CreateFood from "../components/foodControl/CreateFood";
+import BoardFood from "../components/controlPages/food/BoardFood";
+import CreateFood from "../components/controlPages/food/CreateFood";
 
 const Menu = () => {
   return (

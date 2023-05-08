@@ -1,4 +1,4 @@
-import Food from "../models/Food.model.js";
+import Food from "../models/food.model.js";
 import Image from "../models/image.model.js";
 import createError from "../utils/createError.js";
 

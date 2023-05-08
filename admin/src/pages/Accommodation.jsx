@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Box, Button } from "@mui/material";
-import BoardRoom from "../components/roomControl/BoardRoom";
+import BoardRoom from "../components/controlPages/room/BoardRoom";
 
 const Accommodation = () => {
   const navigate = useNavigate();

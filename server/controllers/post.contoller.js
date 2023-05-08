@@ -1,4 +1,3 @@
-import { cloudinary } from "../index.js";
 import Post from "../models/post.model.js";
 import createError from "../utils/createError.js";
 

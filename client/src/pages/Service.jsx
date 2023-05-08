@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import newRequest from "../utils/NewRequest";
+import newRequest from "../utils/newRequest";
 import Banner from "../components/_child/Banner";
 
 const Service = () => {

@@ -9,7 +9,7 @@ import bgFrame from "../assets/images/bg-frs.png";
 import accomSlide1 from "../assets/images/accom-slide-1.jpg";
 import bgReadmore from "../assets/images/bg-read-m.png";
 
-import newRequest from "../utils/NewRequest";
+import newRequest from "../utils/newRequest";
 
 const bigItemTextContent = {
   textTransform: "uppercase",
