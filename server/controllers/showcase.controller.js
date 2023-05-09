@@ -1,4 +1,4 @@
-import Showcase from "../models/Showcase.model.js";
+import Showcase from "../models/showcase.model.js";
 import Image from "../models/image.model.js";
 import createError from "../utils/createError.js";
 

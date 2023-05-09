@@ -10,7 +10,6 @@ import newRequest from "../utils/newRequest";
 const Gallery = () => {
   const folder = "banner/gallery";
   const [imgBanner, setImgBanner] = useState("");
-
   useEffect(() => {
     newRequest.get(`image/?folder=${folder}`).then((res) => {
       setImgBanner(res.data.url);

@@ -1,5 +1,4 @@
 import React from 'react'
-// import banner from '../../assets/images/accom-slide-1.jpg'
 
 const Banner = (props) => {
   return (

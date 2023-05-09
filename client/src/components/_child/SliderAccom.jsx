@@ -1,100 +1,57 @@
-import React, { Component } from "react";
-import Slider from 'react-slick'
+import React, { useState } from "react";
+import Slider from "react-slick";
 
-import accom1 from '../../assets/images/accom-sm-1.jpg'
-import accom2 from '../../assets/images/accom-sm-2.jpg'
-import accom3 from '../../assets/images/accom-sm-3.jpg'
-import accom4 from '../../assets/images/accom-sm-4.jpg'
+const SliderAccom = ({ data, onSlideClick }) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
 
-function SampleNextArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: "block"}}
-        onClick={onClick}
-      />
-    );
-  }
-  
-  function SamplePrevArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: "block" }}
-        onClick={onClick}
-      />
-    );
-  }
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4, 
+    slidesToScroll: 1,
+    initialSlide: currentSlide, 
+    afterChange: (current) => setCurrentSlide(current),
+  };
 
-export default class SliderAccom extends Component {
-    render() {
-      const settings = {
-        infinite: true,
-        speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-      };
-
-      return (
-        <div className="slider-container">
-          <Slider {...settings}>
-          <div className="slider-item">
-          <a href="#">
-            <div className="slider-item-img">
-              <img src={accom1} alt="" />
-            </div>
-            <div className="desc">
-              <p>double room</p>
-            </div>
-          </a>
-        </div>
-        <div className="slider-item">
-          <a href="#">
-            <div className="slider-item-img">
-              <img src={accom2} alt="" />
-            </div>
-            <div className="desc">
-              <p>triple room</p>
-              <span>3 bed</span>
-            </div>
-          </a>
-        </div>
-        <div className="slider-item">
-          <a href="#">
-            <div className="slider-item-img">
-              <img src={accom3} alt="" />
-            </div>
-            <div className="desc">
-              <p>triple room</p>
-              <span>2 bed</span>
-            </div>
-          </a>
-        </div>
-        <div className="slider-item">
-          <a href="#">
-            <div className="slider-item-img">
-              <img src={accom4} alt="" />
-            </div>
-            <div className="desc">
-              <p>dorm room</p>
-            </div>
-          </a>
-        </div>
-        <div className="slider-item">
-          <a href="#">
-            <div className="slider-item-img">
-              <img src={accom2} alt="" />
-            </div>
-            <div className="desc">
-              <p>triple room</p>
-              <span>3 bed</span>
-            </div>
-          </a>
-        </div>
-          </Slider>
-        </div>
-      );
+  const handleSlideClick = (index) => {
+    setCurrentSlide(index);
+    if (onSlideClick) {
+      onSlideClick(index);
     }
-  }
+  };
+
+  const goToPrevSlide = () => {
+    setCurrentSlide((prevSlide) => (prevSlide - 1 + data.length) % data.length);
+  };
+
+  const goToNextSlide = () => {
+    setCurrentSlide((prevSlide) => (prevSlide + 1) % data.length);
+  };
+
+  return (
+    <div className="slider-container">
+      <div className="slider-nav slider-prev" onClick={goToPrevSlide}>
+        &lt;
+      </div>
+      <Slider {...settings}>
+        {data.map((room, index) => (
+          <div key={room._id} onClick={() => handleSlideClick(index)}>
+            <div className="slider-item">
+              <img src={room.images[0].url} alt={room.name} />
+              <div className="slider-item-content">
+                <h3>{room.name}</h3>
+                <p>{room.notes}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </Slider>
+      <div className="slider-nav slider-next" onClick={goToNextSlide}>
+        &gt;
+      </div>
+    </div>
+  );
+};
+
+export default SliderAccom;

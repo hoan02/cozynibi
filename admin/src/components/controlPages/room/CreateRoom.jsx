@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import {
@@ -219,11 +219,12 @@ const CreateRoom = () => {
                 onBlur={handleBlur}
                 style={{ marginBottom: "16px" }}
               />
+
               <FormControl fullWidth>
-                <InputLabel id="">BedSize (w*h)</InputLabel>
-                <TextField
-                  as={Select}
+                <InputLabel id="bed-size-label">BedSize (w*h)</InputLabel>
+                <Select
                   name="bedSize"
+                  labelId="bed-size-label"
                   label="BedSize (w*h)"
                   fullWidth
                   error={touched.bedSize && Boolean(errors.bedSize)}
@@ -235,7 +236,7 @@ const CreateRoom = () => {
                   <MenuItem value="1.8*2.0">1.8*2.0</MenuItem>
                   <MenuItem value="2.0*2.2">2.0*2.2</MenuItem>
                   <MenuItem value="2.0*3.0">2.0*3.0</MenuItem>
-                </TextField>
+                </Select>
               </FormControl>
 
               <TextField
