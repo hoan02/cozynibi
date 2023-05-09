@@ -9,11 +9,11 @@ const bookingSchema = new Schema(
       required: true,
     },
     checkIn: {
-      type: String,
+      type: Date,
       required: true,
     },
     checkOut: {
-      type: String,
+      type: Date,
       required: true,
     },
     numberAdults: {

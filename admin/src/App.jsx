@@ -4,12 +4,13 @@ import { RequireAuth } from "react-auth-kit";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
-import Login from "./pages/login/Login.jsx";
+import Login from "./pages/Login.jsx";
 import Sidebar from "./components/sidebar/Sidebar.jsx";
-import Home from "./pages/home/Home.jsx";
-import Banners from "./pages/banners/Banners";
-import MyAccount from "./pages/myAccount/MyAccount";
-import { listPage } from "./contexts/listPage.jsx";
+import Home from "./pages/Home.jsx";
+import Banners from "./pages/Banners";
+import CreateBanner from "./components/banner/CreateBanner.jsx";
+import MyAccount from "./pages/MyAccount.jsx";
+import { listParentPage, listChildPage } from "./contexts/listPage.jsx";
 import "./App.scss";
 
 const App = () => {
@@ -30,12 +31,29 @@ const App = () => {
             }
           />
           <Route
+            path="banners/create/:slug"
+            element={
+              <RequireAuth loginPath="/login">{<CreateBanner />}</RequireAuth>
+            }
+          />
+          <Route
             path="/my-account"
             element={
               <RequireAuth loginPath="/login">{<MyAccount />}</RequireAuth>
             }
           />
-          {listPage.map((page, index) => {
+          {listChildPage.map((page, index) => {
+            return (
+              <Route
+                key={index}
+                path={`pages/${page.slug}`}
+                element={
+                  <RequireAuth loginPath="/login">{page.component}</RequireAuth>
+                }
+              />
+            );
+          })}
+          {listParentPage.map((page, index) => {
             return (
               <Route
                 key={index}

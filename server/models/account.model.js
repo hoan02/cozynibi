@@ -10,23 +10,29 @@ const accountSchema = new Schema(
     },
     email: {
       type: String,
-      required: true,
       unique: true,
     },
     password: {
       type: String,
       required: true,
     },
-    avatar: {
-      type: Schema.Types.ObjectId,
-      ref: "Image",
-      require: false,
+    fullName: {
+      type: String,
+      required: false,
+    },
+    age: {
+      type: Number,
+      required: false,
+    },
+    sex: {
+      type: Boolean,
+      required: false,
     },
     phone: {
       type: Number,
       required: false,
     },
-    description: {
+    descriptions: {
       type: String,
       required: false,
     },

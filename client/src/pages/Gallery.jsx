@@ -1,18 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Banner from "../components/_child/Banner";
 
 // import images
 import galleryItem from "../assets/images/gallery-item.jpg";
 import banner from "../assets/images/banner-gallery.jpg";
 
-import newRequest from "../utils/NewRequest";
+import newRequest from "../utils/newRequest";
 
 const Gallery = () => {
   const folder = "banner/gallery";
   const [imgBanner, setImgBanner] = useState("");
-  newRequest.get(`image/?folder=${folder}`).then((res) => {
-    setImgBanner(res.data.url);
-  });
+  useEffect(() => {
+    newRequest.get(`image/?folder=${folder}`).then((res) => {
+      setImgBanner(res.data.url);
+    });
+  }, []);
 
   return (
     <div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Banner from "../components/_child/Banner";
 
 // import images
@@ -9,14 +9,16 @@ import imgMail from "../assets/images/ct-mail.png";
 import imgWeb from "../assets/images/ct-web.png";
 import banner from "../assets/images/banner-contact.jpg";
 
-import newRequest from "../utils/NewRequest";
+import newRequest from "../utils/newRequest";
 
 const Contact = () => {
   const folder = "banner/contact";
   const [imgBanner, setImgBanner] = useState("");
-  newRequest.get(`image/?folder=${folder}`).then((res) => {
-    setImgBanner(res.data.url);
-  });
+  useEffect(() => {
+    newRequest.get(`image/?folder=${folder}`).then((res) => {
+      setImgBanner(res.data.url);
+    });
+  }, []);
 
   return (
     <div>

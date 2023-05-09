@@ -1,33 +1,35 @@
-import { cloudinary } from "../index.js";
 import Banner from "../models/banner.model.js";
 import Image from "../models/image.model.js";
 import createError from "../utils/createError.js";
 
-export const getAllBanner = async (req, res, next) => {
+export const getBanner = async (req, res, next) => {
   const slug = req.query.slug;
   try {
     const allBanner = await Banner.findOne({ slug: slug }).populate("image");
     res.status(200).send(allBanner);
   } catch (err) {
-    next(createError(500, "Tìm kiếm tất cả banner không thành công!"));
+    next(createError(500, "Tìm kiếm banner không thành công!"));
   }
 };
 
 export const createBanner = async (req, res, next) => {
-  const bannerId = req.params.id;
+  const slug = req.query.slug;
   const image = req.body;
-  console.log(image);
   try {
-    const newBanner = await Banner.findByIdAndUpdate(bannerId, {
-      $addToSet: { image: [image] },
-    });
+    const newBanner = await Banner.findOneAndUpdate(
+      {
+        slug: slug,
+      },
+      {
+        $addToSet: { image: [image] },
+      }
+    );
 
     res.status(201).json({
       success: true,
       message: "Tạo banner thành công!",
       newBanner,
     });
-    console.log(newBanner);
   } catch (err) {
     next(createError(500, "Tạo banner thất bại!"));
   }
@@ -54,10 +56,10 @@ export const updateBanner = async (req, res, next) => {
 };
 
 export const deleteBanner = async (req, res, next) => {
-  const bannerId = req.params.id;
+  const slug = req.query.slug;
   const imageId = req.query.imageId;
   try {
-    const banner = await Banner.findById(bannerId);
+    const banner = await Banner.findOne({ slug: slug });
     if (!banner) {
       return res.status(404).send("Không tìm thấy banner!");
     }

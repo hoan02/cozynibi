@@ -7,15 +7,49 @@ const tourSchema = new Schema(
       type: String,
       required: true,
     },
-    note: {
+    tourCode: {
       type: String,
       required: true,
     },
-    detail: {
-      type: Schema.Types.ObjectId,
-      ref: "TourDetail",
+    images: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Image",
+        required: false,
+      },
+    ],
+    tripSchedules: [
+      {
+        time: {
+          type: String,
+          required: true,
+        },
+        content: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+    inclusions: {
+      type: [String],
       required: true,
     },
+    exclusions: {
+      type: [String],
+      required: true,
+    },
+    tourPrice: [
+      {
+        numberPerson: {
+          type: Number,
+          required: true,
+        },
+        pricePerPerson: {
+          type: Number,
+          required: true,
+        },
+      },
+    ],
   },
   {
     timestamps: true,

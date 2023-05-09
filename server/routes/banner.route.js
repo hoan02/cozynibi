@@ -1,6 +1,6 @@
 import express from "express";
 import {
-  getAllBanner,
+  getBanner,
   createBanner,
   updateBanner,
   deleteBanner,
@@ -9,12 +9,9 @@ import { verifyToken } from "../middlewares/jwt.js";
 
 const router = express.Router();
 
-router.get("/all", getAllBanner);
-// router.post("/create", verifyToken, createBanner);
-// router.put("/update/:id", verifyToken, updateBanner);
-// router.delete("/delete/:id", verifyToken, deleteBanner);
-router.post("/create/:id", createBanner);
-router.put("/update", updateBanner);
-router.delete("/delete/:id", deleteBanner);
+router.get("/get", getBanner);
+router.post("/create", verifyToken, createBanner);
+router.put("/update", verifyToken, updateBanner);
+router.delete("/delete", verifyToken, deleteBanner);
 
 export default router;

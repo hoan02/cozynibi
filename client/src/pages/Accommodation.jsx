@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SliderAccom from "../components/_child/SliderAccom";
 import { Link } from "react-router-dom";
 import Banner from "../components/_child/Banner";
@@ -9,7 +9,7 @@ import bgFrame from "../assets/images/bg-frs.png";
 import accomSlide1 from "../assets/images/accom-slide-1.jpg";
 import bgReadmore from "../assets/images/bg-read-m.png";
 
-import newRequest from "../utils/NewRequest";
+import newRequest from "../utils/newRequest";
 
 const bigItemTextContent = {
   textTransform: "uppercase",
@@ -42,9 +42,23 @@ const readMore = {
 const Accommodation = () => {
   const folder = "banner/accommodation";
   const [imgBanner, setImgBanner] = useState("");
-  newRequest.get(`image/?folder=${folder}`).then((res) => {
-    setImgBanner(res.data.url);
-  });
+  const [rooms, setRooms] = useState([]);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    newRequest.get(`image/?folder=${folder}`).then((res) => {
+      setImgBanner(res.data.url);
+    });
+
+    newRequest.get(`room`).then((res) => {
+      setRooms(res.data);
+    });
+  }, []);
+
+  const handleSlideClick = (index) => {
+    setCurrentSlide(index);
+  };
+
   return (
     <div>
       {imgBanner && <Banner img={imgBanner} text="accommodation" />}
@@ -53,21 +67,14 @@ const Accommodation = () => {
           <div className="big-item">
             <div className="big-item-content">
               <div className="big-item-img">
-                <img src={accomSlide1} alt="" />
+                <img src={rooms[currentSlide]?.images[0].url} alt="" />
               </div>
               <div className="big-item-text">
                 <div className="big-item-text-content">
-                  <h3>
-                      double room
-                  </h3>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Quibusdam soluta repudiandae iusto suscipit explicabo
-                    voluptatem odit ratione sint, non ullam, distinctio veniam.
-                    Et ex vel aut dicta? Corporis, nam quo?
-                  </p>
+                  <h3>{rooms[currentSlide]?.name}</h3>
+                  <p>{rooms[currentSlide]?.descriptions}</p>
                   <div className="read-more">
-                    <Link to={"../pages"} style={readMore}>
+                    <Link to={`${rooms[currentSlide]?._id}`} style={readMore}>
                       read more
                     </Link>
                   </div>
@@ -75,8 +82,9 @@ const Accommodation = () => {
               </div>
             </div>
           </div>
-          
-          <SliderAccom />
+          {rooms.length > 0 && (
+            <SliderAccom data={rooms} onSlideClick={handleSlideClick} />
+          )}
         </div>
       </div>
     </div>

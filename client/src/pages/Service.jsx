@@ -1,5 +1,5 @@
-import { useState } from "react";
-import newRequest from "../utils/NewRequest";
+import { useState, useEffect } from "react";
+import newRequest from "../utils/newRequest";
 import Banner from "../components/_child/Banner";
 
 // import images
@@ -11,9 +11,11 @@ import img4 from "../assets/images/icon/ser-4.png";
 const Service = () => {
   const folder = "banner/service";
   const [imgBanner, setImgBanner] = useState("");
-  newRequest.get(`image/?folder=${folder}`).then((res) => {
-    setImgBanner(res.data.url);
-  });
+  useEffect(() => {
+    newRequest.get(`image/?folder=${folder}`).then((res) => {
+      setImgBanner(res.data.url);
+    });
+  }, []);
 
   return (
     <div className="service">
