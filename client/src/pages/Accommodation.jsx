@@ -42,12 +42,22 @@ const readMore = {
 const Accommodation = () => {
   const folder = "banner/accommodation";
   const [imgBanner, setImgBanner] = useState("");
+  const [rooms, setRooms] = useState([]);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     newRequest.get(`image/?folder=${folder}`).then((res) => {
       setImgBanner(res.data.url);
     });
+
+    newRequest.get(`room`).then((res) => {
+      setRooms(res.data);
+    });
   }, []);
+
+  const handleSlideClick = (index) => {
+    setCurrentSlide(index);
+  };
 
   return (
     <div>
@@ -57,23 +67,14 @@ const Accommodation = () => {
           <div className="big-item">
             <div className="big-item-content">
               <div className="big-item-img">
-                <img src={accomSlide1} alt="" />
+                <img src={rooms[currentSlide]?.images[0].url} alt="" />
               </div>
               <div className="big-item-text">
                 <div className="big-item-text-content">
-                  <h3>
-                    <Link to={"#"} style={bigItemTextContent}>
-                      double room
-                    </Link>
-                  </h3>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Quibusdam soluta repudiandae iusto suscipit explicabo
-                    voluptatem odit ratione sint, non ullam, distinctio veniam.
-                    Et ex vel aut dicta? Corporis, nam quo?
-                  </p>
+                  <h3>{rooms[currentSlide]?.name}</h3>
+                  <p>{rooms[currentSlide]?.descriptions}</p>
                   <div className="read-more">
-                    <Link to={"#"} style={readMore}>
+                    <Link to={`${rooms[currentSlide]?._id}`} style={readMore}>
                       read more
                     </Link>
                   </div>
@@ -81,7 +82,9 @@ const Accommodation = () => {
               </div>
             </div>
           </div>
-          <SliderAccom />
+          {rooms.length > 0 && (
+            <SliderAccom data={rooms} onSlideClick={handleSlideClick} />
+          )}
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Banner from "../components/_child/Banner";
+import banner from "../assets/images/banner-about-us.jpg";
 
 // import images
 import bgAbout from "../assets/images/bg-abu.png";

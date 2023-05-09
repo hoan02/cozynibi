@@ -16,6 +16,7 @@ import News from "./pages/News";
 import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
 import "./App.css";
+import AccommodationDetails from "./pages/AccommodationDetails";
 
 const routes = [
   {
@@ -32,6 +33,11 @@ const routes = [
     path: "/accommodation",
     element: <Accommodation />,
     title: "Accommodation",
+  },
+  {
+    path: "/accommodation/:id",
+    element: <AccommodationDetails />,
+    title: "Accommodation Details",
   },
   {
     path: "/menu",

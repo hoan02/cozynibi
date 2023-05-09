@@ -14,7 +14,6 @@ import newRequest from "../utils/newRequest";
 const Contact = () => {
   const folder = "banner/contact";
   const [imgBanner, setImgBanner] = useState("");
-
   useEffect(() => {
     newRequest.get(`image/?folder=${folder}`).then((res) => {
       setImgBanner(res.data.url);

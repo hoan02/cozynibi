@@ -243,13 +243,14 @@ const UpdateRoom = () => {
                   onBlur={handleBlur}
                   style={{ marginBottom: "16px" }}
                 />
+                
                 <FormControl fullWidth>
-                  <InputLabel id="">BedSize (w*h)</InputLabel>
+                  <InputLabel id="bed-size-label">BedSize (w*h)</InputLabel>
                   <Select
                     name="bedSize"
+                    labelId="bed-size-label"
                     label="BedSize (w*h)"
                     fullWidth
-                    value={values.bedSize}
                     error={touched.bedSize && Boolean(errors.bedSize)}
                     helperText={touched.bedSize && errors.bedSize}
                     onChange={handleChange}
