@@ -4,30 +4,31 @@ import Banner from "../components/_child/Banner";
 import newRequest from "../utils/newRequest";
 
 // import images
-import itemImg from "../assets/images/our-tour.jpg";
+import itemImg from '../assets/images/our-tour.jpg'
+
 
 const tourItems = [
   {
     img: itemImg,
-    content_1: "bich dong pagoda",
-    content_2: "mua cave - phat diem cathedral",
+    content_1: 'bich dong pagoda',
+    content_2: 'mua cave - phat diem cathedral'
   },
   {
     img: itemImg,
-    content_1: "bich dong pagoda",
-    content_2: "mua cave - phat diem cathedral",
+    content_1: 'bich dong pagoda',
+    content_2: 'mua cave - phat diem cathedral'
   },
   {
     img: itemImg,
-    content_1: "bich dong pagoda",
-    content_2: "mua cave - phat diem cathedral",
+    content_1: 'bich dong pagoda',
+    content_2: 'mua cave - phat diem cathedral'
   },
   {
     img: itemImg,
-    content_1: "bich dong pagoda",
-    content_2: "mua cave - phat diem cathedral",
+    content_1: 'bich dong pagoda',
+    content_2: 'mua cave - phat diem cathedral'
   },
-];
+]
 
 const TourTravel = () => {
   const folder = "banner/tour-travel";
