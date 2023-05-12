@@ -3,41 +3,31 @@ import { useState, useEffect } from "react";
 import Banner from "../components/_child/Banner";
 import newRequest from "../utils/newRequest";
 
-// import images
-import itemImg from '../assets/images/our-tour.jpg'
-
-
-const tourItems = [
-  {
-    img: itemImg,
-    content_1: 'bich dong pagoda',
-    content_2: 'mua cave - phat diem cathedral'
-  },
-  {
-    img: itemImg,
-    content_1: 'bich dong pagoda',
-    content_2: 'mua cave - phat diem cathedral'
-  },
-  {
-    img: itemImg,
-    content_1: 'bich dong pagoda',
-    content_2: 'mua cave - phat diem cathedral'
-  },
-  {
-    img: itemImg,
-    content_1: 'bich dong pagoda',
-    content_2: 'mua cave - phat diem cathedral'
-  },
-]
-
 const TourTravel = () => {
   const folder = "banner/tour-travel";
   const [imgBanner, setImgBanner] = useState("");
+  const [tourData, setTourData] = useState();
   useEffect(() => {
-    newRequest.get(`image/?folder=${folder}`).then((res) => {
-      setImgBanner(res.data.url);
-    });
+    newRequest
+      .get(`image/?folder=${folder}`)
+      .then((res) => {
+        setImgBanner(res.data.url);
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
+
+    newRequest
+      .get(`tour`)
+      .then((res) => {
+        setTourData(res.data);
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
   }, []);
+
+  console.log(tourData);
 
   return (
     <div className="tour-travel">
@@ -65,19 +55,19 @@ const TourTravel = () => {
           </h2>
           <div className="list-our-tour">
             <ul>
-              {tourItems.map((tourItem, index) => {
+              {tourData?.map((tourItem, index) => {
                 return (
                   <li key={index}>
                     <a href="#" className="item">
-                      <div className="tour-avt">
-                        <img src={tourItem.img} alt="" />
+                      <div className="avt">
+                        <img src={tourItem.images[0].url} alt="" />
                       </div>
                       <div className="box-layer">
                         <div className="tour-desc">
                           <div className="tour-desc_middle">
                             <h3>
                               <span>
-                                {tourItem.content_1} <br /> {tourItem.content_2}
+                                {tourItem.name}
                               </span>
                             </h3>
                           </div>

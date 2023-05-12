@@ -15,11 +15,11 @@ import CreatePost from "../components/controlPages/post/CreatePost";
 import UpdatePost from "../components/controlPages/post/UpdatePost";
 
 export const listParentPage = [
-  {
-    name: "About Us",
-    slug: "about-us",
-    component: <AboutUs />,
-  },
+  // {
+  //   name: "About Us",
+  //   slug: "about-us",
+  //   component: <AboutUs />,
+  // },
   {
     name: "Accommodation",
     slug: "accommodation",
@@ -35,11 +35,11 @@ export const listParentPage = [
     slug: "tour-travel",
     component: <TourTravel />,
   },
-  {
-    name: "Service",
-    slug: "service",
-    component: <Service />,
-  },
+  // {
+  //   name: "Service",
+  //   slug: "service",
+  //   component: <Service />,
+  // },
   {
     name: "News",
     slug: "news",

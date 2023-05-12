@@ -7,18 +7,40 @@ import imgPhone from "../assets/images/ct-phone.png";
 import imgFax from "../assets/images/ct-fax.png";
 import imgMail from "../assets/images/ct-mail.png";
 import imgWeb from "../assets/images/ct-web.png";
-import banner from "../assets/images/banner-contact.jpg";
 
 import newRequest from "../utils/newRequest";
+import toastService from "../../../admin/src/utils/toastService";
 
 const Contact = () => {
   const folder = "banner/contact";
   const [imgBanner, setImgBanner] = useState("");
   useEffect(() => {
-    newRequest.get(`image/?folder=${folder}`).then((res) => {
-      setImgBanner(res.data.url);
-    });
+    newRequest
+      .get(`image/?folder=${folder}`)
+      .then((res) => {
+        setImgBanner(res.data.url);
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
   }, []);
+
+  const [form, setFrom] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    title: "",
+    content: "",
+  });
+
+  const handleChange = (e) => {
+    setFrom({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = () => {
+    newRequest.post(`contact/create`, form);
+  };
 
   return (
     <div>
@@ -86,12 +108,14 @@ const Contact = () => {
                 <div className="contact-right">
                   <h4>Get in touch with us</h4>
                   <div className="form-contact">
-                    <form action="">
+                    <form action="" onSubmit={handleSubmit}>
                       <div className="row">
                         <div className="col-md-6 col-lg-6 col-sm-12">
                           <input
                             type="text"
                             className="input-contact"
+                            name="name"
+                            onChange={handleChange}
                             placeholder="Name"
                           />
                         </div>
@@ -99,6 +123,8 @@ const Contact = () => {
                           <input
                             type="text"
                             className="input-contact"
+                            name="phone"
+                            onChange={handleChange}
                             placeholder="Tel"
                           />
                         </div>
@@ -108,6 +134,8 @@ const Contact = () => {
                           <input
                             type="email"
                             className="input-contact"
+                            name="email"
+                            onChange={handleChange}
                             placeholder="Email"
                           />
                         </div>
@@ -115,6 +143,8 @@ const Contact = () => {
                           <input
                             type="text"
                             className="input-contact"
+                            name="address"
+                            onChange={handleChange}
                             placeholder="Address"
                           />
                         </div>
@@ -124,6 +154,8 @@ const Contact = () => {
                           <input
                             type="text"
                             className="input-contact"
+                            name="title"
+                            onChange={handleChange}
                             placeholder="Title"
                           />
                         </div>
@@ -131,13 +163,12 @@ const Contact = () => {
                       <div className="row">
                         <div className="col-md-12 col-lg-12 col-sm-12">
                           <textarea
-                            name=""
-                            id=""
                             cols={30}
                             rows={10}
                             className="area-contact"
+                            name="content"
                             placeholder="Comments"
-                            defaultValue={""}
+                            onChange={handleChange}
                           />
                         </div>
                       </div>

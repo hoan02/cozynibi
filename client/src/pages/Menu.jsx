@@ -10,97 +10,64 @@ import newRequest from "../utils/newRequest";
 const Menu = () => {
   const folder = "banner/menu";
   const [imgBanner, setImgBanner] = useState("");
+  const [dataFood, setDataFood] = useState([]);
+  const [dataLoaded, setDataLoaded] = useState(false);
+
   useEffect(() => {
-    newRequest.get(`image/?folder=${folder}`).then((res) => {
-      setImgBanner(res.data.url);
-    });
+    newRequest
+      .get(`image/?folder=${folder}`)
+      .then((res) => {
+        setImgBanner(res.data.url);
+      })
+      .catch((error) => {
+        console.log("Error retrieving banner image:", error);
+      });
+
+    newRequest
+      .get(`food`)
+      .then((res) => {
+        setDataFood(res.data.reverse());
+        setDataLoaded(true);
+      })
+      .catch((error) => {
+        console.log("Error retrieving food data:", error);
+      });
   }, []);
 
   return (
     <div>
-      {imgBanner && <Banner img={imgBanner} text="Menu" />}
+      {dataLoaded && imgBanner && <Banner img={imgBanner} text="Menu" />}
       <section>
         <div className="menu bg-white">
           <div className="container">
             <div className="menu-box">
-              <div className="menu-list row"></div>
-              <div className="pagination">
-                <ul id="pagination-menu">
-                  <div class="col-md-6 col-lg-4 col-sm-12">
-                    <div class="menu-item">
-                      <a href="#" class="menu-img">
-                        <img src={menuItem} alt="" />
-                      </a>
-                      <div class="menu-title">
-                        <h3>
-                          <a href="#">Lasagne al Forno</a>
-                        </h3>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-lg-4 col-sm-12">
-                    <div class="menu-item">
-                      <a href="#" class="menu-img">
-                        <img src={menuItem} alt="" />
-                      </a>
-                      <div class="menu-title">
-                        <h3>
-                          <a href="#">Lasagne al Forno</a>
-                        </h3>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-lg-4 col-sm-12">
-                    <div class="menu-item">
-                      <a href="#" class="menu-img">
-                        <img src={menuItem} alt="" />
-                      </a>
-                      <div class="menu-title">
-                        <h3>
-                          <a href="#">Lasagne al Forno</a>
-                        </h3>
-                      </div>
-                    </div>
-                  </div>
-                </ul>
-                <ul id="pagination-menu">
-                  <div class="col-md-6 col-lg-4 col-sm-12">
-                    <div class="menu-item">
-                      <a href="#" class="menu-img">
-                        <img src={menuItem} alt="" />
-                      </a>
-                      <div class="menu-title">
-                        <h3>
-                          <a href="#">Lasagne al Forno</a>
-                        </h3>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-lg-4 col-sm-12">
-                    <div class="menu-item">
-                      <a href="#" class="menu-img">
-                        <img src={menuItem} alt="" />
-                      </a>
-                      <div class="menu-title">
-                        <h3>
-                          <a href="#">Lasagne al Forno</a>
-                        </h3>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-lg-4 col-sm-12">
-                    <div class="menu-item">
-                      <a href="#" class="menu-img">
-                        <img src={menuItem} alt="" />
-                      </a>
-                      <div class="menu-title">
-                        <h3>
-                          <a href="#">Lasagne al Forno</a>
-                        </h3>
-                      </div>
-                    </div>
-                  </div>
-                </ul>
+              <div className="menu-list row">
+                <div className="pagination">
+                  {Array.from(
+                    { length: Math.ceil(dataFood.length / 3) },
+                    (_, i) => (
+                      <ul key={i} id="pagination-menu">
+                        {dataFood.slice(i * 3, i * 3 + 3).map((item, index) => (
+                          <div
+                            key={index}
+                            className="col-md-6 col-lg-4 col-sm-12"
+                          >
+                            <div className="menu-item">
+                              <a href="#" className="menu-img">
+                                <img src={item.image.url} alt="" />
+                              </a>
+                              <div className="menu-title">
+                                <h3>
+                                  <a href="#">{item.name}</a>
+                                </h3>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </ul>
+                    )
+                  )}
+                </div>
               </div>
             </div>
           </div>

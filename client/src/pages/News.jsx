@@ -2,10 +2,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Banner from "../components/_child/Banner";
 
-// import images
-import newItem from "../assets/images/news-item.jpg";
-import banner from "../assets/images/banner-gallery.jpg";
-
 import newRequest from "../utils/newRequest";
 
 const itemContentContainerLink = {
@@ -30,10 +26,26 @@ const readMoreLink = {
 const News = () => {
   const folder = "banner/news";
   const [imgBanner, setImgBanner] = useState("");
+  const [dataPost, setDataPost] = useState([]);
+
   useEffect(() => {
-    newRequest.get(`image/?folder=${folder}`).then((res) => {
-      setImgBanner(res.data.url);
-    });
+    newRequest
+      .get(`image/?folder=${folder}`)
+      .then((res) => {
+        setImgBanner(res.data.url);
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
+
+    newRequest
+      .get(`post`)
+      .then((res) => {
+        setDataPost(res.data);
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
   }, []);
 
   return (
@@ -42,81 +54,36 @@ const News = () => {
       <div className="page-news">
         <div className="container">
           <div className="news-box">
-            <div className="item">
-              <div className="item-border" />
-              <div className="item-img">
-                <img src={newItem} alt="" />
-              </div>
-              <div className="item-content">
-                <div className="item-content-container">
-                  <h3>
-                    <Link to={"#"} style={itemContentContainerLink}>
-                      LASAGNE AL FORNO
-                    </Link>
-                  </h3>
-                  <p>
-                    Aliquam erat volutpat. Duis ac turpis. Donec sit amet eros.
-                    Lorem ipsum dolor. Mauris fermentum dictum magna. Sed
-                    laoreet aliquam leo. Ut tellus dolor, dapibus eget,
-                  </p>
-                  <div className="read-more">
-                    <Link to={"#"} style={readMoreLink}>
-                      Read more
-                    </Link>
+            {dataPost.map((item, index) => (
+              <div className="item" key={index}>
+                <div className="item-border" />
+                <div className="item-img">
+                  <img src={item.images[0].url} alt="" />
+                </div>
+                <div className="item-content">
+                  <div className="item-content-container">
+                    <h3>
+                      <Link
+                        to={`/${item._id}`}
+                        style={itemContentContainerLink}
+                      >
+                        {item.title}
+                      </Link>
+                    </h3>
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html: item.content.slice(0, 350),
+                      }}
+                    />
+                    <div className="read-more">
+                      <Link to={`/${item._id}`} style={readMoreLink}>
+                        Read more
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="item">
-              <div className="item-border" />
-              <div className="item-content">
-                <div className="item-content-container">
-                  <h3>
-                    <Link to={"#"} style={itemContentContainerLink}>
-                      LASAGNE AL FORNO
-                    </Link>
-                  </h3>
-                  <p>
-                    Aliquam erat volutpat. Duis ac turpis. Donec sit amet eros.
-                    Lorem ipsum dolor. Mauris fermentum dictum magna. Sed
-                    laoreet aliquam leo. Ut tellus dolor, dapibus eget,
-                  </p>
-                  <div className="read-more">
-                    <Link to={"#"} style={readMoreLink}>
-                      Read more
-                    </Link>
-                  </div>
-                </div>
-              </div>
-              <div className="item-img">
-                <img src={newItem} alt="" />
-              </div>
-            </div>
-            <div className="item">
-              <div className="item-border" />
-              <div className="item-img">
-                <img src={newItem} alt="" />
-              </div>
-              <div className="item-content">
-                <div className="item-content-container">
-                  <h3>
-                    <Link to={"#"} style={itemContentContainerLink}>
-                      LASAGNE AL FORNO
-                    </Link>
-                  </h3>
-                  <p>
-                    Aliquam erat volutpat. Duis ac turpis. Donec sit amet eros.
-                    Lorem ipsum dolor. Mauris fermentum dictum magna. Sed
-                    laoreet aliquam leo. Ut tellus dolor, dapibus eget,
-                  </p>
-                  <div className="read-more">
-                    <Link to={"#"} style={readMoreLink}>
-                      Read more
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
           <div className="pagination" />
         </div>

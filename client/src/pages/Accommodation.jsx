@@ -46,13 +46,23 @@ const Accommodation = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
-    newRequest.get(`image/?folder=${folder}`).then((res) => {
-      setImgBanner(res.data.url);
-    });
+    newRequest
+      .get(`image/?folder=${folder}`)
+      .then((res) => {
+        setImgBanner(res.data.url);
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+      });
 
-    newRequest.get(`room`).then((res) => {
-      setRooms(res.data);
-    });
+    newRequest
+      .get(`room`)
+      .then((res) => {
+        setRooms(res.data);
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+      });
   }, []);
 
   const handleSlideClick = (index) => {

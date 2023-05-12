@@ -12,6 +12,7 @@ import CreateBanner from "./components/banner/CreateBanner.jsx";
 import MyAccount from "./pages/MyAccount.jsx";
 import { listParentPage, listChildPage } from "./contexts/listPage.jsx";
 import "./App.scss";
+import Booking from "./pages/Booking.jsx";
 
 const App = () => {
   return (
@@ -40,6 +41,12 @@ const App = () => {
             path="/my-account"
             element={
               <RequireAuth loginPath="/login">{<MyAccount />}</RequireAuth>
+            }
+          />
+          <Route
+            path="/booking"
+            element={
+              <RequireAuth loginPath="/login">{<Booking />}</RequireAuth>
             }
           />
           {listChildPage.map((page, index) => {

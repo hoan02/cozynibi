@@ -14,9 +14,14 @@ const AboutUs = () => {
   const [imgBanner, setImgBanner] = useState("");
 
   useEffect(() => {
-    newRequest.get(`image/?folder=${folder}`).then((res) => {
-      setImgBanner(res.data.url);
-    });
+    newRequest
+      .get(`image/?folder=${folder}`)
+      .then((res) => {
+        setImgBanner(res.data.url);
+      })
+      .catch((error) => {
+        console.log("Error retrieving banner image:", error);
+      });
   }, []);
 
   return (

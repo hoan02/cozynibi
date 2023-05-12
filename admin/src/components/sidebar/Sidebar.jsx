@@ -12,6 +12,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ViewCarouselIcon from "@mui/icons-material/ViewCarousel";
 import PagesIcon from "@mui/icons-material/Pages";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import HotelIcon from '@mui/icons-material/Hotel';
 import LogoutIcon from "@mui/icons-material/Logout";
 
 const Sidebar = () => {
@@ -58,6 +59,10 @@ const Sidebar = () => {
           </div>
         )}
       </div>
+      <NavLink className="item" to="/booking">
+        <HotelIcon />
+        <span>Booking</span>
+      </NavLink>
       <NavLink className="item" to="/my-account">
         <ManageAccountsIcon />
         <span>My Account</span>
