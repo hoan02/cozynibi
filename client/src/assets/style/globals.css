@@ -7,7 +7,7 @@
 
 @font-face {
   font-family: font;
-  src: url('../fonts/UTM-Hanzel.ttf');
+  src: url("../fonts/UTM-Hanzel.ttf");
 }
 
 * {
@@ -23,9 +23,10 @@ a {
   background: transparent;
 }
 
-a, a:hover {
+a,
+a:hover {
   text-decoration: none;
-  transition: .3s;
+  transition: 0.3s;
   transition: 0.3s;
   color: inherit;
 }
@@ -34,13 +35,18 @@ ul {
   list-style: none;
 }
 
-h1, h2, h3, h4, h5, h6{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: inherit;
   font-weight: 500;
   line-height: 1.1;
   color: inherit;
 }
 
-button{
+button {
   cursor: pointer;
 }
