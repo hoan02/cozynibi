@@ -1,32 +1,37 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import Banner from "../components/_child/Banner";
 
 import newRequest from "../utils/newRequest";
+import { useNavigate } from "react-router-dom";
 
-const itemContentContainerLink = {
-  margin: "0 0 15px",
-  fontSize: "18px",
-  lineHeight: "28px",
-  color: "#000",
-  textTransform: "uppercase",
-  fontWeight: "bolder",
-  transition: "0.3s",
-};
+// const itemContentContainerLink = {
+//   margin: "10px 0 15px",
+//   fontSize: "18px",
+//   lineHeight: "28px",
+//   color: "#000",
+//   textTransform: "uppercase",
+//   fontWeight: "bolder",
+//   transition: "0.3s",
+// };
 
-const readMoreLink = {
-  fontSize: "15px",
-  lineHeight: "24px",
-  fontWeight: "bold",
-  marginTop: "20px",
-  marginBottom: "10px",
-  color: "#000",
-};
+// const readMoreLink = {
+//   fontSize: "15px",
+//   lineHeight: "24px",
+//   fontWeight: "bold",
+//   marginTop: "20px",
+//   marginBottom: "10px",
+//   color: "#000",
+// };
 
 const News = () => {
+  const navigate = useNavigate();
   const folder = "banner/news";
   const [imgBanner, setImgBanner] = useState("");
   const [dataPost, setDataPost] = useState([]);
+
+  const handleDetails = (id) => {
+    navigate(`${id}`);
+  };
 
   useEffect(() => {
     newRequest
@@ -63,22 +68,23 @@ const News = () => {
                 <div className="item-content">
                   <div className="item-content-container">
                     <h3>
-                      <Link
-                        to={`/${item._id}`}
-                        style={itemContentContainerLink}
-                      >
+                      <span onClick={() => handleDetails(item._id)}>
                         {item.title}
-                      </Link>
+                      </span>
                     </h3>
-                    <p
+
+                    <div
                       dangerouslySetInnerHTML={{
                         __html: item.content.slice(0, 350),
                       }}
                     />
                     <div className="read-more">
-                      <Link to={`/${item._id}`} style={readMoreLink}>
+                      <span
+                        href={`/news/${item._id}`}
+                        onClick={() => handleDetails(item._id)}
+                      >
                         Read more
-                      </Link>
+                      </span>
                     </div>
                   </div>
                 </div>
