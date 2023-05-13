@@ -12,6 +12,7 @@
 @import './layout/news.css';
 @import './layout/service.css';
 @import './layout/tourTravel.css';
+@import './layout/accommodationDetails.css';
 
 /* components */
 @import './components/slider.css';

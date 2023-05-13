@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+// import SliderAccom from "../components/_child/SliderAccom";
 import SliderAccom from "../components/_child/SliderAccom";
 import { Link } from "react-router-dom";
 import Banner from "../components/_child/Banner";

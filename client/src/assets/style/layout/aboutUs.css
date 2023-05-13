@@ -6,13 +6,13 @@
     text-align: center;
   }
   
-  .container h2 {
+  .about-intro .container h2 {
     font-weight: 400;
     font-size: 30px;
     padding: 20px 0px;
   }
   
-  .container h2 b {
+  .about-intro .container h2 b {
     font-size: 40px;
     text-transform: uppercase;
   }
@@ -137,7 +137,7 @@
       width: 100%;
     }
   
-    .container h2 {
+    .about-intro .container h2 {
       display: block;
     }
   

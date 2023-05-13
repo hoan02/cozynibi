@@ -55,7 +55,7 @@ const News = () => {
         <div className="container">
           <div className="news-box">
             {dataPost.map((item, index) => (
-              <div className="item" key={index}>
+              <div className="item-news" key={index}>
                 <div className="item-border" />
                 <div className="item-img">
                   <img src={item.images[0].url} alt="" />

@@ -4,14 +4,39 @@ import Slider from "react-slick";
 const SliderAccom = ({ data, onSlideClick }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  function SampleNextArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{ ...style, display: "block", background: "red" }}
+        onClick={onClick}
+      />
+    );
+  }
+  
+  function SamplePrevArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{ ...style, display: "block", background: "green" }}
+        onClick={onClick}
+      />
+    );
+  }
+
   const settings = {
-    dots: false,
+    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 4, 
     slidesToScroll: 1,
     initialSlide: currentSlide, 
     afterChange: (current) => setCurrentSlide(current),
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />
+
   };
 
   const handleSlideClick = (index) => {
@@ -31,9 +56,9 @@ const SliderAccom = ({ data, onSlideClick }) => {
 
   return (
     <div className="slider-container">
-      <div className="slider-nav slider-prev" onClick={goToPrevSlide}>
+      {/* <div className="slider-nav slider-prev" onClick={goToPrevSlide}>
         &lt;
-      </div>
+      </div> */}
       <Slider {...settings}>
         {data.map((room, index) => (
           <div key={room._id} onClick={() => handleSlideClick(index)}>
@@ -47,9 +72,9 @@ const SliderAccom = ({ data, onSlideClick }) => {
           </div>
         ))}
       </Slider>
-      <div className="slider-nav slider-next" onClick={goToNextSlide}>
+      {/* <div className="slider-nav slider-next" onClick={goToNextSlide}>
         &gt;
-      </div>
+      </div> */}
     </div>
   );
 };

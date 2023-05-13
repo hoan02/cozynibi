@@ -1,0 +1,383 @@
+.accommodation {
+    background: url('../../images/icon/bg.jpg');
+    position: relative;
+    padding: 55px 0 120px;
+}
+
+.bg-abe {
+    position: relative;
+    background: url('../../images/icon/bg.jpg');
+    padding: 30px 0;
+}
+
+.titH1-d {
+    font-size: 36px;
+    line-height: 46px;
+    color: #000;
+    text-transform: uppercase;
+    margin: 0 0 15px;
+    padding-bottom: 5px;
+    background: url('../../images/bg-titH2.png') no-repeat;
+    background-position: bottom left;
+}
+
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.main-content {
+    width: 67%;
+    float: left;
+    padding: 0 15px;
+}
+
+.images-detail-k {
+    position: relative;
+}
+
+
+/* content slide */
+.images-detail-k .content-slide {
+    position: relative;
+}
+
+.images-detail-k .content-slide .item-params.active {
+    position: relative;
+    opacity: 1;
+    z-index: 10;
+}
+
+.images-detail-k .content-slide .item-params {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+    transition: all .6s;
+    opacity: 0;
+}
+
+img{
+    vertical-align: middle;
+    border: 0;
+    max-width: 100%;
+}
+
+/* slide */
+.images-detail-k .slide {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 110;
+    text-align: center;
+    background: url('../../images/bg-idk-slide.png');
+    background-size: 100% 100%;
+    padding: 63px 0 16px;
+}
+
+.images-detail-k .slide .slide-ctmd {
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    width: 163px;
+    height: 45px;
+}
+
+.lSSlideOuter, .lSSlideOuter .lSPager.lSGallery {
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    overflow: hidden;
+}
+
+.lSSlideWrapper {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.lSSlideWrapper ul{
+    width: 230.667px;
+    height: 45px;
+    padding-bottom: 0%;
+    transform: translate3d(0px, 0px, 0px);
+}
+
+.lSSlideWrapper ul li{
+    width: 47.6667px;
+    margin-right: 10px;
+}
+
+.images-detail-k .slide .slide-ctmd ul {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+.lSSlideOuter .lSPager, .lSSlideOuter .lightSlider {
+    padding-left: 0;
+    list-style: none;
+}
+.lSSlideWrapper .lSSlide {
+    -webkit-transform: translate(0,0);
+    -ms-transform: translate(0,0);
+    transform: translate(0,0);
+    -webkit-transition: all 1s;
+    -webkit-transition-property: -webkit-transform,height;
+    -moz-transition-property: -moz-transform,height;
+    transition-property: transform,height;
+}
+.lSSlideWrapper .lSSlide, .lSSlideWrapper.usingCss .lSFade>* {
+    -webkit-transition-timing-function: inherit!important;
+    transition-timing-function: inherit!important;
+    -webkit-transition-duration: inherit!important;
+    transition-duration: inherit!important;
+}
+.lightSlider {
+    overflow: hidden;
+    margin: 0;
+}
+
+.images-detail-k .slide .slide-ctmd ul li {
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: top;
+}
+.lightSlider.lsGrab>* {
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+    cursor: -o-grab;
+    cursor: -ms-grab;
+    cursor: grab;
+}
+.lSSlideOuter .lSGallery li, .lSSlideOuter .lightSlider>* {
+    float: left;
+}
+
+.images-detail-k .slide .slide-ctmd ul li a {
+    display: block;
+    width: 45px;
+    height: 45px;
+    position: relative;
+}
+
+
+
+
+
+
+
+/* list parameter */
+.list-parameter {
+    background: #fff;
+    border: 1px solid #ddd;
+    text-align: justify;
+    padding: 10px 10px 0;
+    display: block;
+    margin: 0px 0 35px;
+}
+
+.list-parameter .item-params {
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    margin: 10px;
+}
+
+.list-parameter .item-params .icon {
+    height: 62px;
+    line-height: 62px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.list-parameter .item-params .icon img {
+    max-height: 62px;
+}
+
+.list-parameter .item-params p {
+    margin: 5px 0 0;
+    text-transform: uppercase;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.list-parameter:after {
+    content: '';
+    display: inline-block;
+    width: 100%;
+    height: 1px;
+    vertical-align: top;
+    line-height: 1px;
+}
+
+.main-bottom {
+    margin-top: 40px;
+}
+
+.main-bottom h2 {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: bold;
+    color: #000;
+    margin: 0 0 20px;
+    text-transform: uppercase;
+    padding: 0px 0 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.list-equipment {
+    overflow: hidden;
+}
+
+.list-equipment p {
+    min-width: 50%;
+    float: left;
+    font-size: 16px;
+    line-height: 36px;
+    padding-right: 15px;
+    padding-left: 26px;
+    background: url('../../images/icon/tik.png');
+    background-repeat: no-repeat;
+    background-position: 0 12px;
+    margin: 0;
+}
+
+.side-bar {
+    width: 33%;
+    float: left;
+    padding: 0 15px;
+}
+
+.form-book {
+    position: relative;
+    margin: 0 0 20px;
+    overflow: hidden;
+    padding: 24px 14px 18px;
+    background: url('../../images/icon/form-book-k.png');
+    background-size: 100% 100%;
+}
+
+.form-book .col-form {
+    width: 50%;
+    float: left;
+    padding: 6px;
+}
+
+input.date-time {
+    background-image: url('../../images/icon/date-time.png');
+    background-repeat: no-repeat;
+    background-position: calc(100% - 15px) 10px;
+    padding-right: 40px;
+}
+
+input.inp-b {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 13px;
+    width: 100%;
+}
+
+.form-book .col {
+    width: 100%;
+    float: left;
+    padding: 6px;
+}
+
+select.select-b {
+    width: 100%;
+    height: 40px;
+    padding: 0 13px;
+    -webkit-appearance: none;
+    background-image: url('../../images/icon/select-apped.png');
+    background-repeat: no-repeat;
+    background-position: calc(100% - 13px) 17px;
+}
+
+.btn-book-n {
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: #423c2a;
+    line-height: 38px;
+    color: #d7b659;
+}
+
+.item-sb {
+    margin-bottom: 20px;
+}
+
+.tit-sb {
+    margin: 0 0 15px;
+    font-size: 24px;
+    line-height: 30px;
+    text-transform: uppercase;
+    color: #000;
+    font-family: 'UTM-Hanzel';
+}
+
+.list-room-sb {
+    position: relative;
+}
+
+.list-room-sb ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list-room-sb ul li {
+    margin-bottom: 15px;
+    padding: 15px;
+    background: url('../../images/icon/sb-room-k.png');
+    background-size: 100% 100%;
+    overflow: hidden;
+}
+
+.list-room-sb ul li .avt {
+    display: block;
+    float: left;
+    width: 130px;
+    height: 92px;
+    overflow: hidden;
+}
+
+.list-room-sb ul li .avt img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all .35s;
+}
+
+.list-room-sb ul li .desc {
+    float: left;
+    width: calc(100% - 130px);
+    padding-left: 15px;
+    display: table;
+    height: 92px;
+}
+
+.list-room-sb ul li .desc .desc-midle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.list-room-sb ul li .desc .desc-midle h3 {
+    margin: 0;
+    line-height: 36px;
+    font-size: 22px;
+    text-transform: uppercase;
+    font-family: 'UTM-Hanzel';
+}
+
+.list-room-sb ul li .desc .desc-midle p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 24px;
+}

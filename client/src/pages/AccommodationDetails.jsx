@@ -1,27 +1,53 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Banner from "../components/_child/Banner";
+import newRequest from "../utils/newRequest";
+
+
+// import images
 import slide from "../assets/images/accom-slide-d-1.jpg";
 import icon1 from "../assets/images/acp-1.jpg";
 import icon2 from "../assets/images/acp-2.jpg";
 import icon3 from "../assets/images/acp-3.jpg";
 import icon4 from "../assets/images/acp-4.jpg";
+import itemsb1 from '../assets/images/item-sb-1.jpg'
+import itemsb2 from '../assets/images/item-sb-2.jpg'
+import itemsb3 from '../assets/images/item-sb-3.jpg'
+import accommsmd1 from '../assets/images/accom-sm-d-1.jpg'
+import accommsmd2 from '../assets/images/accom-sm-d-2.jpg'
+import accommsmd3 from '../assets/images/accom-sm-d-3.jpg'
 
 const AccommodationDetails = () => {
+  const folder = "banner/accommodation";
+  const [imgBanner, setImgBanner] = useState("");
+  const [rooms, setRooms] = useState([]);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    newRequest
+      .get(`image/?folder=${folder}`)
+      .then((res) => {
+        setImgBanner(res.data.url);
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+      });
+
+    newRequest
+      .get(`room`)
+      .then((res) => {
+        setRooms(res.data);
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+      });
+  }, []);
   return (
-    <>
-      <div className="banner">
-        <div className="banner-title">
-          <div className="avt">
-            <img src="img/banner-about-us.jpg" alt="" />
-          </div>
-          <div className="desc">
-            <h1>
-              <span>accommodation</span>
-            </h1>
-          </div>
-        </div>
-      </div>
+    <div>
+      {imgBanner && <Banner img={imgBanner} text="accommodation" />}
       <div className="accommodation  bg-abe">
-        <div className="container">
+        <div className="container" style={{
+          marginBottom: '40px',
+        }}>
           <h1 className="titH1-d">
             <span>Double Room</span>
           </h1>
@@ -30,67 +56,67 @@ const AccommodationDetails = () => {
               <div className="images-detail-k">
                 <div className="content-slide">
                   <div className="item active" data-id={1}>
-                    <img src="img/accom-slide-d-1.jpg" alt="" />
+                    <img src={slide} alt="" />
                   </div>
-                  <div className="item" data-id={2}>
-                    <img src="img/accom-slide-d-1.jpg" alt="" />
+                  <div className="item-params" data-id={2}>
+                    <img src={slide} alt="" />
                   </div>
-                  <div className="item" data-id={3}>
-                    <img src="img/accom-slide-d-1.jpg" alt="" />
+                  <div className="item-params" data-id={3}>
+                    <img src={slide} alt="" />
                   </div>
-                  <div className="item" data-id={4}>
-                    <img src="img/accom-slide-d-1.jpg" alt="" />
-                  </div>
+                  {/* <div className="item-params" data-id={4}>
+                    <img src={slide} alt="" />
+                  </div> */}
                 </div>
                 <div className="slide">
                   <div className="slide-ctmd">
                     <ul>
                       <li className="active active-k" data-id={1}>
                         <a href="javascript:void(0)">
-                          <img src="img/accom-sm-d-1.jpg" alt="" />
+                          <img src={accommsmd1} alt="" />
                         </a>
                       </li>
                       <li data-id={2}>
                         <a href="javascript:void(0)">
-                          <img src="img/accom-sm-d-2.jpg" alt="" />
+                          <img src={accommsmd2} alt="" />
                         </a>
                       </li>
                       <li data-id={3}>
                         <a href="javascript:void(0)">
-                          <img src="img/accom-sm-d-3.jpg" alt="" />
+                          <img src={accommsmd3} alt="" />
                         </a>
                       </li>
-                      <li data-id={4}>
+                      {/* <li data-id={4}>
                         <a href="javascript:void(0)">
-                          <img src="img/accom-sm-d-3.jpg" alt="" />
+                          <img src={accommsmd1} alt="" />
                         </a>
-                      </li>
+                      </li> */}
                     </ul>
                   </div>
                 </div>
               </div>
               <div className="list-parameter">
-                <div className="item">
+                <div className="item-params">
                   <div className="icon">
-                    <img src="img/acp-1.jpg" alt="" />
+                    <img src={icon1} alt="" />
                   </div>
                   <p>Room: 18m2</p>
                 </div>
-                <div className="item">
+                <div className="item-params">
                   <div className="icon">
-                    <img src="img/acp-2.jpg" alt="" />
+                    <img src={icon2} alt="" />
                   </div>
                   <p>high: 3.50</p>
                 </div>
-                <div className="item">
+                <div className="item-params">
                   <div className="icon">
-                    <img src="img/acp-3.jpg" alt="" />
+                    <img src={icon3} alt="" />
                   </div>
                   <p>Bed size: 1.1 * 2.0m</p>
                 </div>
-                <div className="item">
+                <div className="item-params">
                   <div className="icon">
-                    <img src="img/acp-4.jpg" alt="" />
+                    <img src={icon4} alt="" />
                   </div>
                   <p>Room rates: 600.000</p>
                 </div>
@@ -137,26 +163,26 @@ const AccommodationDetails = () => {
             <div className="side-bar">
               <div className="form-book">
                 <form action="">
-                  <div className="col-2">
+                  <div className="col-form">
                     <input
                       type="text"
                       className="inp-b date-time"
                       placeholder="CHECK IN"
                     />
                   </div>
-                  <div className="col-2">
+                  <div className="col-form">
                     <input
                       type="text"
                       className="inp-b date-time"
                       placeholder="CHECK OUT"
                     />
                   </div>
-                  <div className="col-2">
+                  <div className="col-form">
                     <select name="" id="" className="select-b">
                       <option value={0}>ADULTS</option>
                     </select>
                   </div>
-                  <div className="col-2">
+                  <div className="col-form">
                     <select name="" id="" className="select-b">
                       <option value={0}>CHILDREN</option>
                     </select>
@@ -181,7 +207,7 @@ const AccommodationDetails = () => {
                   <ul>
                     <li>
                       <a href="" className="avt">
-                        <img src="img/item-sb-1.jpg" alt="" />
+                        <img src={itemsb1} alt="" />
                       </a>
                       <div className="desc">
                         <div className="desc-midle">
@@ -194,7 +220,7 @@ const AccommodationDetails = () => {
                     </li>
                     <li>
                       <a href="" className="avt">
-                        <img src="img/item-sb-2.jpg" alt="" />
+                        <img src={itemsb2} alt="" />
                       </a>
                       <div className="desc">
                         <div className="desc-midle">
@@ -207,7 +233,7 @@ const AccommodationDetails = () => {
                     </li>
                     <li>
                       <a href="" className="avt">
-                        <img src="img/item-sb-3.jpg" alt="" />
+                        <img src={itemsb3} alt="" />
                       </a>
                       <div className="desc">
                         <div className="desc-midle">
@@ -224,7 +250,7 @@ const AccommodationDetails = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
