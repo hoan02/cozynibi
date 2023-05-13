@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import Banner from "../components/_child/Banner";
 import newRequest from "../utils/newRequest";
@@ -58,7 +59,7 @@ const TourTravel = () => {
               {tourData?.map((tourItem, index) => {
                 return (
                   <li key={index}>
-                    <a href="#" className="item">
+                    <Link to={`${tourItem._id}`} className="item">
                       <div className="avt">
                         <img src={tourItem.images[0].url} alt="" />
                       </div>
@@ -66,14 +67,12 @@ const TourTravel = () => {
                         <div className="tour-desc">
                           <div className="tour-desc_middle">
                             <h3>
-                              <span>
-                                {tourItem.name}
-                              </span>
+                              <span>{tourItem.name}</span>
                             </h3>
                           </div>
                         </div>
                       </div>
-                    </a>
+                    </Link>
                   </li>
                 );
               })}

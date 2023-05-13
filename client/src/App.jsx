@@ -17,6 +17,7 @@ import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
 import "./App.css";
 import AccommodationDetails from "./pages/AccommodationDetails";
+import TourDetails from "./pages/TourDetails";
 
 const routes = [
   {
@@ -48,6 +49,11 @@ const routes = [
     path: "/tour-travel",
     element: <TourTravel />,
     title: "Tour Travel",
+  },
+  {
+    path: "/tour-travel/:id",
+    element: <TourDetails />,
+    title: "Tour Details",
   },
   {
     path: "/service",
